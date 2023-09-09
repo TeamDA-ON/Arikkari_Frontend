@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/pages/login/login.dart';
 import 'package:get/get.dart';
-import 'package:flutter_project/pages/quizSelection/quizSelection.dart';
 
 void main() {
   runApp(
     const GetMaterialApp(
-      home: quizSelection(),
+      home: Login(),
     ),
   );
 }
