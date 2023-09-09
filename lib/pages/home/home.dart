@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/pages/choseQuiz/chosequiz.dart';
+import 'package:flutter_project/pages/quizSelection/quizSelection.dart';
 import 'package:get/get.dart';
-import 'package:flutter_project/widgets/appbar.dart';
 
 void main() {
   runApp(const Home());
@@ -60,7 +59,7 @@ class _QuizStartState extends State<QuizStart> {
             ),
             ElevatedButton(
               onPressed: () {
-                Get.to(ChoseQuiz());
+                Get.to(const quizSelection());
               },
               style: ElevatedButton.styleFrom(
                 elevation: 0,
