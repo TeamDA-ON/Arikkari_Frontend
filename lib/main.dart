@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/pages/home/home.dart';
+import 'package:flutter_project/pages/spelling-quiz/spelling-quiz.dart';
 import 'package:get/get.dart';
 
 void main() {
   runApp(
     const GetMaterialApp(
-      home: Home(),
+      // home: Home(),
+      home: Quiz(),
     ),
   );
 }

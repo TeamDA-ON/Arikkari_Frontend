@@ -12,7 +12,9 @@ class Quiz extends StatefulWidget {
 }
 
 class QuizController extends GetxController {
-  final quiz = Spelling_Quiz(answer: '', description: '', difficulty: null, problem: '').obs;
+  final quiz =
+      Spelling_Quiz(answer: '', description: '', difficulty: null, problem: '')
+          .obs;
 
   Future<void> getData() async {
     try {
@@ -28,7 +30,7 @@ class QuizController extends GetxController {
 
 class _QuizState extends State<Quiz> {
   FlutterTts flutterTts = FlutterTts();
-  TextEditingController textEditController =TextEditingController();
+  TextEditingController textEditController = TextEditingController();
   final QuizController quizController = Get.put(QuizController());
 
   @override
@@ -36,11 +38,12 @@ class _QuizState extends State<Quiz> {
     textEditController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-    quizController.getData();
+    // quizController.getData();
     return Scaffold(
-      resizeToAvoidBottomInset: false,//키보드에 가려지는 위젯이 생길때 오버플로우 방지해주는 코드
+      resizeToAvoidBottomInset: false, //키보드에 가려지는 위젯이 생길때 오버플로우 방지해주는 코드
       backgroundColor: const Color(0xFFeff0f0),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -93,12 +96,12 @@ class _QuizState extends State<Quiz> {
                             ),
                             const Text('4/20'),
                             IconButton(
-                                iconSize: 10,
-                                onPressed: () async {
-                                  var result = await flutterTts.speak("영준아.");
-                                },
-                                icon: Image.asset('assets/img/volume.png'),
-                              ),
+                              iconSize: 10,
+                              onPressed: () async {
+                                var result = await flutterTts.speak("영준아.");
+                              },
+                              icon: Image.asset('assets/img/volume.png'),
+                            ),
                           ],
                         ),
                         const Divider(
@@ -106,14 +109,17 @@ class _QuizState extends State<Quiz> {
                           thickness: 1,
                           endIndent: 0.5,
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         Center(
                           child: Wrap(
                             children: [
                               Obx(() => Text(
-                                '${quizController.quiz.value.problem}', // 가져온 데이터의 일부를 표시
-                                style: TextStyle(fontSize: 20),
-                              )),
+                                    quizController
+                                        .quiz.value.problem, // 가져온 데이터의 일부를 표시
+                                    style: const TextStyle(fontSize: 20),
+                                  )),
                               Container(
                                 margin: const EdgeInsets.only(top: 8),
                                 width: 100,
@@ -129,8 +135,9 @@ class _QuizState extends State<Quiz> {
                                     border: InputBorder.none,
                                     filled: true,
                                     fillColor: Color(0xFFE7E7E7),
+                                  ),
                                 ),
-                              ),),
+                              ),
                               const Text(
                                 '?',
                                 style: TextStyle(
@@ -143,28 +150,7 @@ class _QuizState extends State<Quiz> {
                       ],
                     ),
                   ),
-                  Positioned(
-                    top: -30,
-                    left: 10,
-                    child: Container(
-                      width: 100,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 4,
-                          color: const Color(0xFF92DCEC),
-                        ),
-                        borderRadius: BorderRadius.circular(30),
-                        color: const Color(0xFFFFFFFF)
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('난이도 : ${quizController.quiz.value.difficulty}'),
-                        ],
-                      ),
-                    ),
-                  ),
+                  boxPosition(),
                   Positioned(
                     top: -30,
                     right: 10,
@@ -189,22 +175,20 @@ class _QuizState extends State<Quiz> {
                     ),
                   ),
                   Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: 
-                      ElevatedButton(
-                        onPressed: onSubmit, 
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.grey),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            )
-                          )
-                        ),
-                        child: const Text('다음')
-                      )
-                    )
+                      right: 0,
+                      left: 0,
+                      bottom: 0,
+                      child: ElevatedButton(
+                          onPressed: onSubmit,
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.grey),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ))),
+                          child: const Text('다음')))
                 ],
               ),
               SizedBox(
@@ -222,13 +206,38 @@ class _QuizState extends State<Quiz> {
       ),
     );
   }
-  void onSubmit(){
+
+  Positioned boxPosition() {
+    return Positioned(
+      top: -30,
+      left: 10,
+      child: Container(
+        width: 100,
+        height: 40,
+        decoration: BoxDecoration(
+            border: Border.all(
+              width: 4,
+              color: const Color(0xFF92DCEC),
+            ),
+            borderRadius: BorderRadius.circular(30),
+            color: const Color(0xFFFFFFFF)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('난이도 : ${quizController.quiz.value.difficulty}'),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void onSubmit() {
     quizController.getData();
-   String textResult =  textEditController.text.trim();
-   print('textResult : $textResult');
-    if(textResult == quizController.quiz.value.answer){
+    String textResult = textEditController.text.trim();
+    print('textResult : $textResult');
+    if (textResult == quizController.quiz.value.answer) {
       print('정답');
-    }else{
+    } else {
       print('오답');
     }
   }
