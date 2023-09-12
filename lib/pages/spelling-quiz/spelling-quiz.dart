@@ -150,11 +150,36 @@ class _QuizState extends State<Quiz> {
                       ],
                     ),
                   ),
-                  boxPosition(),
-                  Positioned(
-                    top: -30,
-                    right: 10,
-                    child: Container(
+                  boxPosition(
+                      -25,
+                      null,
+                      0,
+                      null,
+                      Container(
+                        width: 100,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 4,
+                              color: const Color(0xFF92dcec),
+                            ),
+                            borderRadius: BorderRadius.circular(30),
+                            color: const Color(0xFFFFFFFF)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            quizText(
+                                '난이도 : ${quizController.quiz.value.difficulty}',
+                                const Color(0xFF404040)),
+                          ],
+                        ),
+                      )),
+                  boxPosition(
+                    -25,
+                    null,
+                    null,
+                    0,
+                    Container(
                       width: 200,
                       height: 40,
                       decoration: BoxDecoration(
@@ -163,32 +188,41 @@ class _QuizState extends State<Quiz> {
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
-                            '듣고 빈칸을 채워주세요.',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
+                        children: [
+                          quizText("듣고 빈칸을 채워주세요", const Color(0XFFEFF0F0)),
                         ],
                       ),
                     ),
                   ),
-                  Positioned(
-                      right: 0,
-                      left: 0,
-                      bottom: 0,
-                      child: ElevatedButton(
-                          onPressed: onSubmit,
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.grey),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ))),
-                          child: const Text('다음')))
+                  boxPosition(
+                      null, //top
+                      -30, //bottom
+                      null, // left
+                      10, // right
+                      GestureDetector(
+                          onTap: onSubmit,
+                          child: Container(
+                            width: 80,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFf4f4f4),
+                              border:
+                                  Border.all(color: const Color(0xFFD9D9D9)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  "완료",
+                                  style: TextStyle(
+                                    color: Color(0xFF7A7A7A),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ))),
                 ],
               ),
               SizedBox(
@@ -207,27 +241,24 @@ class _QuizState extends State<Quiz> {
     );
   }
 
-  Positioned boxPosition() {
-    return Positioned(
-      top: -30,
-      left: 10,
-      child: Container(
-        width: 100,
-        height: 40,
-        decoration: BoxDecoration(
-            border: Border.all(
-              width: 4,
-              color: const Color(0xFF92DCEC),
-            ),
-            borderRadius: BorderRadius.circular(30),
-            color: const Color(0xFFFFFFFF)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('난이도 : ${quizController.quiz.value.difficulty}'),
-          ],
-        ),
+  Text quizText(String text, Color color) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: color,
+        fontFamily: 'Pretendard',
       ),
+    );
+  }
+
+  Positioned boxPosition(
+      double? top, double? bottom, double? left, double? right, Widget widget) {
+    return Positioned(
+      top: top,
+      left: left,
+      bottom: bottom,
+      right: right,
+      child: widget,
     );
   }
 
