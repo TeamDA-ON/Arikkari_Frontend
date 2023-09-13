@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/pages/quizSelection/quizSelection.dart';
+import 'package:flutter_project/config/app_colors.dart';
 import 'package:get/get.dart';
-
-void main() {
-  runApp(const Home());
-}
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -25,13 +22,13 @@ class QuizStart extends StatefulWidget {
 }
 
 class _QuizStartState extends State<QuizStart> {
-  String todayWorld = 'baek';
+  String todayWorld = '가타부타';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.blue,
+        color: AppColors.blueF3,
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
@@ -57,60 +54,82 @@ class _QuizStartState extends State<QuizStart> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.02,
             ),
-            ElevatedButton(
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 Get.to(const quizSelection());
               },
-              style: ElevatedButton.styleFrom(
-                elevation: 0,
-              ),
-              child: Image.asset(
-                'assets/img/start.png',
-                width: 99,
+              child: SizedBox(
                 height: 99,
+                width: 99,
+                child: Image.asset(
+                  'assets/img/start.png',
+                ),
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.07,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: MediaQuery.of(context).size.height * 0.4,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              margin: const EdgeInsets.only(bottom: 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    todayWorld,
-                    style: const TextStyle(
-                        fontSize: 38,
-                        fontWeight: FontWeight.w600,
-                        decoration: TextDecoration.underline,
-                        decorationThickness: 1),
-                    textAlign: TextAlign.center,
-                  )
-                ],
-              ),
+              height: MediaQuery.of(context).size.height * 0.1,
             ),
             Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.center,
               children: [
-                Container(
-                  color: Colors.black,
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  height: MediaQuery.of(context).size.height * 0.2,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.08,
                 ),
-                Positioned(
-                  bottom: 0,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: MediaQuery.of(context).size.height * 0.4,
-                    color: Colors.yellow,
-                  ),
-                ),
+                Stack(
+                    clipBehavior: Clip.none,
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        margin: const EdgeInsets.only(bottom: 0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              todayWorld,
+                              style: const TextStyle(
+                                  color: AppColors.blueF3,
+                                  fontSize: 38,
+                                  fontWeight: FontWeight.w600,
+                                  decoration: TextDecoration.underline,
+                                  decorationThickness: 1),
+                              textAlign: TextAlign.center,
+                            )
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        top: -30,
+                        child: Container(
+                          width: 210,
+                          height: 65,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                '오늘의 단어',
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  color: AppColors.darkGrayF1,
+                                  fontWeight: FontWeight.w700,
+                                  decoration: TextDecoration.none,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ]),
               ],
             ),
           ],

@@ -4,9 +4,11 @@ import 'package:get/get.dart';
 
 void main() {
   runApp(
-    const GetMaterialApp(
-      // home: Home(),
-      home: Quiz(),
+    GetMaterialApp(
+      theme: ThemeData(
+        fontFamily: 'Pretendard',
+      ),
+      home: const Home(),
     ),
   );
 }
