@@ -79,26 +79,12 @@ class _MyWidgetState extends State<quizContainer> {
                     ),
                   ),
                   const Text('4/20'),
-                  // IconButton(
-                  //   iconSize: 10,
-                  //   onPressed: () async {
-                  //     var result = await flutterTts.speak("영준아.");
-                  //   },
-                  //   icon: Image.asset('assets/img/volume.png'),
-                  // ),
-
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: GestureDetector(
-                      onTap: () async {
-                        var result = await flutterTts.speak("");
-                      },
-                      child: Image.asset(
-                        "assets/img/volume.png",
-                        width: 30.0,
-                        height: 30.0,
-                      ),
-                    ),
+                  IconButton(
+                    iconSize: 10,
+                    onPressed: () async {
+                      var result = await flutterTts.speak("영준아.");
+                    },
+                    icon: Image.asset('assets/img/volume.png'),
                   ),
                 ],
               ),
