@@ -4,8 +4,11 @@ import 'package:get/get.dart';
 
 void main() {
   runApp(
-    const GetMaterialApp(
-      home: Home(),
+    GetMaterialApp(
+      theme: ThemeData(
+        fontFamily: 'Pretendard',
+      ),
+      home: const Home(),
     ),
   );
 }
