@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../pages/spelling-quiz/spelling-quiz.dart';
+import 'package:flutter_project/pages/spelling-quiz/quizContainer.dart';
 
 class selectBox extends StatelessWidget {
   final String title, subTitle;
