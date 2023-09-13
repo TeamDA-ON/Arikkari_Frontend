@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../pages/spelling-quiz/spelling-quiz.dart';
 
 class selectBox extends StatelessWidget {
   final String title, subTitle;
   final Color textColor;
-  final onTaps;
+  final dynamic Page;
 
   const selectBox({
     super.key,
     required this.title,
     required this.subTitle,
     required this.textColor,
-    required this.onTaps,
+    required this.Page,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => QuizController());
+        Get.to(Page);
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 1,
