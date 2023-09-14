@@ -1,9 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-import 'package:flutter_project/model/model_quiz.dart';
-import 'package:get/get.dart';
-import 'package:flutter_project/pages/spelling-quiz/quizContainer.dart';
+import 'package:flutter_project/widgets/quizContainer/solveQuizContainer.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
