@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/pages/home/home.dart';
+import 'package:flutter_project/ui/screen/home/home.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -9,8 +9,20 @@ void main() {
         fontFamily: 'Pretendard',
       ),
       home: const Home(),
+      // home: const Quiz(),
     ),
   );
+}
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: QuizStart(),
+    );
+  }
 }
 
 // class MyApp extends StatelessWidget {
