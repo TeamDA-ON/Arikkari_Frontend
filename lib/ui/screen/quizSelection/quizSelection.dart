@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
-import 'package:flutter_project/ui/spelling-quiz/spelling-quiz.dart';
-import 'package:flutter_project/widgets/constants/appbar.dart';
-import 'package:flutter_project/widgets/pages/quizSelection/selectBox.dart';
+import 'package:flutter_project/ui/widgets/constants/appbar.dart';
+import 'package:flutter_project/ui/widgets/pages/quizSelection/selectBox.dart';
 import 'package:get/get.dart';
 
 class quizSelection extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
-import 'package:flutter_project/widgets/quizContainer/solve_quiz_container.dart';
+import 'package:flutter_project/ui/widgets/constants/quizContainer/solve_quiz_container.dart';
 import 'package:get/get.dart';
 
 class Quiz extends StatelessWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/home/home_getx.dart';
-import 'package:flutter_project/ui/quizSelection/quizSelection.dart';
+import 'package:flutter_project/ui/screen/quizSelection/quizSelection.dart';
 import 'package:get/get.dart';
 
-import '../_constant/theme/app_colors.dart';
+import '../../_constant/theme/app_colors.dart';
 
 class QuizStart extends StatelessWidget {
   const QuizStart({super.key});
