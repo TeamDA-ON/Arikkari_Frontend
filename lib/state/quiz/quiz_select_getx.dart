@@ -1,12 +1,14 @@
+import 'package:flutter_project/ui/screen/spelling-quiz/spelling-quiz.dart';
+import 'package:flutter_project/ui/screen/voca-quiz/vaca-quiz.dart';
 import 'package:get/get.dart';
 
 class QuizSelectGetx extends GetxController {
   static QuizSelectGetx get to => Get.find();
   void chagePage(bool isGoSpelling) {
     if (isGoSpelling) {
-      // 맞춤법 퀴즈로 이동
+      Get.to(Quiz());
     } else {
-      //어휘
+      Get.to(const Voca());
     }
   }
 }

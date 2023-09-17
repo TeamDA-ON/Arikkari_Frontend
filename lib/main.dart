@@ -8,22 +8,22 @@ void main() {
       theme: ThemeData(
         fontFamily: 'Pretendard',
       ),
-      home: const Home(),
+      home: Home(),
       // home: const Quiz(),
     ),
   );
 }
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+// class Home extends StatelessWidget {
+//   const Home({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: QuizStart(),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       home: QuizStart(),
+//     );
+//   }
+// }
 
 // class MyApp extends StatelessWidget {
 //   const MyApp({super.key});
