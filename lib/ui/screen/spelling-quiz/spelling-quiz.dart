@@ -31,7 +31,7 @@ class Quiz extends StatelessWidget {
                   },
                   problemText: '바보',
                   editController: editController,
-                  difficulty: difficulty,
+                  difficulty: '상',
                   submit: submit,
                 ),
                 SizedBox(
