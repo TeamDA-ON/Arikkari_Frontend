@@ -36,7 +36,7 @@ class QuizGetx extends GetxController {
     if (isGoSpelling) {
       Get.to(const Quiz());
     } else if (!isGoSpelling) {
-      Get.to(const Quiz());
+      Get.to(const Quiz()); //false면 selectBox로 이동하면됨
     }
   }
 

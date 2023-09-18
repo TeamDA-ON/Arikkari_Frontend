@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 Stack solveQuizContainer({
   // 파라미터
+  required bool? isTypeSpelling, //스펠인지 아닌지 확인
   required Function? ttsTap,
   required String? problemText,
   required TextEditingController? editController,
@@ -75,13 +76,15 @@ Stack solveQuizContainer({
             ),
             Center(
               child: Wrap(
+                direction: Axis.horizontal,
+                alignment: WrapAlignment.center,
                 children: [
                   Text(
                     problemText!, // 가져온 데이터의 일부를 표시
-                    style: const TextStyle(fontSize: 2),
+                    style: const TextStyle(
+                      fontSize: 32,
+                    ),
                   ),
-
-                  //if (quizController.quizType == "spelling")
                   Container(
                     margin: const EdgeInsets.only(top: 9),
                     width: 100,
@@ -148,40 +151,41 @@ Stack solveQuizContainer({
           ),
         ),
       ),
-      boxPosition(
-        null, //top
-        -30, //bottom
-        null, // left
-        10, // right
-        GestureDetector(
-          onTap: submit,
-          child: Container(
-            width: 80,
-            height: 40,
-            decoration: BoxDecoration(
-              color: const Color(0xFFf4f4f4),
-              border: Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "확인",
-                  style: TextStyle(
-                    letterSpacing: 5,
-                    color: Color(
-                      0xFF7A7A7A,
+      if (isTypeSpelling!)
+        boxPosition(
+          null, //top
+          -30, //bottom
+          null, // left
+          10, // right
+          GestureDetector(
+            onTap: submit,
+            child: Container(
+              width: 80,
+              height: 40,
+              decoration: BoxDecoration(
+                color: const Color(0xFFf4f4f4),
+                border: Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    "확인",
+                    style: TextStyle(
+                      letterSpacing: 5,
+                      color: Color(
+                        0xFF7A7A7A,
+                      ),
+                      fontSize: 22.0,
+                      fontFamily: "Pretendard",
                     ),
-                    fontSize: 22.0,
-                    fontFamily: "Pretendard",
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
-      ),
     ],
   );
 }

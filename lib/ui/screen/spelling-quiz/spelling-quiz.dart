@@ -13,10 +13,10 @@ class Quiz extends StatelessWidget {
     return GetBuilder<QuizGetx>(builder: (x) {
       return Scaffold(
         resizeToAvoidBottomInset: false, //키보드에 가려지는 위젯 오버플로우 방지
+
         backgroundColor: x.answerIsCollect == "Normal"
             ? const Color(0xFFeff0f0)
             : const Color(0xFFeff0f0),
-        // backgroundColor: Colors.black,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: SizedBox(
@@ -25,13 +25,14 @@ class Quiz extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: Get.height * 0.1,
                 ),
                 solveQuizContainer(
                   // ttsTap: () async {
                   //   var result = await x.flutterTts.speak("영준아.");
                   // },
                   ttsTap: () {},
+                  isTypeSpelling: x.isShowButton,
                   problemText: '바보',
                   editController: x.textEditController,
                   difficulty: "상", //type string으로 바꿔놈
@@ -40,7 +41,7 @@ class Quiz extends StatelessWidget {
                   },
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: Get.height * 0.1,
                 ),
                 Image.asset(
                   'assets/img/quizlogo.png',
