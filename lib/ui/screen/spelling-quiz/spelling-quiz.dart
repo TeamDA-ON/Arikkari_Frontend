@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
 import 'package:flutter_project/ui/widgets/constants/quizContainer/solve_quiz_container.dart';
 import 'package:get/get.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class Quiz extends StatelessWidget {
-  const Quiz({super.key});
+  Quiz({super.key});
+  FlutterTts flutterTts = FlutterTts();
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +25,14 @@ class Quiz extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),
-                Obx(
-                  () => solveQuizContainer(
-                    ttsTap: () async {
-                      var result = await x.flutterTts.speak("");
-                    },
-                    difficulty: x.quiz,
-                    editController: x.textEditController,
-                    problemText: x.quiz,
-                    submit: () {
-                      x.onSubmit();
-                    },
-                  ),
+                solveQuizContainer(
+                  ttsTap: () async {
+                    var result = await flutterTts.speak("영준아.");
+                  },
+                  problemText: '바보',
+                  editController: editController,
+                  difficulty: '상',
+                  submit: submit,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,

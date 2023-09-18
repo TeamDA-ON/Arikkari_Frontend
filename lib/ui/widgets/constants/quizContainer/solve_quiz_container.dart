@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 
 Stack solveQuizContainer({
   // 파라미터
-  required Function() ttsTap,
-  required Rx<Spelling_Quiz> problemText,
+  required Function ttsTap,
+  required String problemText,
   required TextEditingController editController,
   required Rx<Spelling_Quiz> difficulty,
   required Function() submit,

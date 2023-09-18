@@ -5,13 +5,14 @@ import 'package:get/get.dart';
 
 import '../../_constant/theme/app_colors.dart';
 
-class QuizStart extends StatelessWidget {
-  const QuizStart({super.key});
+class Home extends StatelessWidget {
+  const Home({super.key});
 
   // String todayWorld = '가타부타';
 
   @override
   Widget build(BuildContext context) {
+    Get.put(HomeGetx());
     return GetBuilder<HomeGetx>(
       builder: (x) {
         return Scaffold(
@@ -40,7 +41,7 @@ class QuizStart extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
+                  height: Get.height * 0.02,
                 ),
                 GestureDetector(
                   onTap: () {
@@ -80,7 +81,7 @@ class QuizStart extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  x.todayWord ?? '일단 빈값',
+                                  x.todayWord,
                                   style: const TextStyle(
                                       color: AppColors.blueF3,
                                       fontSize: 38,
