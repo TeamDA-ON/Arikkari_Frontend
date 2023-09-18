@@ -32,7 +32,7 @@ class QuizGetx extends GetxController {
   void chagePage(bool isGoSpelling) {
     isShowButton = isGoSpelling ? false : true;
     update();
-    Get.to(() => Quiz());
+    Get.to(() => const Quiz());
   }
 
   void onSubmit() {
