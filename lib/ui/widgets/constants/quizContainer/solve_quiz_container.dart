@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/model/model_quiz.dart';
 import 'package:get/get.dart';
 
 Stack solveQuizContainer({
   // 파라미터
-  required Function ttsTap,
-  required String problemText,
-  required TextEditingController editController,
-  required Rx<Spelling_Quiz> difficulty,
+  required Function? ttsTap,
+  required String? problemText,
+  required TextEditingController? editController,
+  required String? difficulty,
+  // required Rx<Spelling_Quiz>? difficulty,
   required Function() submit,
 }) {
   return Stack(
@@ -35,6 +35,7 @@ Stack solveQuizContainer({
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   margin: const EdgeInsets.fromLTRB(25, 20, 10, 20),
@@ -54,11 +55,11 @@ Stack solveQuizContainer({
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: GestureDetector(
-                    onTap: ttsTap(),
+                    onTap: ttsTap!(),
                     child: Image.asset(
                       "assets/img/volume.png",
-                      width: 30.0,
-                      height: 30.0,
+                      width: 25.0,
+                      height: 25.0,
                     ),
                   ),
                 ),
@@ -76,12 +77,13 @@ Stack solveQuizContainer({
               child: Wrap(
                 children: [
                   Text(
-                    problemText, // 가져온 데이터의 일부를 표시
-                    style: const TextStyle(fontSize: 20),
+                    problemText!, // 가져온 데이터의 일부를 표시
+                    style: const TextStyle(fontSize: 2),
                   ),
+
                   //if (quizController.quizType == "spelling")
                   Container(
-                    margin: const EdgeInsets.only(top: 8),
+                    margin: const EdgeInsets.only(top: 9),
                     width: 100,
                     height: 35,
                     color: const Color.fromRGBO(255, 255, 255, 1),
@@ -90,19 +92,12 @@ Stack solveQuizContainer({
                       style: const TextStyle(
                         fontSize: 25,
                       ),
-                      controller: editController,
+                      controller: editController!,
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         filled: true,
                         fillColor: Color(0xFFE7E7E7),
                       ),
-                    ),
-                  ),
-                  const Text(
-                    '',
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Color(0xFF404040),
                     ),
                   ),
                 ],

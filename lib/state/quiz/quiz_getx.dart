@@ -7,11 +7,12 @@ import 'package:get/get.dart';
 class QuizGetx extends GetxController {
   static QuizGetx get to => Get.find();
   bool isShowButton = true;
+  String answerIsCollect = "Normal";
 
   final quiz = Spelling_Quiz(
     answer: '',
     description: '',
-    difficulty: null,
+    difficulty: 1,
     problem: '',
   ).obs;
 
@@ -30,9 +31,13 @@ class QuizGetx extends GetxController {
   // }
 
   void chagePage(bool isGoSpelling) {
-    isShowButton = isGoSpelling ? false : true;
+    // isShowButton = isGoSpelling ? false : true;
     update();
-    Get.to(() => Quiz());
+    if (isGoSpelling) {
+      Get.to(const Quiz());
+    } else if (!isGoSpelling) {
+      Get.to(const Quiz());
+    }
   }
 
   void onSubmit() {
@@ -44,5 +49,12 @@ class QuizGetx extends GetxController {
     } else {
       print('오답');
     }
+  }
+
+  checkAnswer() {
+    // textEditController의 값이랑 비교하면 됨
+    // 여기에 답을 확인하는 로직 작성
+    // 정답이면 answerIsCollect = "collect"
+    // 아니면 answerIsCollect = "notCollect"
   }
 }

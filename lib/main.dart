@@ -8,7 +8,7 @@ void main() {
       theme: ThemeData(
         fontFamily: 'Pretendard',
       ),
-      home: Home(),
+      home: const Home(),
       // home: const Quiz(),
     ),
   );
