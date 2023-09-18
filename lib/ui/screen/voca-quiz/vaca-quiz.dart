@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/ui/widgets/pages/voca-quiz/button.dart';
+import 'package:get/get.dart';
 
 class Voca extends StatefulWidget {
   const Voca({super.key});
@@ -10,9 +12,7 @@ class Voca extends StatefulWidget {
 class _VocaState extends State<Voca> {
   String difficulty = '중';
 
-  void quizAnswer(){
-
-  }
+  void quizAnswer() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +23,8 @@ class _VocaState extends State<Voca> {
           // color: const Color(0xFFeff0f0),
           width: double.maxFinite,
           child: ScrollConfiguration(
-            behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+            behavior:
+                ScrollConfiguration.of(context).copyWith(scrollbars: false),
             child: SingleChildScrollView(
               primary: false,
               child: Column(
@@ -40,7 +41,7 @@ class _VocaState extends State<Voca> {
                         height: MediaQuery.of(context).size.height * 0.5,
                         padding: const EdgeInsets.symmetric(
                             vertical: 30, horizontal: 20),
-                      
+
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(30),
@@ -56,7 +57,8 @@ class _VocaState extends State<Voca> {
                             Row(
                               children: [
                                 Container(
-                                  margin: const EdgeInsets.fromLTRB(25, 20, 10, 20),
+                                  margin:
+                                      const EdgeInsets.fromLTRB(25, 20, 10, 20),
                                   width: 200,
                                   height: 9.5,
                                   child: const ClipRRect(
@@ -135,19 +137,28 @@ class _VocaState extends State<Voca> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.04,
+                    height: Get.height * 0.04,
                   ),
                   Column(
                     children: [
-                      button(context, "통찰", false),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.03,
+                      button(
+                        onTap: () {},
+                        quizSelection: '아리까리',
                       ),
-                      button(context, "분석", false),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.03,
+                        height: Get.height * 0.03,
                       ),
-                      button(context, "가늠", true),
+                      button(
+                        onTap: () {},
+                        quizSelection: '아리까리',
+                      ),
+                      SizedBox(
+                        height: Get.height * 0.03,
+                      ),
+                      button(
+                        onTap: () {},
+                        quizSelection: '아리까리',
+                      ),
                     ],
                   )
                 ],
@@ -156,22 +167,6 @@ class _VocaState extends State<Voca> {
           ),
         ),
       ),
-    );
-  }
-
-  SizedBox button(BuildContext context, String a, var b) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.height * 0.8,
-      height: 52,
-      child: OutlinedButton(
-          onPressed: () {
-            b ? print("정답") : print("오답");
-          },
-          style: OutlinedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)))),
-          child: Text(a)),
     );
   }
 }
