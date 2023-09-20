@@ -53,17 +53,18 @@ Stack solveQuizContainer({
                   ),
                 ),
                 const Text('4/20'),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    onTap: ttsTap!(),
-                    child: Image.asset(
-                      "assets/img/volume.png",
-                      width: 25.0,
-                      height: 25.0,
+                if (isTypeSpelling ?? true)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: GestureDetector(
+                      onTap: ttsTap!(),
+                      child: Image.asset(
+                        "assets/img/volume.png",
+                        width: 25.0,
+                        height: 25.0,
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
             const Divider(
@@ -85,24 +86,32 @@ Stack solveQuizContainer({
                       fontSize: 32,
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 9),
-                    width: 100,
-                    height: 35,
-                    color: const Color.fromRGBO(255, 255, 255, 1),
-                    child: TextField(
-                      autofocus: true,
-                      style: const TextStyle(
-                        fontSize: 25,
-                      ),
-                      controller: editController!,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        filled: true,
-                        fillColor: Color(0xFFE7E7E7),
+                  if (isTypeSpelling ?? true)
+                    Container(
+                      margin: const EdgeInsets.only(top: 9),
+                      width: 100,
+                      height: 35,
+                      color: const Color.fromRGBO(255, 255, 255, 1),
+                      child: TextField(
+                        autofocus: true,
+                        style: const TextStyle(
+                          fontSize: 25,
+                        ),
+                        controller: editController!,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          filled: true,
+                          fillColor: Color(0xFFE7E7E7),
+                        ),
                       ),
                     ),
-                  ),
+                  if (isTypeSpelling ?? true)
+                    Text(
+                      problemText, // 가져온 데이터의 일부를 표시
+                      style: const TextStyle(
+                        fontSize: 32,
+                      ),
+                    ),
                 ],
               ),
             ),

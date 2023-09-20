@@ -4,9 +4,27 @@ import 'package:flutter_project/ui/screen/spelling-quiz/spelling-quiz.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 
+Map<String, dynamic> jsonData = {
+  'id': 1,
+  'difficulty': '하',
+  'answer': '문제',
+  'problem1': '문제 앞쪽',
+  'problem2': '문제 뒷쪽',
+  'Commentary': '해설',
+  // "id": 1,
+  // "difficulty": '상',
+  // "problem": '문제설명',
+  // "selection1": '1',
+  // "selection2": '2',
+  // "selection3": '3',
+  // "answer": 2,
+  // "Commentary": '해설'
+};
+
 class QuizGetx extends GetxController {
   static QuizGetx get to => Get.find();
-  bool isShowButton = true;
+
+  bool isShowButton = jsonData['problem1'] != null ?? true;
   String answerIsCollect = "Normal";
 
   final quiz = Spelling_Quiz(
@@ -51,7 +69,7 @@ class QuizGetx extends GetxController {
     }
   }
 
-  checkAnswer() {
+  void checkAnswer() {
     // textEditController의 값이랑 비교하면 됨
     // 여기에 답을 확인하는 로직 작성
     // 정답이면 answerIsCollect = "collect"
