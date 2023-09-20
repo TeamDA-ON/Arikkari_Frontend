@@ -80,23 +80,19 @@ Stack solveQuizContainer({
                 direction: Axis.horizontal,
                 alignment: WrapAlignment.center,
                 children: [
-                  Text(
-                    problemText!, // 가져온 데이터의 일부를 표시
-                    style: const TextStyle(
-                      fontSize: 32,
-                    ),
-                  ),
+                  problemTextMethod(problemText!),
                   if (isTypeSpelling ?? true)
                     Container(
-                      margin: const EdgeInsets.only(top: 9),
-                      width: 100,
-                      height: 35,
-                      color: const Color.fromRGBO(255, 255, 255, 1),
+                      width: 100.0,
+                      height: 70.0,
+                      margin: const EdgeInsets.only(left: 5, right: 5),
                       child: TextField(
+                        // inputFormatters: [LengthLimitingTextInputFormatter(MAXLENGTH)], //입력길이 제한
                         autofocus: true,
                         style: const TextStyle(
                           fontSize: 25,
                         ),
+                        textAlign: TextAlign.center,
                         controller: editController!,
                         decoration: const InputDecoration(
                           border: InputBorder.none,
@@ -105,13 +101,7 @@ Stack solveQuizContainer({
                         ),
                       ),
                     ),
-                  if (isTypeSpelling ?? true)
-                    Text(
-                      problemText, // 가져온 데이터의 일부를 표시
-                      style: const TextStyle(
-                        fontSize: 32,
-                      ),
-                    ),
+                  if (isTypeSpelling ?? true) problemTextMethod(problemText),
                 ],
               ),
             ),
@@ -196,6 +186,18 @@ Stack solveQuizContainer({
           ),
         ),
     ],
+  );
+}
+
+Container problemTextMethod(String problemText) {
+  return Container(
+    margin: const EdgeInsets.only(top: 4),
+    child: Text(
+      problemText, // 가져온 데이터의 일부를 표시
+      style: const TextStyle(
+        fontSize: 32,
+      ),
+    ),
   );
 }
 
