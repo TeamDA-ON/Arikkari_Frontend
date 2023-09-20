@@ -7,7 +7,7 @@ Map<String, dynamic> jsonData = {
   'id': 1,
   'difficulty': '하',
   'answer': '문제',
-  'problem1': '문제 앞쪽',
+  "problem1": '문제 앞',
   'problem2': '문제 뒷쪽',
   'Commentary': '해설',
 };

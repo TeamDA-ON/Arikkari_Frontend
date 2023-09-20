@@ -55,7 +55,7 @@ Stack solveQuizContainer({
                   ),
                 ),
                 const Text('4/20'),
-                if (isTypeSpelling ?? true && api['problem1'] != null)
+                if (isTypeSpelling ?? true)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: GestureDetector(
@@ -80,7 +80,7 @@ Stack solveQuizContainer({
             Center(
               child: Wrap(
                 children: [
-                  problemTextMethod(api['problem1']),
+                  problemTextMethod(api['problem1'] ?? ""),
                   if (isTypeSpelling ?? true)
                     Container(
                       width: 100.0,
@@ -100,8 +100,8 @@ Stack solveQuizContainer({
                         ),
                       ),
                     ),
-                  if (isTypeSpelling ?? true && api['problem2'] != null)
-                    problemTextMethod(api['problem2']),
+                  if (isTypeSpelling ?? true)
+                    problemTextMethod(api['problem2'] ?? ""),
                 ],
               ),
             ),
