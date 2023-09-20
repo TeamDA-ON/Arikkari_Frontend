@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
-import 'package:flutter_project/ui/widgets/constants/quizContainer/solve_quiz_container.dart';
 import 'package:get/get.dart';
+import '../../widgets/constants/quizContainer/solve_quiz_container.dart';
 
 class Quiz extends StatelessWidget {
   const Quiz({super.key});
@@ -13,7 +13,7 @@ class Quiz extends StatelessWidget {
     return GetBuilder<QuizGetx>(builder: (x) {
       return Scaffold(
         resizeToAvoidBottomInset: false, //키보드에 가려지는 위젯 오버플로우 방지
-
+        //정답을 맞추면 answerIsCollect값을 봐꿔서 backgroundColor바꾸면됨
         backgroundColor: x.answerIsCollect == "Normal"
             ? const Color(0xFFeff0f0)
             : const Color(0xFFeff0f0),
@@ -28,18 +28,17 @@ class Quiz extends StatelessWidget {
                   height: Get.height * 0.1,
                 ),
                 solveQuizContainer(
-                  // ttsTap: () async {
-                  //   var result = await x.flutterTts.speak("영준아.");
-                  // },
-                  ttsTap: () {},
-                  isTypeSpelling: x.isShowButton,
-                  problemText: '바보',
-                  editController: x.textEditController,
-                  difficulty: "상", //type string으로 바꿔놈
-                  submit: () {
-                    x.checkAnswer();
-                  },
-                ),
+                    ttsTap: () {
+                      x.usingTts();
+                    },
+                    isTypeSpelling: x.isQuizSpelling,
+                    problemText: 'Test',
+                    editController: x.textEditController,
+                    difficulty: "상", //type string으로 바꿔놈
+                    submit: () {
+                      x.checkAnswer();
+                    },
+                    api: x.quizApi),
                 SizedBox(
                   height: Get.height * 0.1,
                 ),

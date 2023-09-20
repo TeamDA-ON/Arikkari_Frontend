@@ -4,12 +4,14 @@ import 'package:get/get.dart';
 Stack solveQuizContainer({
   // 파라미터
   required bool? isTypeSpelling, //스펠인지 아닌지 확인
-  required Function? ttsTap,
   required String? problemText,
   required TextEditingController? editController,
   required String? difficulty,
   // required Rx<Spelling_Quiz>? difficulty,
+  required Function() ttsTap,
   required Function() submit,
+  required Map<String, dynamic> api,
+  //TODO:: json보네서 api등록해놓기
 }) {
   return Stack(
     clipBehavior: Clip.none,
@@ -53,11 +55,11 @@ Stack solveQuizContainer({
                   ),
                 ),
                 const Text('4/20'),
-                if (isTypeSpelling ?? true)
+                if (isTypeSpelling ?? true && api['problem1'] != null)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: GestureDetector(
-                      onTap: ttsTap!(),
+                      onTap: ttsTap(),
                       child: Image.asset(
                         "assets/img/volume.png",
                         width: 25.0,
@@ -77,10 +79,8 @@ Stack solveQuizContainer({
             ),
             Center(
               child: Wrap(
-                direction: Axis.horizontal,
-                alignment: WrapAlignment.center,
                 children: [
-                  problemTextMethod(problemText!),
+                  problemTextMethod(api['problem1']),
                   if (isTypeSpelling ?? true)
                     Container(
                       width: 100.0,
@@ -92,8 +92,7 @@ Stack solveQuizContainer({
                         style: const TextStyle(
                           fontSize: 25,
                         ),
-                        textAlign: TextAlign.center,
-                        controller: editController!,
+                        controller: editController,
                         decoration: const InputDecoration(
                           border: InputBorder.none,
                           filled: true,
@@ -101,7 +100,8 @@ Stack solveQuizContainer({
                         ),
                       ),
                     ),
-                  if (isTypeSpelling ?? true) problemTextMethod(problemText),
+                  if (isTypeSpelling ?? true && api['problem2'] != null)
+                    problemTextMethod(api['problem2']),
                 ],
               ),
             ),
