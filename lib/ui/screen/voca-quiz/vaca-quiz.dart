@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/ui/widgets/pages/voca-quiz/button.dart';
 import 'package:get/get.dart';
+import '../../widgets/constants/quizContainer/solve_quiz_container.dart';
+import 'package:flutter_project/state/quiz/quiz_getx.dart';
 
 class Voca extends StatefulWidget {
   const Voca({super.key});
@@ -15,158 +17,69 @@ class _VocaState extends State<Voca> {
   void quizAnswer() {}
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFeff0f0),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: SizedBox(
-          // color: const Color(0xFFeff0f0),
-          width: double.maxFinite,
-          child: ScrollConfiguration(
-            behavior:
-                ScrollConfiguration.of(context).copyWith(scrollbars: false),
-            child: SingleChildScrollView(
-              primary: false,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                  ),
-                  Stack(
-                    clipBehavior: Clip.none,
-                    // overflow: Overflow.visible,
-                    children: [
-                      Container(
-                        // width: MediaQuery.of(context).size.width * 0.8,
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 30, horizontal: 20),
-
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(30),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 10,
-                            ),
-                          ],
+    Get.put(QuizGetx());
+    return GetBuilder<QuizGetx>(builder: (x) {
+      return Scaffold(
+        backgroundColor: const Color(0xFFeff0f0),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: SizedBox(
+            // color: const Color(0xFFeff0f0),
+            width: double.maxFinite,
+            child: ScrollConfiguration(
+              behavior:
+                  ScrollConfiguration.of(context).copyWith(scrollbars: false),
+              child: SingleChildScrollView(
+                primary: false,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: Get.height * 0.1,
+                    ),
+                    solveQuizContainer(
+                        ttsTap: () {
+                          x.usingTts();
+                        },
+                        isTypeSpelling: x.isQuizSpelling,
+                        problemText: 'Test',
+                        editController: x.textEditController,
+                        difficulty: "상", //type string으로 바꿔놈
+                        submit: () {
+                          x.checkAnswer();
+                        },
+                        api: x.quizApi),
+                    SizedBox(
+                      height: Get.height * 0.04,
+                    ),
+                    Column(
+                      children: [
+                        button(
+                          onTap: () {},
+                          quizSelection: '아리까리',
                         ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(25, 20, 10, 20),
-                                  width: 200,
-                                  height: 9.5,
-                                  child: const ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    child: LinearProgressIndicator(
-                                      value: 0.7,
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                          Color(0xff00ff00)),
-                                      backgroundColor: Color(0xffD6D6D6),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const Divider(
-                              height: 1,
-                              thickness: 1,
-                            ),
-                            Center(
-                              child: Wrap(
-                                children: const [
-                                  Text(
-                                    '사물을 어림잡아 해아림',
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                        SizedBox(
+                          height: Get.height * 0.03,
                         ),
-                      ),
-                      Positioned(
-                        top: -30,
-                        left: 10,
-                        child: Container(
-                          width: 100,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.yellow,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('난이도 : $difficulty'),
-                            ],
-                          ),
+                        button(
+                          onTap: () {},
+                          quizSelection: '아리까리',
                         ),
-                      ),
-                      Positioned(
-                        top: -30,
-                        right: 10,
-                        child: Container(
-                          width: 200,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text(
-                                '듣고 빈칸을 채워주세요.',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
+                        SizedBox(
+                          height: Get.height * 0.03,
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: Get.height * 0.04,
-                  ),
-                  Column(
-                    children: [
-                      button(
-                        onTap: () {},
-                        quizSelection: '아리까리',
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.03,
-                      ),
-                      button(
-                        onTap: () {},
-                        quizSelection: '아리까리',
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.03,
-                      ),
-                      button(
-                        onTap: () {},
-                        quizSelection: '아리까리',
-                      ),
-                    ],
-                  )
-                ],
+                        button(
+                          onTap: () {},
+                          quizSelection: '아리까리',
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
