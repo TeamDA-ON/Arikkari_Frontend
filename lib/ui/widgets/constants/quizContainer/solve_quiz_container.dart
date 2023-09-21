@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/model/model_quiz.dart';
 import 'package:get/get.dart';
 
 Stack solveQuizContainer({
   // 파라미터
-  required Function ttsTap,
-  required String problemText,
-  required TextEditingController editController,
-  required Rx<Spelling_Quiz> difficulty,
+  required bool? isTypeSpelling, //스펠인지 아닌지 확인
+  required String? problemText,
+  required TextEditingController? editController,
+  required String? difficulty,
+  // required Rx<Spelling_Quiz>? difficulty,
+  required Function() ttsTap,
   required Function() submit,
+  required Map<String, dynamic> api,
+  //TODO:: json보네서 api등록해놓기
 }) {
   return Stack(
     clipBehavior: Clip.none,
@@ -35,6 +38,7 @@ Stack solveQuizContainer({
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   margin: const EdgeInsets.fromLTRB(25, 20, 10, 20),
@@ -51,17 +55,18 @@ Stack solveQuizContainer({
                   ),
                 ),
                 const Text('4/20'),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    onTap: ttsTap(),
-                    child: Image.asset(
-                      "assets/img/volume.png",
-                      width: 30.0,
-                      height: 30.0,
+                if (isTypeSpelling ?? true)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: GestureDetector(
+                      onTap: ttsTap(),
+                      child: Image.asset(
+                        "assets/img/volume.png",
+                        width: 25.0,
+                        height: 25.0,
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
             const Divider(
@@ -75,36 +80,28 @@ Stack solveQuizContainer({
             Center(
               child: Wrap(
                 children: [
-                  Text(
-                    problemText, // 가져온 데이터의 일부를 표시
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  //if (quizController.quizType == "spelling")
-                  Container(
-                    margin: const EdgeInsets.only(top: 8),
-                    width: 100,
-                    height: 35,
-                    color: const Color.fromRGBO(255, 255, 255, 1),
-                    child: TextField(
-                      autofocus: true,
-                      style: const TextStyle(
-                        fontSize: 25,
-                      ),
-                      controller: editController,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        filled: true,
-                        fillColor: Color(0xFFE7E7E7),
+                  problemTextMethod(api['problem1'] ?? ""),
+                  if (isTypeSpelling ?? true)
+                    Container(
+                      width: 100.0,
+                      height: 70.0,
+                      margin: const EdgeInsets.only(left: 5, right: 5),
+                      child: TextField(
+                        // inputFormatters: [LengthLimitingTextInputFormatter(MAXLENGTH)], //입력길이 제한
+                        autofocus: true,
+                        style: const TextStyle(
+                          fontSize: 25,
+                        ),
+                        controller: editController,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          filled: true,
+                          fillColor: Color(0xFFE7E7E7),
+                        ),
                       ),
                     ),
-                  ),
-                  const Text(
-                    '',
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Color(0xFF404040),
-                    ),
-                  ),
+                  if (isTypeSpelling ?? true)
+                    problemTextMethod(api['problem2'] ?? ""),
                 ],
               ),
             ),
@@ -153,41 +150,54 @@ Stack solveQuizContainer({
           ),
         ),
       ),
-      boxPosition(
-        null, //top
-        -30, //bottom
-        null, // left
-        10, // right
-        GestureDetector(
-          onTap: submit,
-          child: Container(
-            width: 80,
-            height: 40,
-            decoration: BoxDecoration(
-              color: const Color(0xFFf4f4f4),
-              border: Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "확인",
-                  style: TextStyle(
-                    letterSpacing: 5,
-                    color: Color(
-                      0xFF7A7A7A,
+      if (isTypeSpelling!)
+        boxPosition(
+          null, //top
+          -30, //bottom
+          null, // left
+          10, // right
+          GestureDetector(
+            onTap: submit,
+            child: Container(
+              width: 80,
+              height: 40,
+              decoration: BoxDecoration(
+                color: const Color(0xFFf4f4f4),
+                border: Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    "확인",
+                    style: TextStyle(
+                      letterSpacing: 5,
+                      color: Color(
+                        0xFF7A7A7A,
+                      ),
+                      fontSize: 22.0,
+                      fontFamily: "Pretendard",
                     ),
-                    fontSize: 22.0,
-                    fontFamily: "Pretendard",
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
-      ),
     ],
+  );
+}
+
+Container problemTextMethod(String problemText) {
+  return Container(
+    margin: const EdgeInsets.only(top: 4),
+    child: Text(
+      problemText, // 가져온 데이터의 일부를 표시
+      style: const TextStyle(
+        fontSize: 32,
+      ),
+    ),
   );
 }
 

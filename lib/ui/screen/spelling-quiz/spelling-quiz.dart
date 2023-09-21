@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
-import 'package:flutter_project/ui/widgets/constants/quizContainer/solve_quiz_container.dart';
 import 'package:get/get.dart';
-import 'package:flutter_tts/flutter_tts.dart';
+import '../../widgets/constants/quizContainer/solve_quiz_container.dart';
 
 class Quiz extends StatelessWidget {
-  Quiz({super.key});
-  FlutterTts flutterTts = FlutterTts();
+  const Quiz({super.key});
 
   @override
   Widget build(BuildContext context) {
     // quizController.getData();
+    Get.put(QuizGetx()); //컨트롤러에 종속성 주입
     return GetBuilder<QuizGetx>(builder: (x) {
       return Scaffold(
-        resizeToAvoidBottomInset: false, //키보드에 가려지는 위젯이 생길때 오버플로우 방지해주는 코드
-        backgroundColor: const Color(0xFFeff0f0),
+        resizeToAvoidBottomInset: false, //키보드에 가려지는 위젯 오버플로우 방지
+        //정답을 맞추면 answerIsCollect값을 봐꿔서 backgroundColor바꾸면됨
+        backgroundColor: x.answerIsCollect == "Normal"
+            ? const Color(0xFFeff0f0)
+            : const Color(0xFFeff0f0),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: SizedBox(
@@ -23,19 +25,22 @@ class Quiz extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: Get.height * 0.1,
                 ),
                 solveQuizContainer(
-                  ttsTap: () async {
-                    var result = await flutterTts.speak("영준아.");
-                  },
-                  problemText: '바보',
-                  editController: editController,
-                  difficulty: '상',
-                  submit: submit,
-                ),
+                    ttsTap: () {
+                      x.usingTts();
+                    },
+                    isTypeSpelling: x.isQuizSpelling,
+                    problemText: 'Test',
+                    editController: x.textEditController,
+                    difficulty: "상", //type string으로 바꿔놈
+                    submit: () {
+                      x.checkAnswer();
+                    },
+                    api: x.quizApi),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: Get.height * 0.1,
                 ),
                 Image.asset(
                   'assets/img/quizlogo.png',
