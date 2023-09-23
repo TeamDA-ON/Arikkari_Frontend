@@ -7,7 +7,7 @@ Map<String, dynamic> jsonData = {
   'id': 1,
   'difficulty': '하',
   'answer': '문제',
-  "problem1": '문제 앞',
+  'problem1': "문제 앞쪽",
   'problem2': '문제 뒷쪽',
   'Commentary': '해설',
 };
@@ -27,8 +27,8 @@ class QuizGetx extends GetxController {
   // ).obs;
   void usingTts() async {
     FlutterTts flutterTts = FlutterTts();
+    //변수로 바꿔야함
     await flutterTts.speak("영준아.");
-    print("answer");
   }
 
   TextEditingController textEditController = TextEditingController();
