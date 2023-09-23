@@ -83,9 +83,7 @@ Stack solveQuizContainer({
             Center(
               child: Wrap(
                 children: [
-                  problemTextMethod(
-                    api['problem1'] ?? "",
-                  ),
+                  problemTextMethod(api['problem1'] ?? api['problem']),
                   if (isTypeSpelling ?? true)
                     Container(
                       width: 100.0,
