@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/state/home/home_getx.dart';
+import 'package:flutter_project/state/result/result_getx.dart';
 import 'package:circle_progress_bar/circle_progress_bar.dart';
+import 'package:flutter_project/ui/widgets/pages/result/resultButton.dart';
 import 'package:get/get.dart';
 
 import '../../_constant/theme/app_colors.dart';
 
 class Result extends StatelessWidget {
-  Result({super.key});
-
-  String CorrectRate = '75.00%';
+  const Result({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeGetx());
-    return GetBuilder<HomeGetx>(
+    Get.put(ResultGetx());
+    return GetBuilder<ResultGetx>(
       builder: (x) {
         return Scaffold(
           body: Container(
@@ -22,7 +21,7 @@ class Result extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.05,
+                  height: MediaQuery.of(context).size.height * 0.1,
                 ),
                 const Text(
                   "정답률", // 가져온 데이터의 일부를 표시
@@ -33,14 +32,18 @@ class Result extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 250,
+                  height: Get.height * 0.12,
+                ),
+                SizedBox(
+                  width: 260,
+                  height: 260,
                   child: CircleProgressBar(
                     foregroundColor: AppColors.white,
                     backgroundColor: Colors.black12,
                     value: 0.5,
                     child: Center(
                       child: Text(
-                        CorrectRate,
+                        x.CorrectRate,
                         style: const TextStyle(
                           color: AppColors.white,
                           fontSize: 34,
@@ -50,6 +53,10 @@ class Result extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: Get.height * 0.12,
+                ),
+                ResultButton(x)
               ],
             ),
           ),
