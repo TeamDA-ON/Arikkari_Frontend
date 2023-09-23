@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
+import 'package:flutter_project/ui/widgets/constants/appbar.dart';
 import 'package:get/get.dart';
 import '../../widgets/constants/quizContainer/solve_quiz_container.dart';
 
@@ -12,6 +13,7 @@ class Quiz extends StatelessWidget {
     Get.put(QuizGetx()); //컨트롤러에 종속성 주입
     return GetBuilder<QuizGetx>(builder: (x) {
       return Scaffold(
+        appBar: appBar(),
         resizeToAvoidBottomInset: false, //키보드에 가려지는 위젯 오버플로우 방지
         //정답을 맞추면 answerIsCollect값을 봐꿔서 backgroundColor바꾸면됨
         backgroundColor: x.answerIsCollect == "Normal"

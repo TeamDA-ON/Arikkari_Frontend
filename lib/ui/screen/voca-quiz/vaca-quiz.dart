@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/ui/widgets/constants/appbar.dart';
 
 class Voca extends StatefulWidget {
   const Voca({super.key});
@@ -10,12 +11,11 @@ class Voca extends StatefulWidget {
 class _VocaState extends State<Voca> {
   String difficulty = '중';
 
-  void quizAnswer(){
-
-  }
+  void quizAnswer() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBar(),
       backgroundColor: const Color(0xFFeff0f0),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -23,7 +23,8 @@ class _VocaState extends State<Voca> {
           // color: const Color(0xFFeff0f0),
           width: double.maxFinite,
           child: ScrollConfiguration(
-            behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+            behavior:
+                ScrollConfiguration.of(context).copyWith(scrollbars: false),
             child: SingleChildScrollView(
               primary: false,
               child: Column(
@@ -40,7 +41,7 @@ class _VocaState extends State<Voca> {
                         height: MediaQuery.of(context).size.height * 0.5,
                         padding: const EdgeInsets.symmetric(
                             vertical: 30, horizontal: 20),
-                      
+
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(30),
@@ -56,7 +57,8 @@ class _VocaState extends State<Voca> {
                             Row(
                               children: [
                                 Container(
-                                  margin: const EdgeInsets.fromLTRB(25, 20, 10, 20),
+                                  margin:
+                                      const EdgeInsets.fromLTRB(25, 20, 10, 20),
                                   width: 200,
                                   height: 9.5,
                                   child: const ClipRRect(
