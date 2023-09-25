@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 AppBar appBar() {
   return AppBar(
-    backgroundColor: Color(0xFFFFFFFF),
+    backgroundColor: const Color(0xFFFFFFFF),
     toolbarHeight: 83,
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: Colors.black, //change your color here
     ),
     actions: [

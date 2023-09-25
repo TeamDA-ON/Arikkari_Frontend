@@ -6,12 +6,12 @@ Stack solveQuizContainer({
   required bool? isTypeSpelling, //스펠인지 아닌지 확인
   required String? problemText,
   required TextEditingController? editController,
+  //임시로 형변환 시켜놈ㄴ
   required String? difficulty,
   // required Rx<Spelling_Quiz>? difficulty,
   required Function() ttsTap,
   required Function() submit,
   required Map<String, dynamic> api,
-  //TODO:: json보네서 api등록해놓기
 }) {
   return Stack(
     clipBehavior: Clip.none,
@@ -40,26 +40,29 @@ Stack solveQuizContainer({
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(25, 20, 10, 20),
-                  width: 190,
-                  height: 9.5,
-                  child: const ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                const Expanded(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
                     child: LinearProgressIndicator(
                       value: 0.7,
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(Color(0xff00ff00)),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Color(0xff00ff00),
+                      ),
                       backgroundColor: Color(0xffD6D6D6),
                     ),
                   ),
                 ),
+                const SizedBox(width: 10),
                 const Text('4/20'),
                 if (isTypeSpelling ?? true)
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
+                    padding: const EdgeInsets.only(
+                      left: 20.0,
+                    ),
                     child: GestureDetector(
-                      onTap: ttsTap(),
+                      onTap: ttsTap,
                       child: Image.asset(
                         "assets/img/volume.png",
                         width: 25.0,
@@ -80,7 +83,7 @@ Stack solveQuizContainer({
             Center(
               child: Wrap(
                 children: [
-                  problemTextMethod(api['problem1'] ?? ""),
+                  problemTextMethod(api['problem1'] ?? api['problem']),
                   if (isTypeSpelling ?? true)
                     Container(
                       width: 100.0,
@@ -101,7 +104,9 @@ Stack solveQuizContainer({
                       ),
                     ),
                   if (isTypeSpelling ?? true)
-                    problemTextMethod(api['problem2'] ?? ""),
+                    problemTextMethod(
+                      api['problem2'] ?? "",
+                    ),
                 ],
               ),
             ),
@@ -117,16 +122,20 @@ Stack solveQuizContainer({
             width: 100,
             height: 40,
             decoration: BoxDecoration(
-                border: Border.all(
-                  width: 4,
-                  color: const Color(0xFF92dcec),
-                ),
-                borderRadius: BorderRadius.circular(30),
-                color: const Color(0xFFFFFFFF)),
+              border: Border.all(
+                width: 4,
+                color: const Color(0xFF92dcec),
+              ),
+              borderRadius: BorderRadius.circular(30),
+              color: const Color(0xFFFFFFFF),
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                quizText('난이도 : $difficulty', const Color(0xFF404040)),
+                quizText(
+                  '난이도 : $difficulty',
+                  const Color(0xFF404040),
+                ),
               ],
             ),
           )),
@@ -145,7 +154,10 @@ Stack solveQuizContainer({
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              quizText("듣고 빈칸을 채워주세요", const Color(0XFFEFF0F0)),
+              quizText(
+                "듣고 빈칸을 채워주세요",
+                const Color(0XFFEFF0F0),
+              ),
             ],
           ),
         ),

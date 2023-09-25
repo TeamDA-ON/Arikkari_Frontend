@@ -46,6 +46,7 @@ dependencies:
   percent_indicator: ^4.2.3
   dio: ^5.2.1+1
   pretty_dio_logger: ^1.1.1
+  circle_progress_bar: ^0.1.2
 
 dev_dependencies:
   flutter_test:
