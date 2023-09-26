@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 GestureDetector button({
   required Function() onTap,
-  required String quizSelection,
+  required String? quizSelection,
 }) {
   return GestureDetector(
     onTap: () {},
@@ -20,7 +20,7 @@ GestureDetector button({
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            quizSelection,
+            quizSelection ?? '',
             style: const TextStyle(
               color: AppColors.darkGrayF1,
               fontWeight: FontWeight.w700,
