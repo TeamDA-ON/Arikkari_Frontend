@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/state/result/result_getx.dart';
 import 'package:circle_progress_bar/circle_progress_bar.dart';
+import 'package:flutter_project/state/quiz/quiz_getx.dart';
 import 'package:flutter_project/ui/widgets/pages/result/resultButton.dart';
 import 'package:get/get.dart';
 
@@ -11,8 +11,8 @@ class Result extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ResultGetx());
-    return GetBuilder<ResultGetx>(
+    Get.put(QuizGetx());
+    return GetBuilder<QuizGetx>(
       builder: (x) {
         return Scaffold(
           body: Container(
@@ -40,10 +40,10 @@ class Result extends StatelessWidget {
                   child: CircleProgressBar(
                     foregroundColor: AppColors.white,
                     backgroundColor: Colors.black12,
-                    value: 0.5,
+                    value: x.problemTrue * 2 / 10,
                     child: Center(
                       child: Text(
-                        x.CorrectRate,
+                        '${x.problemTrue * 20}%',
                         style: const TextStyle(
                           color: AppColors.white,
                           fontSize: 34,

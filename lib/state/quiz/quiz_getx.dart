@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/ui/screen/home/home.dart';
+import 'package:flutter_project/ui/screen/result/result.dart';
 import 'package:flutter_project/ui/screen/spelling-quiz/spelling-quiz.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
@@ -14,10 +16,11 @@ Map<String, dynamic> jsonData = {
 
 class QuizGetx extends GetxController {
   static QuizGetx get to => Get.find();
-
+  RxInt progress = RxInt(0);
+  int problemTrue = 0;
   bool isQuizSpelling = jsonData['problem1'] != null;
   Map<String, dynamic> quizApi = jsonData;
-  String answerIsCollect = "Normal";
+  RxString answerIsCollect = RxString("Normal");
 
   // final quiz = Spelling_Quiz(
   //   answer: '',
@@ -25,10 +28,14 @@ class QuizGetx extends GetxController {
   //   difficulty: 1,
   //   problem: '',
   // ).obs;
-  void usingTts() async {
+  void usingTts({
+    required String? problem1,
+    required String? problem2,
+    required String? answer,
+  }) async {
     FlutterTts flutterTts = FlutterTts();
-    //변수로 바꿔야함
-    await flutterTts.speak("영준아.");
+    String speakVoice = problem1! + answer! + problem2!;
+    await flutterTts.speak(speakVoice);
   }
 
   TextEditingController textEditController = TextEditingController();
@@ -54,6 +61,10 @@ class QuizGetx extends GetxController {
     }
   }
 
+  void goHome() {
+    Get.to(const Home());
+  }
+
   void onSubmit() {
     // quizController.getData();
     // String textResult = textEditController.text.trim();
@@ -70,5 +81,31 @@ class QuizGetx extends GetxController {
     // 여기에 답을 확인하는 로직 작성
     // 정답이면 answerIsCollect = "collect"
     // 아니면 answerIsCollect = "notCollect"
+  }
+
+  void vocaAnswer({
+    required int? answer,
+    required int? selection,
+  }) {
+    if (progress == 4) {
+      Get.to(const Result());
+    } else {
+      if (answer == selection) {
+        print("정답");
+        problemTrue++;
+        answerIsCollect = RxString('true');
+        Future.delayed(const Duration(milliseconds: 2000), () {
+          progress++;
+        });
+      } else {
+        print("오답");
+        answerIsCollect = RxString('false');
+        Future.delayed(const Duration(milliseconds: 5000), () {
+          // 5초 딜레이 5초 동안 버튼이 계속 눌려지는데 나중에 팝업 추가하면서 버튼 가리면 될 듯
+          progress++;
+        });
+      }
+      answerIsCollect = RxString("Normal");
+    }
   }
 }
