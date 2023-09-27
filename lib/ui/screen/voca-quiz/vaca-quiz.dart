@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:flutter_project/ui/widgets/pages/voca-quiz/button.dart';
 import 'package:flutter_project/utilities/logger.dart';
 import 'package:get/get.dart';
@@ -55,25 +56,29 @@ class Voca extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
-              return Scaffold(
-                backgroundColor: const Color(0xFFeff0f0),
-                body: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: SizedBox(
-                    // color: const Color(0xFFeff0f0),
-                    width: double.maxFinite,
-                    child: ScrollConfiguration(
-                      behavior: ScrollConfiguration.of(context)
-                          .copyWith(scrollbars: false),
-                      child: SingleChildScrollView(
-                        primary: false,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: Get.height * 0.1,
-                            ),
-                            Obx(
-                              () => voca_QuizContainer(
+              return Obx(
+                () => Scaffold(
+                  backgroundColor: x.answerIsCollect == 'Normal'
+                      ? AppColors.lightGrayF1
+                      : x.answerIsCollect == 'true'
+                          ? AppColors.green
+                          : AppColors.red1,
+                  body: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: SizedBox(
+                      // color: const Color(0xFFeff0f0),
+                      width: double.maxFinite,
+                      child: ScrollConfiguration(
+                        behavior: ScrollConfiguration.of(context)
+                            .copyWith(scrollbars: false),
+                        child: SingleChildScrollView(
+                          primary: false,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: Get.height * 0.1,
+                              ),
+                              voca_QuizContainer(
                                 difficulty: response.data[x.progress.value]
                                     ['difficulty'],
                                 answer: response.data[x.progress.value]
@@ -84,12 +89,10 @@ class Voca extends StatelessWidget {
                                     ['problem'],
                                 // progressNumber: x.progress,
                               ),
-                            ),
-                            SizedBox(
-                              height: Get.height * 0.04,
-                            ),
-                            Obx(
-                              () => Column(
+                              SizedBox(
+                                height: Get.height * 0.04,
+                              ),
+                              Column(
                                 children: [
                                   button(
                                     onTap: () => x.vocaAnswer(
@@ -126,8 +129,8 @@ class Voca extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                            )
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

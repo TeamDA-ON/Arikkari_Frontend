@@ -20,7 +20,7 @@ class QuizGetx extends GetxController {
   int problemTrue = 0;
   bool isQuizSpelling = jsonData['problem1'] != null;
   Map<String, dynamic> quizApi = jsonData;
-  String answerIsCollect = "Normal";
+  RxString answerIsCollect = RxString("Normal");
 
   // final quiz = Spelling_Quiz(
   //   answer: '',
@@ -92,12 +92,20 @@ class QuizGetx extends GetxController {
     } else {
       if (answer == selection) {
         print("정답");
-        progress++;
         problemTrue++;
+        answerIsCollect = RxString('true');
+        Future.delayed(const Duration(milliseconds: 2000), () {
+          progress++;
+        });
       } else {
         print("오답");
-        progress++;
+        answerIsCollect = RxString('false');
+        Future.delayed(const Duration(milliseconds: 5000), () {
+          // 5초 딜레이 5초 동안 버튼이 계속 눌려지는데 나중에 팝업 추가하면서 버튼 가리면 될 듯
+          progress++;
+        });
       }
+      answerIsCollect = RxString("Normal");
     }
   }
 }
