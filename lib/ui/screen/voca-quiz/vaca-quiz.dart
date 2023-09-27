@@ -98,7 +98,7 @@ class Voca extends StatelessWidget {
                                       selection: 1,
                                     ),
                                     quizSelection: response
-                                        .data[x.progress.value]['selection3'],
+                                        .data[x.progress.value]['selection1'],
                                   ),
                                   SizedBox(
                                     height: Get.height * 0.03,

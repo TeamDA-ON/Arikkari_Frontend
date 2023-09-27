@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/ui/screen/home/home.dart';
+import 'package:flutter_project/ui/screen/result/result.dart';
 import 'package:flutter_project/ui/screen/spelling-quiz/spelling-quiz.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,7 @@ Map<String, dynamic> jsonData = {
 class QuizGetx extends GetxController {
   static QuizGetx get to => Get.find();
   RxInt progress = RxInt(0);
+  int problemTrue = 0;
   bool isQuizSpelling = jsonData['problem1'] != null;
   Map<String, dynamic> quizApi = jsonData;
   String answerIsCollect = "Normal";
@@ -59,6 +61,10 @@ class QuizGetx extends GetxController {
     }
   }
 
+  void goHome() {
+    Get.to(const Home());
+  }
+
   void onSubmit() {
     // quizController.getData();
     // String textResult = textEditController.text.trim();
@@ -82,11 +88,12 @@ class QuizGetx extends GetxController {
     required int? selection,
   }) {
     if (progress == 4) {
-      Get.to(const Home());
+      Get.to(const Result());
     } else {
       if (answer == selection) {
         print("정답");
         progress++;
+        problemTrue++;
       } else {
         print("오답");
         progress++;

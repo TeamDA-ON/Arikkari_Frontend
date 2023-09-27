@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/state/result/result_getx.dart';
+import 'package:flutter_project/state/quiz/quiz_getx.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 
-GestureDetector ResultButton(ResultGetx x) {
+GestureDetector ResultButton(QuizGetx x) {
   return GestureDetector(
-    onTap: x.chagePage,
+    onTap: () => x.goHome(),
     child: Container(
       width: Get.width * 0.6,
       height: 58,
