@@ -83,8 +83,8 @@ class QuizGetx extends GetxController {
     if (progress == 4) {
       Get.to(const Result());
     } else {
-      print(textEditController);
-      if (textEditController == answer) {
+      print(textEditController.text);
+      if (textEditController.text == answer) {
         print("정답");
         answerIsCollect = RxString("collect");
         problemTrue++;
@@ -100,7 +100,9 @@ class QuizGetx extends GetxController {
   void vocaAnswer({
     required int? answer,
     required int? selection,
+    required Function() changeBackgroundColor,
   }) {
+    changeBackgroundColor();
     if (progress == 4) {
       Get.to(const Result());
     } else {
@@ -108,18 +110,18 @@ class QuizGetx extends GetxController {
         print("정답");
         problemTrue++;
         answerIsCollect = RxString('true');
-        Future.delayed(const Duration(milliseconds: 2000), () {
-          progress++;
-        });
+        // Future.delayed(const Duration(milliseconds: 2000), () {
+        progress++;
+        // });
       } else {
         print("오답");
         answerIsCollect = RxString('false');
-        Future.delayed(const Duration(milliseconds: 5000), () {
-          // 5초 딜레이 5초 동안 버튼이 계속 눌려지는데 나중에 팝업 추가하면서 버튼 가리면 될 듯
-          progress++;
-        });
+        // Future.delayed(const Duration(milliseconds: 5000), () {
+        // 5초 딜레이 5초 동안 버튼이 계속 눌려지는데 나중에 팝업 추가하면서 버튼 가리면 될 듯
+        progress++;
+        // });
       }
-      answerIsCollect = RxString("Normal");
+      // answerIsCollect = RxString("Normal");
     }
   }
 }

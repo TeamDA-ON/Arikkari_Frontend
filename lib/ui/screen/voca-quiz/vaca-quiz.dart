@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:flutter_project/ui/widgets/pages/voca-quiz/button.dart';
+import 'package:flutter_project/ui/widgets/pages/voca-quiz/voca_QuizContainer.dart';
 import 'package:flutter_project/utilities/logger.dart';
 import 'package:get/get.dart';
-import '../../widgets/pages/voca-quiz/voca_QuizContainer.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
 
 int? id;
@@ -17,8 +17,14 @@ RxString? selection3 = RxString('');
 RxString? commentary = RxString('');
 late final response;
 
-class Voca extends StatelessWidget {
+class Voca extends StatefulWidget {
   const Voca({super.key});
+
+  @override
+  State<Voca> createState() => _VocaState();
+}
+
+class _VocaState extends State<Voca> {
   Future<void> getData(QuizGetx x) async {
     var dio = Dio();
     try {
@@ -35,6 +41,18 @@ class Voca extends StatelessWidget {
     } catch (error) {
       print('에러 :: $error');
     }
+  }
+
+  Color? _backgroundColor;
+
+  void changeBackgroundColor(QuizGetx x) {
+    setState(() {
+      _backgroundColor = x.answerIsCollect == 'Normal'
+          ? AppColors.lightGrayF1
+          : x.answerIsCollect == 'true'
+              ? AppColors.green
+              : AppColors.red1;
+    });
   }
 
   @override
@@ -56,29 +74,25 @@ class Voca extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
-              return Obx(
-                () => Scaffold(
-                  backgroundColor: x.answerIsCollect == 'Normal'
-                      ? AppColors.lightGrayF1
-                      : x.answerIsCollect == 'true'
-                          ? AppColors.green
-                          : AppColors.red1,
-                  body: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: SizedBox(
-                      // color: const Color(0xFFeff0f0),
-                      width: double.maxFinite,
-                      child: ScrollConfiguration(
-                        behavior: ScrollConfiguration.of(context)
-                            .copyWith(scrollbars: false),
-                        child: SingleChildScrollView(
-                          primary: false,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: Get.height * 0.1,
-                              ),
-                              voca_QuizContainer(
+              return Scaffold(
+                backgroundColor: _backgroundColor,
+                body: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: SizedBox(
+                    // color: const Color(0xFFeff0f0),
+                    width: double.maxFinite,
+                    child: ScrollConfiguration(
+                      behavior: ScrollConfiguration.of(context)
+                          .copyWith(scrollbars: false),
+                      child: SingleChildScrollView(
+                        primary: false,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: Get.height * 0.1,
+                            ),
+                            Obx(
+                              () => voca_QuizContainer(
                                 difficulty: response.data[x.progress.value]
                                     ['difficulty'],
                                 answer: response.data[x.progress.value]
@@ -89,17 +103,20 @@ class Voca extends StatelessWidget {
                                     ['problem'],
                                 // progressNumber: x.progress,
                               ),
-                              SizedBox(
-                                height: Get.height * 0.04,
-                              ),
-                              Column(
+                            ),
+                            SizedBox(
+                              height: Get.height * 0.04,
+                            ),
+                            Obx(
+                              () => Column(
                                 children: [
                                   button(
                                     onTap: () => x.vocaAnswer(
-                                      answer: response.data[x.progress.value]
-                                          ['answer'],
-                                      selection: 1,
-                                    ),
+                                        answer: response.data[x.progress.value]
+                                            ['answer'],
+                                        selection: 1,
+                                        changeBackgroundColor: () =>
+                                            changeBackgroundColor),
                                     quizSelection: response
                                         .data[x.progress.value]['selection1'],
                                   ),
@@ -108,10 +125,11 @@ class Voca extends StatelessWidget {
                                   ),
                                   button(
                                     onTap: () => x.vocaAnswer(
-                                      answer: response.data[x.progress.value]
-                                          ['answer'],
-                                      selection: 2,
-                                    ),
+                                        answer: response.data[x.progress.value]
+                                            ['answer'],
+                                        selection: 2,
+                                        changeBackgroundColor: () =>
+                                            changeBackgroundColor),
                                     quizSelection: response
                                         .data[x.progress.value]['selection2'],
                                   ),
@@ -120,17 +138,18 @@ class Voca extends StatelessWidget {
                                   ),
                                   button(
                                     onTap: () => x.vocaAnswer(
-                                      answer: response.data[x.progress.value]
-                                          ['answer'],
-                                      selection: 3,
-                                    ),
+                                        answer: response.data[x.progress.value]
+                                            ['answer'],
+                                        selection: 3,
+                                        changeBackgroundColor: () =>
+                                            changeBackgroundColor),
                                     quizSelection: response
                                         .data[x.progress.value]['selection3'],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
