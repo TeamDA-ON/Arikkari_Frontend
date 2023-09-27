@@ -7,6 +7,7 @@ Stack spelling_QuizContainer({
   required String? problem2,
   required String? commentary,
   required TextEditingController? editController,
+  //임시로 형변환 시켜놈ㄴ
   required String? difficulty,
   required Function() ttsTap,
   required Function() submit,
@@ -38,20 +39,21 @@ Stack spelling_QuizContainer({
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(25, 20, 10, 20),
-                  width: 190,
-                  height: 9.5,
-                  child: const ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                const Expanded(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
                     child: LinearProgressIndicator(
                       value: 0.7,
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(Color(0xff00ff00)),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Color(0xff00ff00),
+                      ),
                       backgroundColor: Color(0xffD6D6D6),
                     ),
                   ),
                 ),
+                const SizedBox(width: 10),
                 const Text('4/20'),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
@@ -112,16 +114,20 @@ Stack spelling_QuizContainer({
             width: 100,
             height: 40,
             decoration: BoxDecoration(
-                border: Border.all(
-                  width: 4,
-                  color: const Color(0xFF92dcec),
-                ),
-                borderRadius: BorderRadius.circular(30),
-                color: const Color(0xFFFFFFFF)),
+              border: Border.all(
+                width: 4,
+                color: const Color(0xFF92dcec),
+              ),
+              borderRadius: BorderRadius.circular(30),
+              color: const Color(0xFFFFFFFF),
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                quizText('난이도 : $difficulty', const Color(0xFF404040)),
+                quizText(
+                  '난이도 : $difficulty',
+                  const Color(0xFF404040),
+                ),
               ],
             ),
           )),
@@ -140,7 +146,10 @@ Stack spelling_QuizContainer({
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              quizText("듣고 빈칸을 채워주세요", const Color(0XFFEFF0F0)),
+              quizText(
+                "듣고 빈칸을 채워주세요",
+                const Color(0XFFEFF0F0),
+              ),
             ],
           ),
         ),
