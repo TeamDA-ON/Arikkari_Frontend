@@ -12,6 +12,7 @@ Stack spelling_QuizContainer({
   required Function() ttsTap,
   required Function() submit,
 }) {
+  ttsTap();
   return Stack(
     clipBehavior: Clip.none,
     // overflow: Overflow.visible,
@@ -58,7 +59,7 @@ Stack spelling_QuizContainer({
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: GestureDetector(
-                    onTap: ttsTap(),
+                    onTap: () => ttsTap(),
                     child: Image.asset(
                       "assets/img/volume.png",
                       width: 25.0,
@@ -160,7 +161,7 @@ Stack spelling_QuizContainer({
         null, // left
         10, // right
         GestureDetector(
-          onTap: submit,
+          onTap: () => submit(),
           child: Container(
             width: 80,
             height: 40,

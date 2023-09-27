@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/ui/screen/home/home.dart';
 import 'package:flutter_project/ui/screen/result/result.dart';
-import 'package:flutter_project/ui/screen/spelling-quiz/spelling-quiz.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 
@@ -51,15 +50,15 @@ class QuizGetx extends GetxController {
   //   }
   // }
 
-  void chagePage(bool isGoSpelling) {
-    // isShowButton = isGoSpelling ? false : true;
-    update();
-    if (isGoSpelling) {
-      Get.to(const Quiz());
-    } else if (!isGoSpelling) {
-      Get.to(const Quiz()); //false면 selectBox로 이동하면됨
-    }
-  }
+  // void chagePage(bool isGoSpelling) {
+  //   // isShowButton = isGoSpelling ? false : true;
+  //   update();
+  //   if (isGoSpelling) {
+  //     Get.to(const Quiz());
+  //   } else if (!isGoSpelling) {
+  //     Get.to(const Quiz()); //false면 selectBox로 이동하면됨
+  //   }
+  // }
 
   void goHome() {
     Get.to(const Home());
@@ -76,11 +75,26 @@ class QuizGetx extends GetxController {
     // }
   }
 
-  void checkAnswer() {
+  void checkAnswer({required String answer}) {
     // textEditController의 값이랑 비교하면 됨
     // 여기에 답을 확인하는 로직 작성
     // 정답이면 answerIsCollect = "collect"
     // 아니면 answerIsCollect = "notCollect"
+    if (progress == 4) {
+      Get.to(const Result());
+    } else {
+      print(textEditController);
+      if (textEditController == answer) {
+        print("정답");
+        answerIsCollect = RxString("collect");
+        problemTrue++;
+        progress++;
+      } else {
+        print("오답");
+        answerIsCollect = RxString("notCollect");
+        progress++;
+      }
+    }
   }
 
   void vocaAnswer({
