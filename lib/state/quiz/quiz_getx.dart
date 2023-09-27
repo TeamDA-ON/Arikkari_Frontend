@@ -25,10 +25,14 @@ class QuizGetx extends GetxController {
   //   difficulty: 1,
   //   problem: '',
   // ).obs;
-  void usingTts() async {
+  void usingTts({
+    required String? problem1,
+    required String? problem2,
+    required String? answer,
+  }) async {
     FlutterTts flutterTts = FlutterTts();
-    await flutterTts.speak("영준아.");
-    print("answer");
+    String speakVoice = problem1! + answer! + problem2!;
+    await flutterTts.speak(speakVoice);
   }
 
   TextEditingController textEditController = TextEditingController();

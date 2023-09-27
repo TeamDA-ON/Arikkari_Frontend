@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Stack solveQuizContainer({
-  // 파라미터
-  required bool? isTypeSpelling, //스펠인지 아닌지 확인
-  required String? problemText,
-  required TextEditingController? editController,
+Stack voca_QuizContainer({
   required String? difficulty,
-  // required Rx<Spelling_Quiz>? difficulty,
-  required Function() ttsTap,
-  required Function() submit,
-  required Map<String, dynamic> api,
-  //TODO:: json보네서 api등록해놓기
+  required String? problem,
+  required int? answer,
+  required String? commentary,
 }) {
   return Stack(
     clipBehavior: Clip.none,
@@ -55,18 +49,6 @@ Stack solveQuizContainer({
                   ),
                 ),
                 const Text('4/20'),
-                if (isTypeSpelling ?? true)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: GestureDetector(
-                      onTap: ttsTap(),
-                      child: Image.asset(
-                        "assets/img/volume.png",
-                        width: 25.0,
-                        height: 25.0,
-                      ),
-                    ),
-                  ),
               ],
             ),
             const Divider(
@@ -80,28 +62,7 @@ Stack solveQuizContainer({
             Center(
               child: Wrap(
                 children: [
-                  problemTextMethod(api['problem1'] ?? ""),
-                  if (isTypeSpelling ?? true)
-                    Container(
-                      width: 100.0,
-                      height: 70.0,
-                      margin: const EdgeInsets.only(left: 5, right: 5),
-                      child: TextField(
-                        // inputFormatters: [LengthLimitingTextInputFormatter(MAXLENGTH)], //입력길이 제한
-                        autofocus: true,
-                        style: const TextStyle(
-                          fontSize: 25,
-                        ),
-                        controller: editController,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          filled: true,
-                          fillColor: Color(0xFFE7E7E7),
-                        ),
-                      ),
-                    ),
-                  if (isTypeSpelling ?? true)
-                    problemTextMethod(api['problem2'] ?? ""),
+                  problemTextMethod(problem),
                 ],
               ),
             ),
@@ -150,50 +111,15 @@ Stack solveQuizContainer({
           ),
         ),
       ),
-      if (isTypeSpelling!)
-        boxPosition(
-          null, //top
-          -30, //bottom
-          null, // left
-          10, // right
-          GestureDetector(
-            onTap: submit,
-            child: Container(
-              width: 80,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xFFf4f4f4),
-                border: Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    "확인",
-                    style: TextStyle(
-                      letterSpacing: 5,
-                      color: Color(
-                        0xFF7A7A7A,
-                      ),
-                      fontSize: 22.0,
-                      fontFamily: "Pretendard",
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
     ],
   );
 }
 
-Container problemTextMethod(String problemText) {
+Container problemTextMethod(String? problemText) {
   return Container(
     margin: const EdgeInsets.only(top: 4),
     child: Text(
-      problemText, // 가져온 데이터의 일부를 표시
+      problemText ?? '', // 가져온 데이터의 일부를 표시
       style: const TextStyle(
         fontSize: 32,
       ),
