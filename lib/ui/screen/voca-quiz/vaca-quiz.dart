@@ -1,33 +1,36 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/ui/widgets/pages/voca-quiz/button.dart';
+import 'package:flutter_project/utilities/logger.dart';
 import 'package:get/get.dart';
 import '../../widgets/pages/voca-quiz/voca_QuizContainer.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
 
 int? id;
-int? answer;
-String? difficulty;
-String? problem;
-String? selection1;
-String? selection2;
-String? selection3;
-String? commentary;
+RxInt answer = RxInt(0);
+RxString difficulty = RxString('');
+RxString? problem = RxString('');
+RxString? selection1 = RxString('');
+RxString? selection2 = RxString('');
+RxString? selection3 = RxString('');
+RxString? commentary = RxString('');
+late final response;
 
 class Voca extends StatelessWidget {
   const Voca({super.key});
-  Future<void> getData() async {
+  Future<void> getData(QuizGetx x) async {
     var dio = Dio();
     try {
-      final response = await dio.get(
+      response = await dio.get(
           'https://port-0-arikkari-backend-mvp-2rrqq2blmy418s6.sel5.cloudtype.app/api/mcq/get');
-      difficulty = response.data[0]['difficulty'];
-      answer = response.data[0]['answer'];
-      problem = response.data[0]['problem'];
-      selection1 = response.data[0]['selection1'];
-      selection2 = response.data[0]['selection2'];
-      selection3 = response.data[0]['selection3'];
-      commentary = response.data[0]['commentary'];
+      // difficulty.value = response.data[x.progress.value]['difficulty'];
+      // answer.value = response.data[x.progress.value]['answer'];
+      // problem?.value = response.data[x.progress.value]['problem'];
+      // selection1?.value = response.data[x.progress.value]['selection1'];
+      // selection2?.value = response.data[x.progress.value]['selection2'];
+      // selection3?.value = response.data[x.progress.value]['selection3'];
+      // commentary?.value = response.data[x.progress.value]['commentary'];
+      logger.d(response.data);
     } catch (error) {
       print('에러 :: $error');
     }
@@ -39,10 +42,16 @@ class Voca extends StatelessWidget {
     return GetBuilder<QuizGetx>(
       builder: (x) {
         return FutureBuilder(
-          future: getData(),
+          future: getData(x),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
+              return const Center(
+                child: SizedBox(
+                  width: 200,
+                  height: 200,
+                  child: CircularProgressIndicator(),
+                ),
+              );
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
@@ -63,36 +72,60 @@ class Voca extends StatelessWidget {
                             SizedBox(
                               height: Get.height * 0.1,
                             ),
-                            voca_QuizContainer(
-                              difficulty: difficulty,
-                              answer: answer,
-                              commentary: commentary,
-                              problem: problem,
+                            Obx(
+                              () => voca_QuizContainer(
+                                difficulty: response.data[x.progress.value]
+                                    ['difficulty'],
+                                answer: response.data[x.progress.value]
+                                    ['answer'],
+                                commentary: response.data[x.progress.value]
+                                    ['commentary'],
+                                problem: response.data[x.progress.value]
+                                    ['problem'],
+                                // progressNumber: x.progress,
+                              ),
                             ),
                             SizedBox(
                               height: Get.height * 0.04,
                             ),
-                            Column(
-                              children: [
-                                button(
-                                  onTap: () {},
-                                  quizSelection: selection1,
-                                ),
-                                SizedBox(
-                                  height: Get.height * 0.03,
-                                ),
-                                button(
-                                  onTap: () {},
-                                  quizSelection: selection2,
-                                ),
-                                SizedBox(
-                                  height: Get.height * 0.03,
-                                ),
-                                button(
-                                  onTap: () {},
-                                  quizSelection: selection3,
-                                ),
-                              ],
+                            Obx(
+                              () => Column(
+                                children: [
+                                  button(
+                                    onTap: () => x.vocaAnswer(
+                                      answer: response.data[x.progress.value]
+                                          ['answer'],
+                                      selection: 1,
+                                    ),
+                                    quizSelection: response
+                                        .data[x.progress.value]['selection3'],
+                                  ),
+                                  SizedBox(
+                                    height: Get.height * 0.03,
+                                  ),
+                                  button(
+                                    onTap: () => x.vocaAnswer(
+                                      answer: response.data[x.progress.value]
+                                          ['answer'],
+                                      selection: 2,
+                                    ),
+                                    quizSelection: response
+                                        .data[x.progress.value]['selection2'],
+                                  ),
+                                  SizedBox(
+                                    height: Get.height * 0.03,
+                                  ),
+                                  button(
+                                    onTap: () => x.vocaAnswer(
+                                      answer: response.data[x.progress.value]
+                                          ['answer'],
+                                      selection: 3,
+                                    ),
+                                    quizSelection: response
+                                        .data[x.progress.value]['selection3'],
+                                  ),
+                                ],
+                              ),
                             )
                           ],
                         ),

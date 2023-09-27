@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/ui/screen/home/home.dart';
 import 'package:flutter_project/ui/screen/spelling-quiz/spelling-quiz.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ Map<String, dynamic> jsonData = {
 
 class QuizGetx extends GetxController {
   static QuizGetx get to => Get.find();
-
+  RxInt progress = RxInt(0);
   bool isQuizSpelling = jsonData['problem1'] != null;
   Map<String, dynamic> quizApi = jsonData;
   String answerIsCollect = "Normal";
@@ -74,5 +75,22 @@ class QuizGetx extends GetxController {
     // 여기에 답을 확인하는 로직 작성
     // 정답이면 answerIsCollect = "collect"
     // 아니면 answerIsCollect = "notCollect"
+  }
+
+  void vocaAnswer({
+    required int? answer,
+    required int? selection,
+  }) {
+    if (progress == 4) {
+      Get.to(const Home());
+    } else {
+      if (answer == selection) {
+        print("정답");
+        progress++;
+      } else {
+        print("오답");
+        progress++;
+      }
+    }
   }
 }

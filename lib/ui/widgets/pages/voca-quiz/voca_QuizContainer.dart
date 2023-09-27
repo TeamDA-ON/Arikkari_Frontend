@@ -6,7 +6,9 @@ Stack voca_QuizContainer({
   required String? problem,
   required int? answer,
   required String? commentary,
+  // required int? progressNumber,
 }) {
+  // String progress = progressNumber as String;
   return Stack(
     clipBehavior: Clip.none,
     // overflow: Overflow.visible,
@@ -48,7 +50,9 @@ Stack voca_QuizContainer({
                     ),
                   ),
                 ),
-                const Text('4/20'),
+                // Text(
+                //   progressNumber as String,
+                // ),
               ],
             ),
             const Divider(

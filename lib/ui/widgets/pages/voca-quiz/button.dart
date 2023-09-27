@@ -7,7 +7,7 @@ GestureDetector button({
   required String? quizSelection,
 }) {
   return GestureDetector(
-    onTap: () {},
+    onTap: () => onTap(),
     child: Container(
       height: 54,
       width: Get.width * 1,
