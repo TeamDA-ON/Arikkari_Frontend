@@ -101,7 +101,7 @@ class _VocaState extends State<Voca> {
                                     ['commentary'],
                                 problem: response.data[x.progress.value]
                                     ['problem'],
-                                // progressNumber: x.progress,
+                                progressNumber: x.progress,
                               ),
                             ),
                             SizedBox(
