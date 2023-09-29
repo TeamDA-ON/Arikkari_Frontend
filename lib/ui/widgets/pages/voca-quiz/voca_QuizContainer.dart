@@ -6,9 +6,8 @@ Stack voca_QuizContainer({
   required String? problem,
   required int? answer,
   required String? commentary,
-  // required int? progressNumber,
+  required RxInt progressNumber,
 }) {
-  // String progress = progressNumber as String;
   return Stack(
     clipBehavior: Clip.none,
     // overflow: Overflow.visible,
@@ -43,16 +42,16 @@ Stack voca_QuizContainer({
                   child: const ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     child: LinearProgressIndicator(
-                      value: 0.7,
+                      value: 0.1,
                       valueColor:
                           AlwaysStoppedAnimation<Color>(Color(0xff00ff00)),
                       backgroundColor: Color(0xffD6D6D6),
                     ),
                   ),
                 ),
-                // Text(
-                //   progressNumber as String,
-                // ),
+                Text(
+                  '$progressNumber/5',
+                ),
               ],
             ),
             const Divider(
