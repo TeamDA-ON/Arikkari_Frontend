@@ -7,10 +7,10 @@ Stack spelling_QuizContainer({
   required String? problem2,
   required String? commentary,
   required TextEditingController? editController,
-  //임시로 형변환 시켜놈ㄴ
   required String? difficulty,
+  required RxString? answerIsCollect,
   required Function() ttsTap,
-  required Function() submit,
+  required Function() checkAnswer,
 }) {
   ttsTap();
   return Stack(
@@ -59,7 +59,7 @@ Stack spelling_QuizContainer({
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: GestureDetector(
-                    onTap: () => ttsTap(),
+                    onTap: () => ttsTap,
                     child: Image.asset(
                       "assets/img/volume.png",
                       width: 25.0,
@@ -161,7 +161,7 @@ Stack spelling_QuizContainer({
         null, // left
         10, // right
         GestureDetector(
-          onTap: () => submit(),
+          onTap: () => checkAnswer,
           child: Container(
             width: 80,
             height: 40,
@@ -189,6 +189,42 @@ Stack spelling_QuizContainer({
           ),
         ),
       ),
+      // 정답 오답 표시 표
+      if (answerIsCollect != "Normal")
+        boxPosition(
+            50,
+            null,
+            50,
+            null,
+            answerIsCollect == "collect"
+                ? Container(
+                    height: 148,
+                    width: 148,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFFF7171),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        "assets/img/xMark.png",
+                        width: 96.82,
+                        height: 96.82,
+                      ),
+                    ),
+                  )
+                : Container(
+                    height: 148,
+                    width: 148,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFFF7171),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Image.asset(
+                      "assets/img/vMark.png",
+                      width: 96.82,
+                      height: 96.82,
+                    ),
+                  ))
     ],
   );
 }
