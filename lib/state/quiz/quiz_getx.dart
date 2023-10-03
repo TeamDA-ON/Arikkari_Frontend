@@ -107,19 +107,22 @@ class QuizGetx extends GetxController {
       Get.to(const Result());
     } else {
       if (answer == selection) {
+        answerIsCollect = RxString("collect");
         print("정답");
         problemTrue++;
-        answerIsCollect = RxString('true');
-        // Future.delayed(const Duration(milliseconds: 2000), () {
-        progress++;
-        // });
+        Future.delayed(const Duration(milliseconds: 5000), () {
+          progress++;
+          print("노말");
+          answerIsCollect = RxString("Normal");
+        });
       } else {
+        answerIsCollect = RxString("notCollect");
         print("오답");
-        answerIsCollect = RxString('false');
-        // Future.delayed(const Duration(milliseconds: 5000), () {
-        // 5초 딜레이 5초 동안 버튼이 계속 눌려지는데 나중에 팝업 추가하면서 버튼 가리면 될 듯
-        progress++;
-        // });
+        Future.delayed(const Duration(milliseconds: 5000), () {
+          // 5초 딜레이 5초 동안 버튼이 계속 눌려지는데 나중에 팝업 추가하면서 버튼 가리면 될 듯
+          progress++;
+          answerIsCollect = RxString("Normal");
+        });
       }
       // answerIsCollect = RxString("Normal");
     }

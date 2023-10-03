@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 Stack voca_QuizContainer({
@@ -7,6 +8,7 @@ Stack voca_QuizContainer({
   required int? answer,
   required String? commentary,
   required RxInt progressNumber,
+  required RxString? answerIsCollect,
 }) {
   return Stack(
     clipBehavior: Clip.none,
@@ -114,6 +116,42 @@ Stack voca_QuizContainer({
           ),
         ),
       ),
+      if (answerIsCollect != "Normal")
+        boxPosition(
+          50,
+          null,
+          (Get.width * 0.5 - 100.0),
+          null,
+          answerIsCollect == "collect"
+              ? Container(
+                  height: 148,
+                  width: 148,
+                  decoration: const BoxDecoration(
+                    color: AppColors.green,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Image.asset(
+                      "assets/img/vMark.png",
+                      width: 96.82,
+                      height: 96.82,
+                    ),
+                  ),
+                )
+              : Container(
+                  height: 148,
+                  width: 148,
+                  decoration: const BoxDecoration(
+                    color: AppColors.red1,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.asset(
+                    "assets/img/xMark.png",
+                    width: 96.82,
+                    height: 96.82,
+                  ),
+                ),
+        ),
     ],
   );
 }
