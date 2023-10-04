@@ -87,12 +87,16 @@ class QuizGetx extends GetxController {
       if (textEditController.text == answer) {
         print("정답");
         answerIsCollect = RxString("collect");
-        problemTrue++;
-        progress++;
+        Future.delayed(const Duration(milliseconds: 5000), () {
+          problemTrue++;
+          progress++;
+        });
       } else {
         print("오답");
         answerIsCollect = RxString("notCollect");
-        progress++;
+        Future.delayed(const Duration(milliseconds: 5000), () {
+          progress++;
+        });
       }
     }
   }

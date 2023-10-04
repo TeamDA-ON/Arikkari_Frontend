@@ -13,6 +13,7 @@ Stack spelling_QuizContainer({
   required Function() checkAnswer,
 }) {
   ttsTap();
+
   return Stack(
     clipBehavior: Clip.none,
     // overflow: Overflow.visible,
@@ -137,6 +138,40 @@ Stack spelling_QuizContainer({
         ),
       ),
       boxPosition(
+        null, //top
+        -30, //bottom
+        null, // left
+        10, // right
+        GestureDetector(
+          onTap: () => print("object"),
+          child: Container(
+            width: 80,
+            height: 40,
+            decoration: BoxDecoration(
+              color: const Color(0xFFf4f4f4),
+              border: Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  "확인",
+                  style: TextStyle(
+                    letterSpacing: 5,
+                    color: Color(
+                      0xFF7A7A7A,
+                    ),
+                    fontSize: 22.0,
+                    fontFamily: "Pretendard",
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+      boxPosition(
           -25,
           null,
           0,
@@ -185,47 +220,12 @@ Stack spelling_QuizContainer({
           ),
         ),
       ),
-      //확인버튼
-      boxPosition(
-        null, //top
-        -30, //bottom
-        null, // left
-        10, // right
-        GestureDetector(
-          onTap: () => print("object"),
-          child: Container(
-            width: 80,
-            height: 40,
-            decoration: BoxDecoration(
-              color: const Color(0xFFf4f4f4),
-              border: Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "확인",
-                  style: TextStyle(
-                    letterSpacing: 5,
-                    color: Color(
-                      0xFF7A7A7A,
-                    ),
-                    fontSize: 22.0,
-                    fontFamily: "Pretendard",
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
       // 정답 오답 표시 표
       if (answerIsCollect != "Normal")
         boxPosition(
             50,
             null,
-            50,
+            Get.width * 0.5 - 100,
             null,
             answerIsCollect == "collect"
                 ? Container(
