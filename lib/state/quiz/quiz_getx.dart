@@ -110,15 +110,14 @@ class QuizGetx extends GetxController {
         answerIsCollect = RxString("collect");
         print("정답");
         problemTrue++;
-        Future.delayed(const Duration(milliseconds: 5000), () {
+        Future.delayed(const Duration(milliseconds: 1000), () {
           progress++;
-          print("노말");
           answerIsCollect = RxString("Normal");
         });
       } else {
         answerIsCollect = RxString("notCollect");
         print("오답");
-        Future.delayed(const Duration(milliseconds: 5000), () {
+        Future.delayed(const Duration(milliseconds: 1000), () {
           // 5초 딜레이 5초 동안 버튼이 계속 눌려지는데 나중에 팝업 추가하면서 버튼 가리면 될 듯
           progress++;
           answerIsCollect = RxString("Normal");

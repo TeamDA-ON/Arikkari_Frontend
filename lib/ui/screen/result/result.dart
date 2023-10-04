@@ -21,7 +21,7 @@ class Result extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: Get.height * 0.1,
                 ),
                 const Text(
                   "정답률", // 가져온 데이터의 일부를 표시
@@ -32,7 +32,7 @@ class Result extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: Get.height * 0.12,
+                  height: Get.height * 0.05,
                 ),
                 SizedBox(
                   width: 260,
@@ -54,9 +54,34 @@ class Result extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: Get.height * 0.12,
+                  height: Get.height * 0.1,
                 ),
-                ResultButton(x)
+                ResultButton(x),
+                const Spacer(),
+                Container(
+                  height: Get.height * 0.2,
+                  width: Get.width,
+                  decoration: const BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Column(
+                      children: const [
+                        SizedBox(
+                            width: 100,
+                            child: Divider(
+                              color: Color(0xFF7A7A7A),
+                              thickness: 2.0,
+                            ))
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           ),

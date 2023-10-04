@@ -41,13 +41,13 @@ Stack voca_QuizContainer({
                   margin: const EdgeInsets.fromLTRB(25, 20, 10, 20),
                   width: 190,
                   height: 9.5,
-                  child: const ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
                     child: LinearProgressIndicator(
-                      value: 0.1,
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(Color(0xff00ff00)),
-                      backgroundColor: Color(0xffD6D6D6),
+                      value: (progressNumber * 0.2).toDouble(),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                          Color(0xff00ff00)),
+                      backgroundColor: const Color(0xffD6D6D6),
                     ),
                   ),
                 ),
