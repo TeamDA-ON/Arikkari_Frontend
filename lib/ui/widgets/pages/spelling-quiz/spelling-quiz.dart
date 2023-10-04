@@ -3,6 +3,7 @@ import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 Stack spelling_QuizContainer({
+  required int? quizCount,
   required String? answer,
   required String? problem1,
   required String? problem2,
@@ -41,22 +42,22 @@ Stack spelling_QuizContainer({
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Expanded(
+                Expanded(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(10),
                     ),
                     child: LinearProgressIndicator(
-                      value: 0.7,
-                      valueColor: AlwaysStoppedAnimation<Color>(
+                      value: (quizCount! * 0.2).toDouble(),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
                         Color(0xff00ff00),
                       ),
-                      backgroundColor: Color(0xffD6D6D6),
+                      backgroundColor: const Color(0xffD6D6D6),
                     ),
                   ),
                 ),
                 const SizedBox(width: 10),
-                const Text('4/20'),
+                Text('$quizCount/5'),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: GestureDetector(
