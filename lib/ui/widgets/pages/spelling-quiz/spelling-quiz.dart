@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 Stack spelling_QuizContainer({
@@ -13,7 +14,6 @@ Stack spelling_QuizContainer({
   required Function() checkAnswer,
 }) {
   ttsTap();
-
   return Stack(
     clipBehavior: Clip.none,
     // overflow: Overflow.visible,
@@ -232,12 +232,12 @@ Stack spelling_QuizContainer({
                     height: 148,
                     width: 148,
                     decoration: const BoxDecoration(
-                      color: Color(0xFFFF7171),
+                      color: AppColors.green,
                       shape: BoxShape.circle,
                     ),
                     child: Center(
                       child: Image.asset(
-                        "assets/img/xMark.png",
+                        "assets/img/vMark.png",
                         width: 96.82,
                         height: 96.82,
                       ),
@@ -247,11 +247,11 @@ Stack spelling_QuizContainer({
                     height: 148,
                     width: 148,
                     decoration: const BoxDecoration(
-                      color: Color(0xFFFF7171),
+                      color: AppColors.red1,
                       shape: BoxShape.circle,
                     ),
                     child: Image.asset(
-                      "assets/img/vMark.png",
+                      "assets/img/xMark.png",
                       width: 96.82,
                       height: 96.82,
                     ),

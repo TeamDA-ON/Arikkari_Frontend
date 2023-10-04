@@ -90,12 +90,14 @@ class QuizGetx extends GetxController {
         Future.delayed(const Duration(milliseconds: 5000), () {
           problemTrue++;
           progress++;
+          // answerIsCollect = RxString("Normal");
         });
       } else {
         print("오답");
         answerIsCollect = RxString("notCollect");
         Future.delayed(const Duration(milliseconds: 5000), () {
           progress++;
+          // answerIsCollect = RxString("Normal");
         });
       }
     }
