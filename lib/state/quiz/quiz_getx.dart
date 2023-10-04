@@ -64,18 +64,8 @@ class QuizGetx extends GetxController {
     Get.to(const Home());
   }
 
-  void onSubmit() {
-    // quizController.getData();
-    // String textResult = textEditController.text.trim();
-    // print('textResult : $textResult');
-    // if (textResult == quiz.value.answer) {
-    //   print('정답');
-    // } else {
-    //   print('오답');
-    // }
-  }
-
-  void checkAnswer({required String answer}) {
+  void checkAnswer({required String? answer}) {
+    print("getx controller");
     // textEditController의 값이랑 비교하면 됨
     // 여기에 답을 확인하는 로직 작성
     // 정답이면 answerIsCollect = "collect"

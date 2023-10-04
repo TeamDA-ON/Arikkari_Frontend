@@ -136,11 +136,12 @@ class _VocaState extends State<Voca> {
                                   button(
                                     onTap: () => {
                                       x.vocaAnswer(
-                                          answer: response
-                                              .data[x.progress.value]['answer'],
-                                          selection: 2,
-                                          changeBackgroundColor: () =>
-                                              changeBackgroundColor),
+                                        answer: response.data[x.progress.value]
+                                            ['answer'],
+                                        selection: 2,
+                                        changeBackgroundColor: () =>
+                                            changeBackgroundColor,
+                                      ),
                                       setState(
                                         () => x.answerIsCollect,
                                       ),
