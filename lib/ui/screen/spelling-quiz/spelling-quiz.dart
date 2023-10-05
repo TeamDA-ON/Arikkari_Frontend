@@ -52,108 +52,74 @@ class _QuizState extends State<Quiz> {
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
-              return Scaffold(
-                resizeToAvoidBottomInset: false,
-                backgroundColor: x.answerIsCollect == "Normal"
-                    ? AppColors.lightGrayF1
-                    : x.answerIsCollect == "collect"
-                        ? AppColors.green // 정답일때
-                        : AppColors.red1, // 오답일때
-                body: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: SizedBox(
-                    width: double.maxFinite,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: Get.height * 0.1,
-                        ),
-                        Obx(
-                          () => spelling_QuizContainer(
-                            quizCount: x.progress,
-                            answerIsCollect: x.answerIsCollect,
-                            problem1: response.data[x.progress.value]
-                                ['problem1'],
-                            problem2: response.data[x.progress.value]
-                                ['problem2'],
-                            difficulty: response.data[x.progress.value]
-                                ['difficulty'],
-                            answer: response.data[x.progress.value]['answer'],
-                            ttsTap: () {
-                              x.usingTts(
-                                problem1: response.data[x.progress.value]
-                                    ['problem1'],
-                                problem2: response.data[x.progress.value]
-                                    ['problem2'],
-                                answer: response.data[x.progress.value]
-                                    ['answer'],
-                              );
-                            },
-                            editController: x.textEditController,
-                            checkAnswer: () {
-                              x.checkAnswer(
-                                answer: response.data[x.progress.value]
-                                    ['answer'],
-                              );
-                            },
-                            commentary: response.data[x.progress.value]
-                                ['commentary'],
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+              return Obx(
+                () => GestureDetector(
+                  onTap: x.answerIsCollect == "Normal"
+                      ? null
+                      : () => {
+                            x.answerIsCollect("Normal"),
+                            x.progress(x.progress.value + 1),
+                            x.textEditController.text = "",
+                          },
+                  child: Scaffold(
+                    resizeToAvoidBottomInset: false,
+                    backgroundColor: x.answerIsCollect == "Normal"
+                        ? AppColors.lightGrayF1
+                        : x.answerIsCollect == "collect"
+                            ? AppColors.green // 정답일때
+                            : AppColors.red1, // 오답일때
+                    body: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: SizedBox(
+                        width: double.maxFinite,
+                        child: Column(
                           children: [
-                            GestureDetector(
-                              onTap: () {
+                            SizedBox(
+                              height: Get.height * 0.1,
+                            ),
+                            spelling_QuizContainer(
+                              isLoading: x.isLoading.value,
+                              quizCount: x.progress.value,
+                              answerIsCollect: x.answerIsCollect,
+                              problem1: response.data[x.progress.value]
+                                  ['problem1'],
+                              problem2: response.data[x.progress.value]
+                                  ['problem2'],
+                              difficulty: response.data[x.progress.value]
+                                  ['difficulty'],
+                              answer: response.data[x.progress.value]['answer'],
+                              ttsTap: () {
+                                x.usingTts(
+                                  problem1: response.data[x.progress.value]
+                                      ['problem1'],
+                                  problem2: response.data[x.progress.value]
+                                      ['problem2'],
+                                  answer: response.data[x.progress.value]
+                                      ['answer'],
+                                );
+                              },
+                              editController: x.textEditController,
+                              checkAnswer: () {
                                 x.checkAnswer(
                                   answer: response.data[x.progress.value]
                                       ['answer'],
                                 );
-                                setState(() {
-                                  x.answerIsCollect;
-                                });
                               },
-                              child: Container(
-                                width: 80,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFf4f4f4),
-                                  border: Border.all(
-                                      color: const Color(0xFFD9D9D9),
-                                      width: 3.0),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(10)),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Text(
-                                      "확인",
-                                      style: TextStyle(
-                                        letterSpacing: 5,
-                                        color: Color(
-                                          0xFF7A7A7A,
-                                        ),
-                                        fontSize: 22.0,
-                                        fontFamily: "Pretendard",
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
+                              commentary: response.data[x.progress.value]
+                                  ['commentary'],
+                            ),
+                            SizedBox(
+                              height: Get.height * 0.1,
+                            ),
+                            Image.asset(
+                              'assets/img/quizlogo.png',
+                              width: 120,
+                              height: 120,
+                              color: const Color(0xFF000000).withOpacity(0.08),
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: Get.height * 0.1,
-                        ),
-                        Image.asset(
-                          'assets/img/quizlogo.png',
-                          width: 120,
-                          height: 120,
-                          color: const Color(0xFF000000).withOpacity(0.08),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
