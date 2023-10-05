@@ -28,6 +28,7 @@ class _QuizState extends State<Quiz> {
       try {
         response = await dio.get(
             'https://port-0-arikkari-backend-mvp-2rrqq2blmy418s6.sel5.cloudtype.app/api/saq/get');
+
         // difficulty = response.data[0]['difficulty'];
         // answer = response.data[0]['answer'];
         // problem1 = response.data[0]['problem1'];
@@ -54,7 +55,9 @@ class _QuizState extends State<Quiz> {
                 resizeToAvoidBottomInset: false,
                 backgroundColor: x.answerIsCollect == "Normal"
                     ? const Color(0xFFeff0f0)
-                    : const Color(0xFFeff0f0),
+                    : x.answerIsCollect == "collect"
+                        ? const Color(0xFFA0EA9A) // 정답일때
+                        : const Color(0xFFEA9A9A), // 오답일때
                 body: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: SizedBox(
@@ -66,6 +69,7 @@ class _QuizState extends State<Quiz> {
                         ),
                         Obx(
                           () => spelling_QuizContainer(
+                            answerIsCollect: x.answerIsCollect,
                             problem1: response.data[x.progress.value]
                                 ['problem1'],
                             problem2: response.data[x.progress.value]
@@ -84,7 +88,7 @@ class _QuizState extends State<Quiz> {
                               );
                             },
                             editController: x.textEditController,
-                            submit: () {
+                            checkAnswer: () {
                               x.checkAnswer(
                                 answer: response.data[x.progress.value]
                                     ['answer'],

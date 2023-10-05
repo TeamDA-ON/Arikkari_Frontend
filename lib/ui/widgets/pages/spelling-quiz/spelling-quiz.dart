@@ -7,10 +7,10 @@ Stack spelling_QuizContainer({
   required String? problem2,
   required String? commentary,
   required TextEditingController? editController,
-  //임시로 형변환 시켜놈ㄴ
   required String? difficulty,
+  required RxString? answerIsCollect,
   required Function() ttsTap,
-  required Function() submit,
+  required Function() checkAnswer,
 }) {
   ttsTap();
   return Stack(
@@ -59,7 +59,7 @@ Stack spelling_QuizContainer({
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: GestureDetector(
-                    onTap: () => ttsTap(),
+                    onTap: () => ttsTap,
                     child: Image.asset(
                       "assets/img/volume.png",
                       width: 25.0,
@@ -101,6 +101,36 @@ Stack spelling_QuizContainer({
                   ),
                   problemTextMethod(problem2 ?? ""),
                 ],
+              ),
+            ),
+            //test button
+            GestureDetector(
+              onTap: checkAnswer,
+              child: Container(
+                width: 80,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFf4f4f4),
+                  border:
+                      Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      "확인",
+                      style: TextStyle(
+                        letterSpacing: 5,
+                        color: Color(
+                          0xFF7A7A7A,
+                        ),
+                        fontSize: 22.0,
+                        fontFamily: "Pretendard",
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ],
@@ -155,13 +185,14 @@ Stack spelling_QuizContainer({
           ),
         ),
       ),
+      //확인버튼
       boxPosition(
         null, //top
         -30, //bottom
         null, // left
         10, // right
         GestureDetector(
-          onTap: () => submit(),
+          onTap: () => print("object"),
           child: Container(
             width: 80,
             height: 40,
@@ -189,6 +220,42 @@ Stack spelling_QuizContainer({
           ),
         ),
       ),
+      // 정답 오답 표시 표
+      if (answerIsCollect != "Normal")
+        boxPosition(
+            50,
+            null,
+            50,
+            null,
+            answerIsCollect == "collect"
+                ? Container(
+                    height: 148,
+                    width: 148,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFFF7171),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        "assets/img/xMark.png",
+                        width: 96.82,
+                        height: 96.82,
+                      ),
+                    ),
+                  )
+                : Container(
+                    height: 148,
+                    width: 148,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFFF7171),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Image.asset(
+                      "assets/img/vMark.png",
+                      width: 96.82,
+                      height: 96.82,
+                    ),
+                  ))
     ],
   );
 }

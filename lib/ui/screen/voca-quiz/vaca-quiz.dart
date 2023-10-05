@@ -75,7 +75,11 @@ class _VocaState extends State<Voca> {
               return Text('Error: ${snapshot.error}');
             } else {
               return Scaffold(
-                backgroundColor: _backgroundColor,
+                backgroundColor: x.answerIsCollect == "Normal"
+                    ? AppColors.lightGrayF1
+                    : x.answerIsCollect == "collect"
+                        ? AppColors.green
+                        : AppColors.red1,
                 body: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: SizedBox(
@@ -93,6 +97,7 @@ class _VocaState extends State<Voca> {
                             ),
                             Obx(
                               () => voca_QuizContainer(
+                                answerIsCollect: x.answerIsCollect,
                                 difficulty: response.data[x.progress.value]
                                     ['difficulty'],
                                 answer: response.data[x.progress.value]
@@ -111,12 +116,17 @@ class _VocaState extends State<Voca> {
                               () => Column(
                                 children: [
                                   button(
-                                    onTap: () => x.vocaAnswer(
-                                        answer: response.data[x.progress.value]
-                                            ['answer'],
-                                        selection: 1,
-                                        changeBackgroundColor: () =>
-                                            changeBackgroundColor),
+                                    onTap: () => {
+                                      x.vocaAnswer(
+                                          answer: response
+                                              .data[x.progress.value]['answer'],
+                                          selection: 1,
+                                          changeBackgroundColor: () =>
+                                              changeBackgroundColor),
+                                      setState(
+                                        () => x.answerIsCollect,
+                                      ),
+                                    },
                                     quizSelection: response
                                         .data[x.progress.value]['selection1'],
                                   ),
@@ -124,12 +134,18 @@ class _VocaState extends State<Voca> {
                                     height: Get.height * 0.03,
                                   ),
                                   button(
-                                    onTap: () => x.vocaAnswer(
+                                    onTap: () => {
+                                      x.vocaAnswer(
                                         answer: response.data[x.progress.value]
                                             ['answer'],
                                         selection: 2,
                                         changeBackgroundColor: () =>
-                                            changeBackgroundColor),
+                                            changeBackgroundColor,
+                                      ),
+                                      setState(
+                                        () => x.answerIsCollect,
+                                      ),
+                                    },
                                     quizSelection: response
                                         .data[x.progress.value]['selection2'],
                                   ),
@@ -137,12 +153,18 @@ class _VocaState extends State<Voca> {
                                     height: Get.height * 0.03,
                                   ),
                                   button(
-                                    onTap: () => x.vocaAnswer(
+                                    onTap: () => {
+                                      x.vocaAnswer(
                                         answer: response.data[x.progress.value]
                                             ['answer'],
                                         selection: 3,
                                         changeBackgroundColor: () =>
-                                            changeBackgroundColor),
+                                            changeBackgroundColor,
+                                      ),
+                                      setState(
+                                        () => x.answerIsCollect,
+                                      ),
+                                    },
                                     quizSelection: response
                                         .data[x.progress.value]['selection3'],
                                   ),

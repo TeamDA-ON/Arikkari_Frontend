@@ -64,18 +64,8 @@ class QuizGetx extends GetxController {
     Get.to(const Home());
   }
 
-  void onSubmit() {
-    // quizController.getData();
-    // String textResult = textEditController.text.trim();
-    // print('textResult : $textResult');
-    // if (textResult == quiz.value.answer) {
-    //   print('정답');
-    // } else {
-    //   print('오답');
-    // }
-  }
-
-  void checkAnswer({required String answer}) {
+  void checkAnswer({required String? answer}) {
+    print("getx controller");
     // textEditController의 값이랑 비교하면 됨
     // 여기에 답을 확인하는 로직 작성
     // 정답이면 answerIsCollect = "collect"
@@ -107,19 +97,21 @@ class QuizGetx extends GetxController {
       Get.to(const Result());
     } else {
       if (answer == selection) {
+        answerIsCollect = RxString("collect");
         print("정답");
         problemTrue++;
-        answerIsCollect = RxString('true');
-        // Future.delayed(const Duration(milliseconds: 2000), () {
-        progress++;
-        // });
+        Future.delayed(const Duration(milliseconds: 1000), () {
+          answerIsCollect = RxString("Normal");
+          progress++;
+        });
       } else {
+        answerIsCollect = RxString("notCollect");
         print("오답");
-        answerIsCollect = RxString('false');
-        // Future.delayed(const Duration(milliseconds: 5000), () {
-        // 5초 딜레이 5초 동안 버튼이 계속 눌려지는데 나중에 팝업 추가하면서 버튼 가리면 될 듯
-        progress++;
-        // });
+        Future.delayed(const Duration(milliseconds: 1000), () {
+          // 5초 딜레이 5초 동안 버튼이 계속 눌려지는데 나중에 팝업 추가하면서 버튼 가리면 될 듯
+          answerIsCollect = RxString("Normal");
+          progress++;
+        });
       }
       // answerIsCollect = RxString("Normal");
     }
