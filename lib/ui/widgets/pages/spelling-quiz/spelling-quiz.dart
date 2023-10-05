@@ -13,12 +13,23 @@ Stack spelling_QuizContainer({
   required RxString? answerIsCollect,
   required Function() ttsTap,
   required Function() checkAnswer,
+  required bool isLoading,
 }) {
-  ttsTap();
+  // print(isLoading);
+  // if (!isLoading) {
+  //   ttsTap();
+  // }
+  if (answerIsCollect == "Normal") {
+    ttsTap();
+  }
   return Stack(
     clipBehavior: Clip.none,
     // overflow: Overflow.visible,
     children: [
+      SizedBox(
+        width: Get.width,
+        height: (Get.height * 0.4) + 30,
+      ),
       Container(
         // width: MediaQuery.of(context).size.width * 0.8,
         height: Get.height * 0.4,
@@ -42,18 +53,17 @@ Stack spelling_QuizContainer({
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Expanded(
+                Expanded(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(10),
                     ),
                     child: LinearProgressIndicator(
-                      value: 1.0,
-                      // value: quizCount.toDouble(),
-                      valueColor: AlwaysStoppedAnimation<Color>(
+                      value: (quizCount * 0.2).toDouble(),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
                         Color(0xff00ff00),
                       ),
-                      backgroundColor: Color(0xffD6D6D6),
+                      backgroundColor: const Color(0xffD6D6D6),
                     ),
                   ),
                 ),
@@ -110,40 +120,42 @@ Stack spelling_QuizContainer({
         ),
       ),
       // 확인버튼
-      // boxPosition(
-      //   null, //top
-      //   -30, //bottom
-      //   null, // left
-      //   10, // right
-      //   GestureDetector(
-      //     onTap: checkAnswer,
-      //     child: Container(
-      //       width: 80,
-      //       height: 40,
-      //       decoration: BoxDecoration(
-      //         color: const Color(0xFFf4f4f4),
-      //         border: Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
-      //         borderRadius: const BorderRadius.all(Radius.circular(10)),
-      //       ),
-      //       child: Column(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         children: const [
-      //           Text(
-      //             "확인",
-      //             style: TextStyle(
-      //               letterSpacing: 5,
-      //               color: Color(
-      //                 0xFF7A7A7A,
-      //               ),
-      //               fontSize: 22.0,
-      //               fontFamily: "Pretendard",
-      //             ),
-      //           )
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      boxPosition(
+        null, //top
+        0, //bottom
+        null, // left
+        10, // right
+        GestureDetector(
+          onTap: () {
+            checkAnswer();
+          },
+          child: Container(
+            width: 80,
+            height: 40,
+            decoration: BoxDecoration(
+              color: const Color(0xFFf4f4f4),
+              border: Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  "확인",
+                  style: TextStyle(
+                    letterSpacing: 5,
+                    color: Color(
+                      0xFF7A7A7A,
+                    ),
+                    fontSize: 22.0,
+                    fontFamily: "Pretendard",
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
       boxPosition(
           -25,
           null,

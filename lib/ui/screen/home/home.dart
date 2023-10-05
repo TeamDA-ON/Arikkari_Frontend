@@ -45,7 +45,7 @@ class Home extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(const quizSelection());
+                    Get.to(() => const quizSelection());
                   },
                   child: SizedBox(
                     height: 99,

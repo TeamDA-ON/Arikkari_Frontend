@@ -6,9 +6,9 @@ class QuizSelectGetx extends GetxController {
   static QuizSelectGetx get to => Get.find();
   void chagePage(bool isGoSpelling) {
     if (isGoSpelling) {
-      Get.to(const Quiz());
+      Get.to(() => const Quiz());
     } else {
-      Get.to(const Voca());
+      Get.to(() => const Voca());
     }
   }
 }

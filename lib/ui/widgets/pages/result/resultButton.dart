@@ -9,6 +9,7 @@ GestureDetector ResultButton(QuizGetx x) {
     onTap: () => {
       x.goHome(),
       x.problemTrue = 0,
+      x.textEditController.text = "",
     },
     child: Container(
       width: Get.width * 0.6,
