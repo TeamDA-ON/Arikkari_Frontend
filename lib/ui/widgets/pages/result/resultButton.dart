@@ -6,7 +6,10 @@ import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 
 GestureDetector ResultButton(QuizGetx x) {
   return GestureDetector(
-    onTap: () => x.goHome(),
+    onTap: () => {
+      x.goHome(),
+      x.problemTrue = 0,
+    },
     child: Container(
       width: Get.width * 0.6,
       height: 58,

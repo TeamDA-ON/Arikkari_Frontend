@@ -62,7 +62,7 @@ Stack spelling_QuizContainer({
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: GestureDetector(
-                    onTap: () => ttsTap,
+                    onTap: ttsTap,
                     child: Image.asset(
                       "assets/img/volume.png",
                       width: 25.0,

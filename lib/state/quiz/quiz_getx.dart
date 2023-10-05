@@ -4,21 +4,10 @@ import 'package:flutter_project/ui/screen/result/result.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 
-Map<String, dynamic> jsonData = {
-  'id': 1,
-  'difficulty': '하',
-  'answer': '문제',
-  'problem1': "문제 앞쪽",
-  'problem2': '문제 뒷쪽',
-  'Commentary': '해설',
-};
-
 class QuizGetx extends GetxController {
   static QuizGetx get to => Get.find();
   RxInt progress = RxInt(0);
   int problemTrue = 0;
-  bool isQuizSpelling = jsonData['problem1'] != null;
-  Map<String, dynamic> quizApi = jsonData;
   RxString answerIsCollect = RxString("Normal");
 
   // final quiz = Spelling_Quiz(
@@ -82,6 +71,7 @@ class QuizGetx extends GetxController {
     changeBackgroundColor();
     if (progress == 4) {
       Get.to(const Result());
+      progress = RxInt(0);
     } else {
       if (answer == selection) {
         answerIsCollect = RxString("collect");
