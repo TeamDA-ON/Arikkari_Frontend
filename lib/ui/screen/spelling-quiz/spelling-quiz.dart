@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
+import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:flutter_project/ui/widgets/pages/spelling-quiz/spelling-quiz.dart';
 import 'package:flutter_project/utilities/logger.dart';
 import 'package:get/get.dart';
@@ -54,10 +55,10 @@ class _QuizState extends State<Quiz> {
               return Scaffold(
                 resizeToAvoidBottomInset: false,
                 backgroundColor: x.answerIsCollect == "Normal"
-                    ? const Color(0xFFeff0f0)
+                    ? AppColors.lightGrayF1
                     : x.answerIsCollect == "collect"
-                        ? const Color(0xFFA0EA9A) // 정답일때
-                        : const Color(0xFFEA9A9A), // 오답일때
+                        ? AppColors.green // 정답일때
+                        : AppColors.red1, // 오답일때
                 body: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: SizedBox(
@@ -69,6 +70,7 @@ class _QuizState extends State<Quiz> {
                         ),
                         Obx(
                           () => spelling_QuizContainer(
+                            quizCount: x.progress,
                             answerIsCollect: x.answerIsCollect,
                             problem1: response.data[x.progress.value]
                                 ['problem1'],
@@ -97,6 +99,50 @@ class _QuizState extends State<Quiz> {
                             commentary: response.data[x.progress.value]
                                 ['commentary'],
                           ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                x.checkAnswer(
+                                  answer: response.data[x.progress.value]
+                                      ['answer'],
+                                );
+                                setState(() {
+                                  x.answerIsCollect;
+                                });
+                              },
+                              child: Container(
+                                width: 80,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFf4f4f4),
+                                  border: Border.all(
+                                      color: const Color(0xFFD9D9D9),
+                                      width: 3.0),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10)),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Text(
+                                      "확인",
+                                      style: TextStyle(
+                                        letterSpacing: 5,
+                                        color: Color(
+                                          0xFF7A7A7A,
+                                        ),
+                                        fontSize: 22.0,
+                                        fontFamily: "Pretendard",
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: Get.height * 0.1,

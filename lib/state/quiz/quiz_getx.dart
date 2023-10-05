@@ -71,18 +71,29 @@ class QuizGetx extends GetxController {
     // 정답이면 answerIsCollect = "collect"
     // 아니면 answerIsCollect = "notCollect"
     if (progress == 4) {
+      progress = RxInt(0);
       Get.to(const Result());
     } else {
       print(textEditController.text);
       if (textEditController.text == answer) {
         print("정답");
         answerIsCollect = RxString("collect");
-        problemTrue++;
-        progress++;
+        Future.delayed(const Duration(milliseconds: 5000), () {
+          answerIsCollect = RxString("Normal");
+
+          problemTrue++;
+          progress++;
+          // answerIsCollect = RxString("Normal");
+        });
       } else {
         print("오답");
         answerIsCollect = RxString("notCollect");
-        progress++;
+        Future.delayed(const Duration(milliseconds: 5000), () {
+          answerIsCollect = RxString("Normal");
+          textEditController.text = "";
+          progress++;
+          // answerIsCollect = RxString("Normal");
+        });
       }
     }
   }
