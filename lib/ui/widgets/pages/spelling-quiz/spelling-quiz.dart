@@ -3,7 +3,7 @@ import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 Stack spelling_QuizContainer({
-  required RxInt? quizCount,
+  required int quizCount,
   required String? answer,
   required String? problem1,
   required String? problem2,
@@ -48,8 +48,8 @@ Stack spelling_QuizContainer({
                       Radius.circular(10),
                     ),
                     child: LinearProgressIndicator(
-                      // value: (quizCount! * 0.2).toDouble(),
                       value: 1.0,
+                      // value: quizCount.toDouble(),
                       valueColor: AlwaysStoppedAnimation<Color>(
                         Color(0xff00ff00),
                       ),
@@ -104,36 +104,6 @@ Stack spelling_QuizContainer({
                   ),
                   problemTextMethod(problem2 ?? ""),
                 ],
-              ),
-            ),
-            //test button
-            GestureDetector(
-              onTap: checkAnswer,
-              child: Container(
-                width: 80,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFf4f4f4),
-                  border:
-                      Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
-                      "확인",
-                      style: TextStyle(
-                        letterSpacing: 5,
-                        color: Color(
-                          0xFF7A7A7A,
-                        ),
-                        fontSize: 22.0,
-                        fontFamily: "Pretendard",
-                      ),
-                    )
-                  ],
-                ),
               ),
             ),
           ],

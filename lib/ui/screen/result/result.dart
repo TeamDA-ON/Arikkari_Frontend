@@ -3,7 +3,6 @@ import 'package:circle_progress_bar/circle_progress_bar.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
 import 'package:flutter_project/ui/widgets/pages/result/resultButton.dart';
 import 'package:get/get.dart';
-
 import '../../_constant/theme/app_colors.dart';
 
 class Result extends StatelessWidget {

@@ -70,7 +70,7 @@ class _QuizState extends State<Quiz> {
                         ),
                         Obx(
                           () => spelling_QuizContainer(
-                            quizCount: x.progress,
+                            quizCount: x.progress.value,
                             answerIsCollect: x.answerIsCollect,
                             problem1: response.data[x.progress.value]
                                 ['problem1'],

@@ -39,33 +39,11 @@ class QuizGetx extends GetxController {
 
   TextEditingController textEditController = TextEditingController();
 
-  // Future<void> getData() async {
-  //   try {
-  //     Dio dio = Dio();
-  //     var response = await dio.get('http://localhost:8080/question/api/get/3');
-  //     quiz.value = Spelling_Quiz.fromMap(response.data);
-  //     print(quiz.value.answer);
-  //   } catch (error) {
-  //     print(error);
-  //   }
-  // }
-
-  // void chagePage(bool isGoSpelling) {
-  //   // isShowButton = isGoSpelling ? false : true;
-  //   update();
-  //   if (isGoSpelling) {
-  //     Get.to(const Quiz());
-  //   } else if (!isGoSpelling) {
-  //     Get.to(const Quiz()); //false면 selectBox로 이동하면됨
-  //   }
-  // }
-
   void goHome() {
     Get.to(const Home());
   }
 
   void checkAnswer({required String? answer}) {
-    print("getx controller");
     // textEditController의 값이랑 비교하면 됨
     // 여기에 답을 확인하는 로직 작성
     // 정답이면 answerIsCollect = "collect"
@@ -80,10 +58,9 @@ class QuizGetx extends GetxController {
         answerIsCollect = RxString("collect");
         Future.delayed(const Duration(milliseconds: 5000), () {
           answerIsCollect = RxString("Normal");
-
           problemTrue++;
           progress++;
-          // answerIsCollect = RxString("Normal");
+          textEditController.text = "";
         });
       } else {
         print("오답");
@@ -92,7 +69,6 @@ class QuizGetx extends GetxController {
           answerIsCollect = RxString("Normal");
           textEditController.text = "";
           progress++;
-          // answerIsCollect = RxString("Normal");
         });
       }
     }
@@ -111,14 +87,14 @@ class QuizGetx extends GetxController {
         answerIsCollect = RxString("collect");
         print("정답");
         problemTrue++;
-        Future.delayed(const Duration(milliseconds: 1000), () {
+        Future.delayed(const Duration(milliseconds: 3000), () {
           answerIsCollect = RxString("Normal");
           progress++;
         });
       } else {
         answerIsCollect = RxString("notCollect");
         print("오답");
-        Future.delayed(const Duration(milliseconds: 1000), () {
+        Future.delayed(const Duration(milliseconds: 3000), () {
           // 5초 딜레이 5초 동안 버튼이 계속 눌려지는데 나중에 팝업 추가하면서 버튼 가리면 될 듯
           answerIsCollect = RxString("Normal");
           progress++;
