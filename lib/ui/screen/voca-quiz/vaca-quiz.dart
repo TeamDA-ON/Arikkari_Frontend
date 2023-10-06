@@ -74,104 +74,121 @@ class _VocaState extends State<Voca> {
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
-              return Scaffold(
-                backgroundColor: x.answerIsCollect == "Normal"
-                    ? AppColors.lightGrayF1
-                    : x.answerIsCollect == "collect"
-                        ? AppColors.green
-                        : AppColors.red1,
-                body: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: SizedBox(
-                    // color: const Color(0xFFeff0f0),
-                    width: double.maxFinite,
-                    child: ScrollConfiguration(
-                      behavior: ScrollConfiguration.of(context)
-                          .copyWith(scrollbars: false),
-                      child: SingleChildScrollView(
-                        primary: false,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: Get.height * 0.1,
+              return Obx(
+                () => GestureDetector(
+                  onTap: x.answerIsCollect == "Normal"
+                      ? null
+                      : () => {
+                            x.answerIsCollect("Normal"),
+                            x.progress(x.progress.value + 1),
+                            x.textEditController.text = "",
+                          },
+                  child: Scaffold(
+                    backgroundColor: x.answerIsCollect == "Normal"
+                        ? AppColors.lightGrayF1
+                        : x.answerIsCollect == "collect"
+                            ? AppColors.green
+                            : AppColors.red1,
+                    body: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: SizedBox(
+                        // color: const Color(0xFFeff0f0),
+                        width: double.maxFinite,
+                        child: ScrollConfiguration(
+                          behavior: ScrollConfiguration.of(context)
+                              .copyWith(scrollbars: false),
+                          child: SingleChildScrollView(
+                            primary: false,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: Get.height * 0.1,
+                                ),
+                                Obx(
+                                  () => voca_QuizContainer(
+                                    answerIsCollect: x.answerIsCollect,
+                                    difficulty: response.data[x.progress.value]
+                                        ['difficulty'],
+                                    answer: response.data[x.progress.value]
+                                        ['answer'],
+                                    commentary: response.data[x.progress.value]
+                                        ['commentary'],
+                                    problem: response.data[x.progress.value]
+                                        ['problem'],
+                                    progressNumber: x.progress,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: Get.height * 0.04,
+                                ),
+                                Obx(
+                                  () => Column(
+                                    children: [
+                                      button(
+                                        onTap: () => {
+                                          x.vocaAnswer(
+                                              answer: response
+                                                      .data[x.progress.value]
+                                                  ['answer'],
+                                              selection: 1,
+                                              changeBackgroundColor: () =>
+                                                  changeBackgroundColor),
+                                          setState(
+                                            () => x.answerIsCollect,
+                                          ),
+                                        },
+                                        quizSelection:
+                                            response.data[x.progress.value]
+                                                ['selection1'],
+                                      ),
+                                      SizedBox(
+                                        height: Get.height * 0.03,
+                                      ),
+                                      button(
+                                        onTap: () => {
+                                          x.vocaAnswer(
+                                            answer:
+                                                response.data[x.progress.value]
+                                                    ['answer'],
+                                            selection: 2,
+                                            changeBackgroundColor: () =>
+                                                changeBackgroundColor,
+                                          ),
+                                          setState(
+                                            () => x.answerIsCollect,
+                                          ),
+                                        },
+                                        quizSelection:
+                                            response.data[x.progress.value]
+                                                ['selection2'],
+                                      ),
+                                      SizedBox(
+                                        height: Get.height * 0.03,
+                                      ),
+                                      button(
+                                        onTap: () => {
+                                          x.vocaAnswer(
+                                            answer:
+                                                response.data[x.progress.value]
+                                                    ['answer'],
+                                            selection: 3,
+                                            changeBackgroundColor: () =>
+                                                changeBackgroundColor,
+                                          ),
+                                          setState(
+                                            () => x.answerIsCollect,
+                                          ),
+                                        },
+                                        quizSelection:
+                                            response.data[x.progress.value]
+                                                ['selection3'],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                            Obx(
-                              () => voca_QuizContainer(
-                                answerIsCollect: x.answerIsCollect,
-                                difficulty: response.data[x.progress.value]
-                                    ['difficulty'],
-                                answer: response.data[x.progress.value]
-                                    ['answer'],
-                                commentary: response.data[x.progress.value]
-                                    ['commentary'],
-                                problem: response.data[x.progress.value]
-                                    ['problem'],
-                                progressNumber: x.progress,
-                              ),
-                            ),
-                            SizedBox(
-                              height: Get.height * 0.04,
-                            ),
-                            Obx(
-                              () => Column(
-                                children: [
-                                  button(
-                                    onTap: () => {
-                                      x.vocaAnswer(
-                                          answer: response
-                                              .data[x.progress.value]['answer'],
-                                          selection: 1,
-                                          changeBackgroundColor: () =>
-                                              changeBackgroundColor),
-                                      setState(
-                                        () => x.answerIsCollect,
-                                      ),
-                                    },
-                                    quizSelection: response
-                                        .data[x.progress.value]['selection1'],
-                                  ),
-                                  SizedBox(
-                                    height: Get.height * 0.03,
-                                  ),
-                                  button(
-                                    onTap: () => {
-                                      x.vocaAnswer(
-                                        answer: response.data[x.progress.value]
-                                            ['answer'],
-                                        selection: 2,
-                                        changeBackgroundColor: () =>
-                                            changeBackgroundColor,
-                                      ),
-                                      setState(
-                                        () => x.answerIsCollect,
-                                      ),
-                                    },
-                                    quizSelection: response
-                                        .data[x.progress.value]['selection2'],
-                                  ),
-                                  SizedBox(
-                                    height: Get.height * 0.03,
-                                  ),
-                                  button(
-                                    onTap: () => {
-                                      x.vocaAnswer(
-                                        answer: response.data[x.progress.value]
-                                            ['answer'],
-                                        selection: 3,
-                                        changeBackgroundColor: () =>
-                                            changeBackgroundColor,
-                                      ),
-                                      setState(
-                                        () => x.answerIsCollect,
-                                      ),
-                                    },
-                                    quizSelection: response
-                                        .data[x.progress.value]['selection3'],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
                     ),

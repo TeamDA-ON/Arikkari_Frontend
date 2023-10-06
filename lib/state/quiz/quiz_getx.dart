@@ -4,29 +4,12 @@ import 'package:flutter_project/ui/screen/result/result.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 
-Map<String, dynamic> jsonData = {
-  'id': 1,
-  'difficulty': '하',
-  'answer': '문제',
-  'problem1': "문제 앞쪽",
-  'problem2': '문제 뒷쪽',
-  'Commentary': '해설',
-};
-
 class QuizGetx extends GetxController {
   static QuizGetx get to => Get.find();
-  RxInt progress = RxInt(0);
+  RxInt progress = 0.obs;
   int problemTrue = 0;
-  bool isQuizSpelling = jsonData['problem1'] != null;
-  Map<String, dynamic> quizApi = jsonData;
-  RxString answerIsCollect = RxString("Normal");
+  RxString answerIsCollect = "Normal".obs;
 
-  // final quiz = Spelling_Quiz(
-  //   answer: '',
-  //   description: '',
-  //   difficulty: 1,
-  //   problem: '',
-  // ).obs;
   void usingTts({
     required String? problem1,
     required String? problem2,
@@ -39,33 +22,11 @@ class QuizGetx extends GetxController {
 
   TextEditingController textEditController = TextEditingController();
 
-  // Future<void> getData() async {
-  //   try {
-  //     Dio dio = Dio();
-  //     var response = await dio.get('http://localhost:8080/question/api/get/3');
-  //     quiz.value = Spelling_Quiz.fromMap(response.data);
-  //     print(quiz.value.answer);
-  //   } catch (error) {
-  //     print(error);
-  //   }
-  // }
-
-  // void chagePage(bool isGoSpelling) {
-  //   // isShowButton = isGoSpelling ? false : true;
-  //   update();
-  //   if (isGoSpelling) {
-  //     Get.to(const Quiz());
-  //   } else if (!isGoSpelling) {
-  //     Get.to(const Quiz()); //false면 selectBox로 이동하면됨
-  //   }
-  // }
-
   void goHome() {
     Get.to(const Home());
   }
 
   void checkAnswer({required String? answer}) {
-    print("getx controller");
     // textEditController의 값이랑 비교하면 됨
     // 여기에 답을 확인하는 로직 작성
     // 정답이면 answerIsCollect = "collect"
@@ -76,12 +37,12 @@ class QuizGetx extends GetxController {
       print(textEditController.text);
       if (textEditController.text == answer) {
         print("정답");
-        answerIsCollect = RxString("collect");
+        answerIsCollect("collect");
         problemTrue++;
         progress++;
       } else {
         print("오답");
-        answerIsCollect = RxString("notCollect");
+        answerIsCollect("notCollect");
         progress++;
       }
     }
@@ -97,21 +58,12 @@ class QuizGetx extends GetxController {
       Get.to(const Result());
     } else {
       if (answer == selection) {
-        answerIsCollect = RxString("collect");
+        answerIsCollect("collect");
         print("정답");
         problemTrue++;
-        Future.delayed(const Duration(milliseconds: 1000), () {
-          answerIsCollect = RxString("Normal");
-          progress++;
-        });
       } else {
-        answerIsCollect = RxString("notCollect");
+        answerIsCollect("notCollect");
         print("오답");
-        Future.delayed(const Duration(milliseconds: 1000), () {
-          // 5초 딜레이 5초 동안 버튼이 계속 눌려지는데 나중에 팝업 추가하면서 버튼 가리면 될 듯
-          answerIsCollect = RxString("Normal");
-          progress++;
-        });
       }
       // answerIsCollect = RxString("Normal");
     }
