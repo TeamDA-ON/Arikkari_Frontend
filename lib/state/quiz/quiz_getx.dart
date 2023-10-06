@@ -9,6 +9,7 @@ class QuizGetx extends GetxController {
   RxInt progress = 0.obs;
   int problemTrue = 0;
   RxString answerIsCollect = "Normal".obs;
+  RxBool isLoading = false.obs;
 
   void usingTts({
     required String? problem1,
@@ -23,27 +24,29 @@ class QuizGetx extends GetxController {
   TextEditingController textEditController = TextEditingController();
 
   void goHome() {
-    Get.to(const Home());
+    Get.to(() => const Home());
   }
 
   void checkAnswer({required String? answer}) {
+    isLoading(false);
     // textEditController의 값이랑 비교하면 됨
     // 여기에 답을 확인하는 로직 작성
     // 정답이면 answerIsCollect = "collect"
     // 아니면 answerIsCollect = "notCollect"
     if (progress == 4) {
-      Get.to(const Result());
+      progress(0);
+      Get.to(() => const Result());
     } else {
       print(textEditController.text);
       if (textEditController.text == answer) {
         print("정답");
-        answerIsCollect("collect");
+        // answerIsCollect = RxString("collect");
+        answerIsCollect('collerct');
         problemTrue++;
-        progress++;
       } else {
-        print("오답");
-        answerIsCollect("notCollect");
-        progress++;
+        print("오답");\
+        // answerIsCollect = RxString("notCollect");
+        answerIsCollect('notCollect');
       }
     }
   }
@@ -55,7 +58,8 @@ class QuizGetx extends GetxController {
   }) {
     changeBackgroundColor();
     if (progress == 4) {
-      Get.to(const Result());
+      Get.to(() => const Result());
+      progress = RxInt(0);
     } else {
       if (answer == selection) {
         answerIsCollect("collect");

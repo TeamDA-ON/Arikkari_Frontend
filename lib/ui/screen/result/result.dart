@@ -3,7 +3,6 @@ import 'package:circle_progress_bar/circle_progress_bar.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
 import 'package:flutter_project/ui/widgets/pages/result/resultButton.dart';
 import 'package:get/get.dart';
-
 import '../../_constant/theme/app_colors.dart';
 
 class Result extends StatelessWidget {
@@ -17,11 +16,11 @@ class Result extends StatelessWidget {
         return Scaffold(
           body: Container(
             color: AppColors.blueF3,
-            width: MediaQuery.of(context).size.width,
+            width: Get.width,
             child: Column(
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: Get.height * 0.1,
                 ),
                 const Text(
                   "정답률", // 가져온 데이터의 일부를 표시
