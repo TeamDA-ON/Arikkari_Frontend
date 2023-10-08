@@ -71,12 +71,14 @@ Stack spelling_QuizContainer({
                   topRight: Radius.circular(30),
                 )
               : BorderRadius.circular(30),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 10,
-            ),
-          ],
+          boxShadow: answerIsCollect == "notCollect"
+              ? null
+              : [
+                  const BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 10,
+                  ),
+                ],
         ),
         child: Column(
           children: [
