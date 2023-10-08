@@ -45,9 +45,11 @@ Stack spelling_QuizContainer({
               children: [
                 Text(
                   commentary,
-                  textAlign: TextAlign.center,
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontFamily: 'Pretendard',
+                    fontSize: 16.0,
+                    color: AppColors.darkGrayF2,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ],
