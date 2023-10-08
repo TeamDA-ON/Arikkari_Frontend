@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/ui/screen/home/home.dart';
+import 'package:flutter_project/ui/screen/login/login.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -8,7 +8,7 @@ void main() {
       theme: ThemeData(
         fontFamily: 'Pretendard',
       ),
-      home: const Home(),
+      home: const Login(),
     ),
   );
 }
