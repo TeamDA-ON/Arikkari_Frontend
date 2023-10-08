@@ -6,7 +6,7 @@ Stack voca_QuizContainer({
   required String? difficulty,
   required String? problem,
   required int? answer,
-  required String? commentary,
+  required String commentary,
   required RxInt progressNumber,
   required RxString? answerIsCollect,
 }) {
@@ -14,6 +14,36 @@ Stack voca_QuizContainer({
     clipBehavior: Clip.none,
     // overflow: Overflow.visible,
     children: [
+      if (answerIsCollect == "notCollect")
+        Container(
+            width: Get.width,
+            height: (Get.height * 0.4) + 80,
+            decoration: const BoxDecoration(
+              color: AppColors.yellow,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(30),
+                topLeft: Radius.circular(30),
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 30),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    commentary,
+                    style: const TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontSize: 16.0,
+                      color: AppColors.darkGrayF2,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            )),
       Container(
         // width: MediaQuery.of(context).size.width * 0.8,
         height: Get.height * 0.4,
