@@ -8,13 +8,13 @@ import 'package:get/get.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
 
 int? id;
-RxInt answer = RxInt(0);
-RxString difficulty = RxString('');
-RxString? problem = RxString('');
-RxString? selection1 = RxString('');
-RxString? selection2 = RxString('');
-RxString? selection3 = RxString('');
-RxString? commentary = RxString('');
+RxInt answer = 0.obs;
+RxString difficulty = ''.obs;
+RxString? problem = ''.obs;
+RxString? selection1 = ''.obs;
+RxString? selection2 = ''.obs;
+RxString? selection3 = ''.obs;
+RxString? commentary = ''.obs;
 late final response;
 
 class Voca extends StatefulWidget {
@@ -49,7 +49,7 @@ class _VocaState extends State<Voca> {
     setState(() {
       _backgroundColor = x.answerIsCollect == 'Normal'
           ? AppColors.lightGrayF1
-          : x.answerIsCollect == 'true'
+          : x.answerIsCollect == 'collect'
               ? AppColors.green
               : AppColors.red1;
     });
@@ -92,7 +92,6 @@ class _VocaState extends State<Voca> {
                     body: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: SizedBox(
-                        // color: const Color(0xFFeff0f0),
                         width: double.maxFinite,
                         child: ScrollConfiguration(
                           behavior: ScrollConfiguration.of(context)

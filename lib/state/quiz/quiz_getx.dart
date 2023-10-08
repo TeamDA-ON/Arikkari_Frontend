@@ -44,7 +44,7 @@ class QuizGetx extends GetxController {
         answerIsCollect('collerct');
         problemTrue++;
       } else {
-        print("오답");\
+        print("오답");
         // answerIsCollect = RxString("notCollect");
         answerIsCollect('notCollect');
       }
