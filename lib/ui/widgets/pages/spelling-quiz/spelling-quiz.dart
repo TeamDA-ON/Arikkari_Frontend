@@ -26,36 +26,41 @@ Stack spelling_QuizContainer({
     clipBehavior: Clip.none,
     // overflow: Overflow.visible,
     children: [
-      if (answerIsCollect == "notCollect")
-        Container(
-          width: Get.width,
-          height: (Get.height * 0.4) + 90,
-          decoration: const BoxDecoration(
-            color: Color(0xFFFEE500),
-            borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
-                topLeft: Radius.circular(50),
-                topRight: Radius.circular(50)),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  commentary,
-                  style: const TextStyle(
-                    fontFamily: 'Pretendard',
-                    fontSize: 16.0,
-                    color: AppColors.darkGrayF2,
-                    fontWeight: FontWeight.w700,
-                  ),
+      answerIsCollect == "notCollect"
+          ? Container(
+              width: Get.width,
+              height: (Get.height * 0.4) + 90,
+              decoration: const BoxDecoration(
+                color: Color(0xFFFEE500),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
                 ),
-              ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      commentary,
+                      style: const TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontSize: 16.0,
+                        color: AppColors.darkGrayF2,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          : SizedBox(
+              width: Get.width,
+              height: (Get.height * 0.4) + 90,
             ),
-          ),
-        ),
       Container(
         // width: MediaQuery.of(context).size.width * 0.8,
         height: Get.height * 0.4,
@@ -161,7 +166,7 @@ Stack spelling_QuizContainer({
       // 확인버튼
       boxPosition(
         null, //top
-        answerIsCollect != "notCollect" ? -20 : 70, //bottom
+        70, //bottom
         null, // left
         10, // right
         GestureDetector(
