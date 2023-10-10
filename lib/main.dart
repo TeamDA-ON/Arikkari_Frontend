@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/ui/screen/home/home.dart';
-import 'package:flutter_project/ui/screen/login/login.dart';
+import 'package:flutter_project/ui/screen/ranking/ranking.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -10,7 +9,7 @@ void main() {
         fontFamily: 'Pretendard',
       ),
       // home: Login(),
-      home: const Home(),
+      home: const Ranking(),
     ),
   );
 }
