@@ -33,15 +33,16 @@ class QuizGetx extends GetxController {
     // 여기에 답을 확인하는 로직 작성
     // 정답이면 answerIsCollect = "collect"
     // 아니면 answerIsCollect = "notCollect"
+    print("컨트롤러 ${textEditController.text}");
+    print("답 $answer");
     if (progress == 4) {
       progress(0);
       Get.to(() => const Result());
     } else {
-      print(textEditController.text);
       if (textEditController.text == answer) {
         print("정답");
         // answerIsCollect = RxString("collect");
-        answerIsCollect('collerct');
+        answerIsCollect('collect');
         problemTrue++;
       } else {
         print("오답");

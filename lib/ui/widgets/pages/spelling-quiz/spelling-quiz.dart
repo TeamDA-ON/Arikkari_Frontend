@@ -7,7 +7,7 @@ Stack spelling_QuizContainer({
   required String? answer,
   required String? problem1,
   required String? problem2,
-  required String? commentary,
+  required String commentary,
   required TextEditingController? editController,
   required String? difficulty,
   required RxString? answerIsCollect,
@@ -26,10 +26,41 @@ Stack spelling_QuizContainer({
     clipBehavior: Clip.none,
     // overflow: Overflow.visible,
     children: [
-      SizedBox(
-        width: Get.width,
-        height: (Get.height * 0.4) + 30,
-      ),
+      answerIsCollect == "notCollect"
+          ? Container(
+              width: Get.width,
+              height: (Get.height * 0.4) + 90,
+              decoration: const BoxDecoration(
+                color: Color(0xFFFEE500),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      commentary,
+                      style: const TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontSize: 16.0,
+                        color: AppColors.darkGrayF2,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          : SizedBox(
+              width: Get.width,
+              height: (Get.height * 0.4) + 90,
+            ),
       Container(
         // width: MediaQuery.of(context).size.width * 0.8,
         height: Get.height * 0.4,
@@ -40,13 +71,21 @@ Stack spelling_QuizContainer({
 
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 10,
-            ),
-          ],
+          // borderRadius: BorderRadius.circular(30),
+          borderRadius: answerIsCollect == "notCollect"
+              ? const BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                )
+              : BorderRadius.circular(30),
+          boxShadow: answerIsCollect == "notCollect"
+              ? null
+              : [
+                  const BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 10,
+                  ),
+                ],
         ),
         child: Column(
           children: [
@@ -55,9 +94,14 @@ Stack spelling_QuizContainer({
               children: [
                 Expanded(
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
+                    borderRadius: answerIsCollect == "Normal"
+                        ? const BorderRadius.all(
+                            Radius.circular(10),
+                          )
+                        : const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
                     child: LinearProgressIndicator(
                       value: (quizCount * 0.2).toDouble(),
                       valueColor: const AlwaysStoppedAnimation<Color>(
@@ -116,43 +160,13 @@ Stack spelling_QuizContainer({
                 ],
               ),
             ),
-            //test button
-            GestureDetector(
-              onTap: checkAnswer,
-              child: Container(
-                width: 80,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFf4f4f4),
-                  border:
-                      Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
-                      "확인",
-                      style: TextStyle(
-                        letterSpacing: 5,
-                        color: Color(
-                          0xFF7A7A7A,
-                        ),
-                        fontSize: 22.0,
-                        fontFamily: "Pretendard",
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
           ],
         ),
       ),
       // 확인버튼
       boxPosition(
         null, //top
-        0, //bottom
+        70, //bottom
         null, // left
         10, // right
         GestureDetector(

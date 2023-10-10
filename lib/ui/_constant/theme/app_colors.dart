@@ -11,5 +11,6 @@ class AppColors {
   static const Color darkGrayF2 = Color(0xFF7A7A7A);
   static const Color red1 = Color(0xFFEA9A9A);
   static const Color green = Color.fromARGB(159, 38, 216, 38);
+  static const Color basic_grayF2 = Color(0xffD9D9D9);
   static const Color yellow = Color(0xFFFEE500);
 }
