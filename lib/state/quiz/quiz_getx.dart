@@ -11,12 +11,6 @@ class QuizGetx extends GetxController {
   RxString answerIsCollect = "Normal".obs;
   RxBool isLoading = false.obs;
 
-  // final quiz = Spelling_Quiz(
-  //   answer: '',
-  //   description: '',
-  //   difficulty: 1,
-  //   problem: '',
-  // ).obs;
   void usingTts({
     required String? problem1,
     required String? problem2,
@@ -72,18 +66,9 @@ class QuizGetx extends GetxController {
         answerIsCollect("collect");
         print("정답");
         problemTrue++;
-        Future.delayed(const Duration(milliseconds: 3000), () {
-          answerIsCollect("Normal");
-          progress++;
-        });
       } else {
         answerIsCollect("notCollect");
         print("오답");
-        Future.delayed(const Duration(milliseconds: 3000), () {
-          // 5초 딜레이 5초 동안 버튼이 계속 눌려지는데 나중에 팝업 추가하면서 버튼 가리면 될 듯
-          answerIsCollect("Normal");
-          progress++;
-        });
       }
       // answerIsCollect = RxString("Normal");
     }
