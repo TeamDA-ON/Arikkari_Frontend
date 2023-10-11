@@ -92,7 +92,10 @@ Stack spelling_QuizContainer({
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
+                Container(
+                  width: 190,
+                  height: 9.5,
+                  margin: const EdgeInsets.only(right: 10),
                   child: ClipRRect(
                     borderRadius: answerIsCollect == "Normal"
                         ? const BorderRadius.all(
@@ -111,7 +114,6 @@ Stack spelling_QuizContainer({
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
                 Text('$quizCount/5'),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
