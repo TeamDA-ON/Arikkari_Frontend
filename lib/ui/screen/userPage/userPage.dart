@@ -34,7 +34,9 @@ class UserPage extends StatelessWidget {
                     children: [
                       userPageMiniTitle("회원정보"),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          x.changeUserInfo();
+                        },
                         child: const Text(
                           "회원정보 수정",
                           style: TextStyle(
@@ -105,7 +107,7 @@ class UserPage extends StatelessWidget {
                   onTap: () {},
                   child: Container(
                     width: 198,
-                    height: 60,
+                    height: 50,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: AppColors.blueF3,
@@ -124,7 +126,7 @@ class UserPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

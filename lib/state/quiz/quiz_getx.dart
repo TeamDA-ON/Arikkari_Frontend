@@ -5,7 +5,6 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 
 class QuizGetx extends GetxController {
-  static QuizGetx get to => Get.find();
   RxInt progress = 0.obs;
   int problemTrue = 0;
   RxString answerIsCollect = "Normal".obs;
