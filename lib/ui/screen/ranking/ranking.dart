@@ -24,7 +24,7 @@ class _RankingState extends State<Ranking> {
     var dio = Dio();
     try {
       final response = await dio.get(
-          'https://port-0-arikkari-backend-euegqv2blnrdvf3e.sel5.cloudtype.app/user/ranking');
+          'https://port-0-arikkari-backend-euegqv2blnrdvf3e.sel5.cloudtype.app/api/user/ranking');
 
       setState(() {
         rankingData = List<Map<String, dynamic>>.from(response.data);
@@ -46,7 +46,7 @@ class _RankingState extends State<Ranking> {
           children: [
             for (var data in rankingData)
               playerRanking(
-                belong: data['belong'],
+                belong: data['belong'] ?? '무소속',
                 name: data['name'],
                 ranking: '${rankingData.indexOf(data) + 1}',
                 score: '${data['point']}',
