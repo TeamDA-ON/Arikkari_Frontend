@@ -28,7 +28,7 @@ class _QuizState extends State<Quiz> {
       var dio = Dio();
       try {
         response = await dio.get(
-            'https://port-0-arikkari-backend-mvp-2rrqq2blmy418s6.sel5.cloudtype.app/api/saq/get');
+            'https://port-0-arikkari-backend-euegqv2blnrdvf3e.sel5.cloudtype.app/api/saq/get');
 
         // difficulty = response.data[0]['difficulty'];
         // answer = response.data[0]['answer'];

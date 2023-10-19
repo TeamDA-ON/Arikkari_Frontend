@@ -1,9 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/ui/widgets/constants/appbar.dart';
 import 'package:flutter_project/ui/widgets/pages/Ranking/playerRanking.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_project/utilities/logger.dart';
 
-class Ranking extends StatelessWidget {
-  const Ranking({super.key});
+class Ranking extends StatefulWidget {
+  const Ranking({Key? key}) : super(key: key);
+
+  @override
+  _RankingState createState() => _RankingState();
+}
+
+class _RankingState extends State<Ranking> {
+  late List<Map<String, dynamic>> rankingData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<void> getData() async {
+    var dio = Dio();
+    try {
+      final response = await dio.get(
+          'https://port-0-arikkari-backend-euegqv2blnrdvf3e.sel5.cloudtype.app/user/ranking');
+
+      setState(() {
+        rankingData = List<Map<String, dynamic>>.from(response.data);
+      });
+
+      logger.d(response.data);
+    } catch (error) {
+      print('에러 :: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +44,13 @@ class Ranking extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(44, 24, 44, 0),
         child: Column(
           children: [
-            playerRanking(
-                belong: '무소속', name: '김강민', ranking: '1', score: '400'),
-            playerRanking(
-                belong: '무소속', name: '박강인', ranking: '2', score: '300'),
-            playerRanking(
-                belong: '무소속', name: '권강빈', ranking: '3', score: '200'),
-            playerRanking(
-                belong: '무소속', name: '우수지', ranking: '4', score: '100')
+            for (var data in rankingData)
+              playerRanking(
+                belong: data['belong'],
+                name: data['name'],
+                ranking: '${rankingData.indexOf(data) + 1}',
+                score: '${data['point']}',
+              ),
           ],
         ),
       ),
