@@ -3,6 +3,7 @@ import 'package:flutter_project/utilities/logger.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
 
 class Webview extends StatefulWidget {
   const Webview({Key? key}) : super(key: key);
@@ -14,6 +15,14 @@ class Webview extends StatefulWidget {
 class _WebviewState extends State<Webview> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
+
+  Future<void> navigateToHome(String token) async {
+    // Save the token to local storage or global state management (e.g., GetX, Provider, etc.)
+    // Example using GetX:
+    // await storage.write(key: 'token', value: token);
+    // Navigate to Home page using Get library
+    Get.offAll(() => const Home());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +51,6 @@ class _WebviewState extends State<Webview> {
                   scope != null &&
                   authuser != null &&
                   prompt != null) {
-                // Create a new URI with the query parameters.
                 Uri uri = Uri.parse(
                     "https://port-0-arikkari-backend-euegqv2blnrdvf3e.sel5.cloudtype.app/api/auth/signup?code=$code&scope=$scope&authuser=$authuser&prompt=$prompt");
                 logger.d(uri);
@@ -50,12 +58,30 @@ class _WebviewState extends State<Webview> {
                 var response = await http.post(uri);
 
                 logger.d(response.body);
+
+                // Extract the token from the response and pass it to navigateToHome function
+                String token = response
+                    .body; // Replace with actual code to extract the token
+
+                await navigateToHome(token);
               }
             }
             return NavigationDecision.navigate;
           },
         ),
       ),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Home')),
+      body: const Center(child: Text('Welcome to Home!')),
     );
   }
 }
