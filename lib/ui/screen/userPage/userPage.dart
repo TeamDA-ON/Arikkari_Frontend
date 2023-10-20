@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/state/user/user_getx.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:get/get.dart';
+import 'package:flutter_project/ui/widgets/constants/appbar.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({super.key});
@@ -13,15 +14,7 @@ class UserPage extends StatelessWidget {
       builder: (x) {
         return Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            title: const Text(
-              "회원 정보",
-              style: TextStyle(
-                color: AppColors.darkGrayF1,
-              ),
-            ),
-            elevation: 0.0,
-          ),
+          appBar: appBar(),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Column(

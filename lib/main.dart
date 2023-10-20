@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/ui/screen/home/home.dart';
-import 'package:flutter_project/ui/screen/login/login.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_project/ui/screen/userPage/userPage.dart';
@@ -12,7 +10,6 @@ void main() {
         fontFamily: 'Pretendard',
       ),
       // home: Login(),
-      // home: const Home(),
       home: const UserPage(),
     ),
   );
