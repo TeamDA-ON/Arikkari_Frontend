@@ -3,6 +3,9 @@ import 'package:flutter_project/utilities/logger.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:flutter_project/ui/screen/home/home.dart';
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
 class Webview extends StatefulWidget {
@@ -16,11 +19,11 @@ class _WebviewState extends State<Webview> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
 
-  Future<void> navigateToHome(String token) async {
-    // Save the token to local storage or global state management (e.g., GetX, Provider, etc.)
-    // Example using GetX:
-    // await storage.write(key: 'token', value: token);
-    // Navigate to Home page using Get library
+  Future<void> navigateToHome(String accessToken, String refreshToken) async {
+    // Save the tokens to shared preferences or any other storage method
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('access_token', accessToken);
+    prefs.setString('refresh_token', refreshToken);
     Get.offAll(() => const Home());
   }
 
@@ -59,29 +62,20 @@ class _WebviewState extends State<Webview> {
 
                 logger.d(response.body);
 
-                // Extract the token from the response and pass it to navigateToHome function
-                String token = response
-                    .body; // Replace with actual code to extract the token
+                // Extract the access token and refresh token from the response
 
-                await navigateToHome(token);
+                final Map<String, dynamic> responseData =
+                    jsonDecode(response.body);
+                final String accessToken = responseData['access_token'];
+                final String refreshToken = responseData['refresh_token'];
+
+                await navigateToHome(accessToken, refreshToken);
               }
             }
             return NavigationDecision.navigate;
           },
         ),
       ),
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: const Center(child: Text('Welcome to Home!')),
     );
   }
 }
