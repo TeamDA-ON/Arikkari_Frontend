@@ -3,6 +3,7 @@ import 'package:flutter_project/ui/widgets/constants/appbar.dart';
 import 'package:flutter_project/ui/widgets/pages/Ranking/playerRanking.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_project/utilities/logger.dart';
+import 'package:flutter_project/repository/data/http_client.dart';
 
 class Ranking extends StatefulWidget {
   const Ranking({Key? key}) : super(key: key);
@@ -23,8 +24,7 @@ class _RankingState extends State<Ranking> {
   Future<void> getData() async {
     var dio = Dio();
     try {
-      final response = await dio.get(
-          'https://port-0-arikkari-backend-euegqv2blnrdvf3e.sel5.cloudtype.app/api/user/ranking');
+      final response = await dio.get('${HttpClients.hostUrl}/api/user/ranking');
 
       setState(() {
         rankingData = List<Map<String, dynamic>>.from(response.data);

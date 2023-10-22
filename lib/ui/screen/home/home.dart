@@ -30,7 +30,7 @@ class Home extends StatelessWidget {
                   height: 150,
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.03,
+                  height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 const Text(
                   '퀴즈 풀러가기',
@@ -71,7 +71,7 @@ class Home extends StatelessWidget {
                         children: [
                           Container(
                             width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.35,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(30),
