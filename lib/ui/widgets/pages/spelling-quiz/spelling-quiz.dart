@@ -40,7 +40,7 @@ Stack spelling_QuizContainer({
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 30),
+                padding: const EdgeInsets.all(30),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -92,8 +92,7 @@ Stack spelling_QuizContainer({
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(25, 20, 10, 20),
+                SizedBox(
                   width: 190,
                   height: 9.5,
                   child: ClipRRect(
@@ -120,10 +119,13 @@ Stack spelling_QuizContainer({
                 ),
               ],
             ),
-            const Divider(
-              height: 1,
-              thickness: 1,
-              endIndent: 0.5,
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: const Divider(
+                height: 1,
+                thickness: 1,
+                endIndent: 0.5,
+              ),
             ),
             const SizedBox(
               height: 10,
@@ -158,42 +160,43 @@ Stack spelling_QuizContainer({
         ),
       ),
       // 확인버튼
-      boxPosition(
-        null, //top
-        70, //bottom
-        null, // left
-        10, // right
-        GestureDetector(
-          onTap: () {
-            checkAnswer();
-          },
-          child: Container(
-            width: 80,
-            height: 40,
-            decoration: BoxDecoration(
-              color: const Color(0xFFf4f4f4),
-              border: Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "확인",
-                  style: TextStyle(
-                    letterSpacing: 5,
-                    color: Color(
-                      0xFF7A7A7A,
+      if (answerIsCollect == "Normal")
+        boxPosition(
+          null, //top
+          70, //bottom
+          null, // left
+          10, // right
+          GestureDetector(
+            onTap: () {
+              checkAnswer();
+            },
+            child: Container(
+              width: 80,
+              height: 40,
+              decoration: BoxDecoration(
+                color: const Color(0xFFf4f4f4),
+                border: Border.all(color: const Color(0xFFD9D9D9), width: 3.0),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    "확인",
+                    style: TextStyle(
+                      letterSpacing: 5,
+                      color: Color(
+                        0xFF7A7A7A,
+                      ),
+                      fontSize: 22.0,
+                      fontFamily: "Pretendard",
                     ),
-                    fontSize: 22.0,
-                    fontFamily: "Pretendard",
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
-      ),
       boxPosition(
           -25,
           null,
