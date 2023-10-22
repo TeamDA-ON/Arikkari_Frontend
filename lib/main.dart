@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/ui/screen/voca-quiz/vaca-quiz.dart';
 import 'package:get/get.dart';
 
 void main() {
