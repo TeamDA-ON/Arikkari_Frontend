@@ -5,6 +5,7 @@ import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:flutter_project/ui/widgets/pages/spelling-quiz/spelling-quiz.dart';
 import 'package:flutter_project/utilities/logger.dart';
 import 'package:get/get.dart';
+import 'package:flutter_project/repository/data/http_client.dart';
 
 int? id;
 String? difficulty;
@@ -27,8 +28,7 @@ class _QuizState extends State<Quiz> {
     Future<void> getData() async {
       var dio = Dio();
       try {
-        response = await dio.get(
-            'https://port-0-arikkari-backend-euegqv2blnrdvf3e.sel5.cloudtype.app/api/saq/get');
+        response = await dio.get('${HttpClients.hostUrl}/api/saq/get');
 
         // difficulty = response.data[0]['difficulty'];
         // answer = response.data[0]['answer'];

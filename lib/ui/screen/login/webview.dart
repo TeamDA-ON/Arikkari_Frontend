@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/bottomBar.dart';
+import 'package:flutter_project/repository/data/http_client.dart';
 import 'package:flutter_project/utilities/logger.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:flutter_project/ui/screen/home/home.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
@@ -19,18 +20,18 @@ class _WebviewState extends State<Webview> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
 
-  Future<void> navigateToHome(String accessToken, String refreshToken) async {
+  Future<void> navigateToHome(var accessToken, var refreshToken) async {
     // Save the tokens to shared preferences or any other storage method
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('access_token', accessToken);
-    prefs.setString('refresh_token', refreshToken);
-    Get.offAll(() => const Home());
+    prefs.setString('access_token', accessToken ?? '');
+    prefs.setString('refresh_token', refreshToken ?? '');
+    Get.offAll(() => const BottomBar());
   }
 
   @override
   Widget build(BuildContext context) {
     const authUrl =
-        'https://accounts.google.com/o/oauth2/v2/auth?client_id=415045963497-6a4h12l94ovshlq70jmfjlh3susd8g91.apps.googleusercontent.com&redirect_uri=https://port-0-arikkari-backend-euegqv2blnrdvf3e.sel5.cloudtype.app/login/oauth2/code/google&response_type=code&scope=email profile';
+        'https://accounts.google.com/o/oauth2/v2/auth?client_id=415045963497-6a4h12l94ovshlq70jmfjlh3susd8g91.apps.googleusercontent.com&redirect_uri=https://port-0-java-springboot-12fhqa2blnyp8mt7.sel5.cloudtype.app/login/oauth2/code/google&response_type=code&scope=email profile';
     return MaterialApp(
       home: Scaffold(
         body: WebView(
@@ -43,7 +44,7 @@ class _WebviewState extends State<Webview> {
           },
           navigationDelegate: (NavigationRequest request) async {
             if (request.url.startsWith(
-                'https://port-0-arikkari-backend-euegqv2blnrdvf3e.sel5.cloudtype.app')) {
+                'https://port-0-java-springboot-12fhqa2blnyp8mt7.sel5.cloudtype.app/')) {
               var urlParameters = Uri.parse(request.url).queryParameters;
               var code = urlParameters['code'];
               var scope = urlParameters['scope'];
@@ -55,7 +56,7 @@ class _WebviewState extends State<Webview> {
                   authuser != null &&
                   prompt != null) {
                 Uri uri = Uri.parse(
-                    "https://port-0-arikkari-backend-euegqv2blnrdvf3e.sel5.cloudtype.app/api/auth/signup?code=$code&scope=$scope&authuser=$authuser&prompt=$prompt");
+                    "${HttpClients.hostUrl}/api/auth/signup?code=$code&scope=$scope&authuser=$authuser&prompt=$prompt");
                 logger.d(uri);
 
                 var response = await http.post(uri);
@@ -66,8 +67,8 @@ class _WebviewState extends State<Webview> {
 
                 final Map<String, dynamic> responseData =
                     jsonDecode(response.body);
-                final String accessToken = responseData['access_token'];
-                final String refreshToken = responseData['refresh_token'];
+                var accessToken = responseData['access_token'] ?? '';
+                var refreshToken = responseData['refresh_token'] ?? '';
 
                 await navigateToHome(accessToken, refreshToken);
               }
