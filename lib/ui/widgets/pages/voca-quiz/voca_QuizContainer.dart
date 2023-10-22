@@ -54,13 +54,23 @@ Stack voca_QuizContainer({
 
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 10,
-            ),
-          ],
+          borderRadius:
+              answerIsCollect == "Normal" || answerIsCollect == "collect"
+                  ? const BorderRadius.all(
+                      Radius.circular(30),
+                    )
+                  : const BorderRadius.only(
+                      topRight: Radius.circular(40),
+                      topLeft: Radius.circular(30),
+                    ),
+          boxShadow: answerIsCollect != 'notCollect'
+              ? [
+                  const BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 10,
+                  ),
+                ]
+              : null,
         ),
         child: Column(
           children: [
@@ -147,6 +157,7 @@ Stack voca_QuizContainer({
         ),
       ),
       if (answerIsCollect != "Normal")
+        //   {
         boxPosition(
           50,
           null,
@@ -181,7 +192,8 @@ Stack voca_QuizContainer({
                     height: 96.82,
                   ),
                 ),
-        ),
+        )
+      // },
     ],
   );
 }
