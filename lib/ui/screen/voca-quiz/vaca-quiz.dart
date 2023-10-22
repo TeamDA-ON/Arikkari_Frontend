@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project/repository/data/http_client.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:flutter_project/ui/widgets/pages/voca-quiz/button.dart';
 import 'package:flutter_project/ui/widgets/pages/voca-quiz/voca_QuizContainer.dart';
@@ -28,8 +29,7 @@ class _VocaState extends State<Voca> {
   Future<void> getData(QuizGetx x) async {
     var dio = Dio();
     try {
-      response = await dio.get(
-          'https://port-0-arikkari-backend-mvp-2rrqq2blmy418s6.sel5.cloudtype.app/api/mcq/get');
+      response = await dio.get('${HttpClients.hostUrl}/api/mcq/get');
       // difficulty.value = response.data[x.progress.value]['difficulty'];
       // answer.value = response.data[x.progress.value]['answer'];
       // problem?.value = response.data[x.progress.value]['problem'];

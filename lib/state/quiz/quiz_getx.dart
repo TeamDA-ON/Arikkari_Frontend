@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/ui/screen/home/home.dart';
+import 'package:flutter_project/bottomBar.dart';
 import 'package:flutter_project/ui/screen/result/result.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
 class QuizGetx extends GetxController {
-  static QuizGetx get to => Get.find();
   RxInt progress = 0.obs;
   int problemTrue = 0;
   RxString answerIsCollect = "Normal".obs;
   RxBool isLoading = false.obs;
+  String? accessToken;
+  String? refreshToken;
+
+  @override
+  void onInit() async {
+    super.onInit();
+    await token();
+  }
+
+  Future<void> token() async {
+    final prefs = await SharedPreferences.getInstance();
+    accessToken = prefs.getString('access_token') ?? '';
+    refreshToken = prefs.getString('refresh_token') ?? '';
+  }
 
   void usingTts({
     required String? problem1,
@@ -24,7 +38,7 @@ class QuizGetx extends GetxController {
   TextEditingController textEditController = TextEditingController();
 
   void goHome() {
-    Get.to(() => const Home());
+    Get.to(() => const BottomBar());
   }
 
   void checkAnswer({required String? answer}) {
