@@ -92,7 +92,8 @@ Stack spelling_QuizContainer({
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                Container(
+                  margin: const EdgeInsets.only(right: 5),
                   width: 190,
                   height: 9.5,
                   child: ClipRRect(
@@ -107,7 +108,7 @@ Stack spelling_QuizContainer({
                 ),
                 Text('$quizCount/5'),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
+                  padding: const EdgeInsets.only(left: 10.0),
                   child: GestureDetector(
                     onTap: ttsTap,
                     child: Image.asset(
