@@ -93,23 +93,15 @@ Stack spelling_QuizContainer({
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
+                  margin: const EdgeInsets.fromLTRB(25, 20, 10, 20),
                   width: 190,
                   height: 9.5,
-                  margin: const EdgeInsets.only(right: 10),
                   child: ClipRRect(
-                    borderRadius: answerIsCollect == "Normal"
-                        ? const BorderRadius.all(
-                            Radius.circular(10),
-                          )
-                        : const BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                          ),
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
                     child: LinearProgressIndicator(
                       value: (quizCount * 0.2).toDouble(),
                       valueColor: const AlwaysStoppedAnimation<Color>(
-                        Color(0xff00ff00),
-                      ),
+                          Color(0xff00ff00)),
                       backgroundColor: const Color(0xffD6D6D6),
                     ),
                   ),
