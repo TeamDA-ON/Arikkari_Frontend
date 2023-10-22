@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/ui/screen/home/home.dart';
+import 'package:flutter_project/bottomBar.dart';
 import 'package:flutter_project/ui/screen/result/result.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,7 +38,7 @@ class QuizGetx extends GetxController {
   TextEditingController textEditController = TextEditingController();
 
   void goHome() {
-    Get.to(() => const Home());
+    Get.to(() => const BottomBar());
   }
 
   void checkAnswer({required String? answer}) {
