@@ -9,8 +9,8 @@ void main() {
       theme: ThemeData(
         fontFamily: 'Pretendard',
       ),
-      home: const Voca(),
-      // home: const Login(),
+      // home: const Quiz(),
+      home: const Login(),
     ),
   );
 }

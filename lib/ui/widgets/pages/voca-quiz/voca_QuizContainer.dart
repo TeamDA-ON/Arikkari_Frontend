@@ -28,7 +28,7 @@ Stack voca_QuizContainer({
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 30),
+              padding: const EdgeInsets.all(30),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
