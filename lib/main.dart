@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/ui/screen/login/login.dart';
+import 'package:flutter_project/ui/screen/voca-quiz/vaca-quiz.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -9,8 +9,8 @@ void main() {
       theme: ThemeData(
         fontFamily: 'Pretendard',
       ),
-      // home: Login(),
-      home: const Login(),
+      home: const Voca(),
+      // home: const Login(),
     ),
   );
 }
