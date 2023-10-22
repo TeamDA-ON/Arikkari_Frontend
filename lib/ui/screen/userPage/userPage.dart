@@ -52,7 +52,7 @@ class UserPage extends StatelessWidget {
                     const SizedBox(
                       width: 40.0,
                     ),
-                    userValue("종종종"),
+                    userValue("권강빈"),
                   ],
                 ),
                 const SizedBox(
@@ -64,7 +64,7 @@ class UserPage extends StatelessWidget {
                     const SizedBox(
                       width: 40,
                     ),
-                    userValue("부산공산주의 학교"),
+                    userValue("부산소마고"),
                   ],
                 ),
                 const SizedBox(
@@ -88,11 +88,11 @@ class UserPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                quizCountWidget("맞힌문제", 22),
+                quizCountWidget("맞힌문제", 3),
                 const SizedBox(
                   height: 30,
                 ),
-                quizCountWidget("틀린문제", 19),
+                quizCountWidget("틀린문제", 2),
                 SizedBox(
                   height: Get.height * 0.1,
                 ),
