@@ -16,7 +16,7 @@ RxString? selection1 = ''.obs;
 RxString? selection2 = ''.obs;
 RxString? selection3 = ''.obs;
 RxString? commentary = ''.obs;
-dynamic response;
+late final dynamic response;
 
 class Voca extends StatefulWidget {
   const Voca({super.key});
@@ -30,6 +30,7 @@ class _VocaState extends State<Voca> {
     var dio = Dio();
     try {
       response = await dio.get('${HttpClients.hostUrl}/api/mcq/get');
+
       // difficulty.value = response.data[x.progress.value]['difficulty'];
       // answer.value = response.data[x.progress.value]['answer'];
       // problem?.value = response.data[x.progress.value]['problem'];
@@ -87,7 +88,7 @@ class _VocaState extends State<Voca> {
                     backgroundColor: x.answerIsCollect == "Normal"
                         ? AppColors.lightGrayF1
                         : x.answerIsCollect == "collect"
-                            ? AppColors.green
+                            ? AppColors.light_green
                             : AppColors.red1,
                     body: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
