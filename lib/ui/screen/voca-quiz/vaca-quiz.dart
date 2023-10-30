@@ -50,7 +50,7 @@ class _VocaState extends State<Voca> {
       _backgroundColor = x.answerIsCollect == 'Normal'
           ? AppColors.lightGrayF1
           : x.answerIsCollect == 'collect'
-              ? AppColors.green
+              ? AppColors.light_green
               : AppColors.red1;
     });
   }
