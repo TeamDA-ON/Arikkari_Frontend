@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/ui/screen/login/login.dart';
+import 'package:flutter_project/ui/screen/quizSelection/quizSelection.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -10,7 +10,8 @@ void main() {
         fontFamily: 'Pretendard',
       ),
       // home: const Quiz(),
-      home: const Login(),
+      // home: const Login(),
+      home: const quizSelection(),
     ),
   );
 }

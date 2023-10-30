@@ -1,12 +1,12 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/repository/data/http_client.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:flutter_project/ui/widgets/pages/voca-quiz/button.dart';
 import 'package:flutter_project/ui/widgets/pages/voca-quiz/voca_QuizContainer.dart';
 import 'package:flutter_project/utilities/logger.dart';
-import 'package:get/get.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
+import 'package:get/get.dart';
+import 'package:dio/dio.dart';
 
 int? id;
 RxInt answer = 0.obs;
@@ -16,7 +16,7 @@ RxString? selection1 = ''.obs;
 RxString? selection2 = ''.obs;
 RxString? selection3 = ''.obs;
 RxString? commentary = ''.obs;
-late final response;
+dynamic response;
 
 class Voca extends StatefulWidget {
   const Voca({super.key});
