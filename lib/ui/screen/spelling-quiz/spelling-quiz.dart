@@ -66,7 +66,7 @@ class _QuizState extends State<Quiz> {
                     backgroundColor: x.answerIsCollect == "Normal"
                         ? AppColors.lightGrayF1
                         : x.answerIsCollect == "collect"
-                            ? AppColors.green // 정답일때
+                            ? AppColors.light_green // 정답일때
                             : AppColors.red1, // 오답일때
                     body: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
