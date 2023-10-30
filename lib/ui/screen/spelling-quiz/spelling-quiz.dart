@@ -13,7 +13,6 @@ String? answer;
 String? problem1;
 String? problem2;
 String? commentary;
-late final response;
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -25,6 +24,7 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   @override
   Widget build(BuildContext context) {
+    late final dynamic response;
     Future<void> getData() async {
       var dio = Dio();
       try {
