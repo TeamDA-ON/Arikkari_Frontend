@@ -15,14 +15,14 @@ String? problem2;
 String? commentary;
 late final response;
 
-class Quiz extends StatefulWidget {
-  const Quiz({super.key});
+class Spelling extends StatefulWidget {
+  const Spelling({super.key});
 
   @override
-  State<Quiz> createState() => _QuizState();
+  State<Spelling> createState() => _SpellingState();
 }
 
-class _QuizState extends State<Quiz> {
+class _SpellingState extends State<Spelling> {
   @override
   Widget build(BuildContext context) {
     Future<void> getData() async {

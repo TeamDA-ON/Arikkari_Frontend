@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/bottomBar.dart';
 import 'package:flutter_project/ui/screen/result/result.dart';
+import 'package:flutter_project/ui/screen/spelling-quiz/spelling-quiz.dart';
+import 'package:flutter_project/ui/screen/voca-quiz/vaca-quiz.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
 class QuizGetx extends GetxController {
   RxInt progress = 0.obs;
+  String quizType = "";
   int problemTrue = 0;
   RxString answerIsCollect = "Normal".obs;
   RxBool isLoading = false.obs;
@@ -25,6 +28,16 @@ class QuizGetx extends GetxController {
     refreshToken = prefs.getString('refresh_token') ?? '';
   }
 
+  void chagePage(bool isGoSpelling) {
+    if (isGoSpelling) {
+      quizType = "SAQ";
+      Get.to(() => const Spelling());
+    } else {
+      quizType = "MCQ";
+      Get.to(() => const Voca());
+    }
+  }
+
   void usingTts({
     required String? problem1,
     required String? problem2,
@@ -32,7 +45,9 @@ class QuizGetx extends GetxController {
   }) async {
     FlutterTts flutterTts = FlutterTts();
     String speakVoice = problem1! + answer! + problem2!;
-    await flutterTts.speak(speakVoice);
+    if (quizType == "SAQ") {
+      await flutterTts.speak(speakVoice);
+    }
   }
 
   TextEditingController textEditController = TextEditingController();
