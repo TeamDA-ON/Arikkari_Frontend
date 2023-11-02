@@ -79,7 +79,7 @@ class _SpellingState extends State<Spelling> {
                             ),
                             spelling_QuizContainer(
                               isLoading: x.isLoading.value,
-                              quizCount: x.progress.value,
+                              quizCount: x.progress.value + 1,
                               answerIsCollect: x.answerIsCollect,
                               problem1: response.data[x.progress.value]
                                   ['problem1'],
