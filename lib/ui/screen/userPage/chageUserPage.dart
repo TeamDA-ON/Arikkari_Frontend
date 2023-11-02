@@ -1,10 +1,33 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/user/user_getx.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
+import 'package:flutter_project/ui/screen/spelling-quiz/spelling-quiz.dart';
+import 'package:flutter_project/ui/screen/userPage/userPage.dart';
 import 'package:get/get.dart';
 
-class UserInfoChagePage extends StatelessWidget {
+import '../../../repository/data/http_client.dart';
+import '../../../utilities/logger.dart';
+
+class UserInfoChagePage extends StatefulWidget {
   const UserInfoChagePage({super.key});
+
+  @override
+  State<UserInfoChagePage> createState() => _UserInfoChagePageState();
+}
+
+class _UserInfoChagePageState extends State<UserInfoChagePage> {
+  void putUserInfoChangeFunction() {
+    Future<void> getData(UserPageGetx x) async {
+      var dio = Dio();
+      try {
+        response = await dio.put("${HttpClients.hostUrl}/api/user/update");
+        logger.d(response.data);
+      } catch (error) {
+        print(error);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +66,15 @@ class UserInfoChagePage extends StatelessWidget {
                         SizedBox(
                           height: Get.height * 0.06,
                         ),
+                        //변경하기 버튼
                         GestureDetector(
                           onTap: () {
                             print("이름 ${x.controllName.text}");
                             print("소속 ${x.controllSchool.text}");
+                            () => {
+                                  putUserInfoChangeFunction(),
+                                };
+                            Get.to(() => const UserPage());
                           },
                           child: Container(
                             width: 180,

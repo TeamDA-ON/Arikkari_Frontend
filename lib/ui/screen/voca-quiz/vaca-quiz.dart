@@ -30,14 +30,6 @@ class _VocaState extends State<Voca> {
     var dio = Dio();
     try {
       response = await dio.get('${HttpClients.hostUrl}/api/mcq/get');
-
-      // difficulty.value = response.data[x.progress.value]['difficulty'];
-      // answer.value = response.data[x.progress.value]['answer'];
-      // problem?.value = response.data[x.progress.value]['problem'];
-      // selection1?.value = response.data[x.progress.value]['selection1'];
-      // selection2?.value = response.data[x.progress.value]['selection2'];
-      // selection3?.value = response.data[x.progress.value]['selection3'];
-      // commentary?.value = response.data[x.progress.value]['commentary'];
       logger.d(response.data);
     } catch (error) {
       print('에러 :: $error');

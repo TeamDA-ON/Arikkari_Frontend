@@ -1,11 +1,39 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/user/user_getx.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:get/get.dart';
 import 'package:flutter_project/ui/widgets/constants/appbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class UserPage extends StatelessWidget {
+import '../../../repository/data/http_client.dart';
+import '../../../utilities/logger.dart';
+
+class UserPage extends StatefulWidget {
   const UserPage({super.key});
+
+  @override
+  State<UserPage> createState() => _UserPageState();
+}
+
+class _UserPageState extends State<UserPage> {
+  late final prefs;
+  late final response;
+  Future<void> getData(UserPageGetx x) async {
+    prefs = await SharedPreferences.getInstance();
+    var dio = Dio();
+    dio.options.headers["Authorization"] =
+        prefs.getString("access_token") ?? "";
+    try {
+      response = await dio.get(
+        "${HttpClients.hostUrl}/api/user/get",
+      );
+      print("유저 가져옴");
+      logger.d(response.data);
+    } catch (error) {
+      print(error);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
