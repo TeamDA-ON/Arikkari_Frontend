@@ -7,7 +7,7 @@ Stack voca_QuizContainer({
   required String? problem,
   required int? answer,
   required String commentary,
-  required RxInt progressNumber,
+  required int progressNumber,
   required RxString? answerIsCollect,
 }) {
   return Stack(
