@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/bottomBar.dart';
-import 'package:flutter_project/ui/screen/result/result.dart';
 import 'package:flutter_project/ui/screen/spelling-quiz/spelling-quiz.dart';
 import 'package:flutter_project/ui/screen/voca-quiz/vaca-quiz.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -31,9 +30,13 @@ class QuizGetx extends GetxController {
   void chagePage(bool isGoSpelling) {
     if (isGoSpelling) {
       quizType = "SAQ";
+      progress = RxInt(0);
+      answerIsCollect = RxString("Normal");
       Get.to(() => const Spelling());
     } else {
       quizType = "MCQ";
+      progress = RxInt(0);
+      answerIsCollect = RxString("Normal");
       Get.to(() => const Voca());
     }
   }
@@ -64,20 +67,15 @@ class QuizGetx extends GetxController {
     // 아니면 answerIsCollect = "notCollect"
     print("컨트롤러 ${textEditController.text}");
     print("답 $answer");
-    if (progress == 4) {
-      progress(0);
-      Get.to(() => const Result());
+    if (textEditController.text == answer) {
+      print("정답");
+      // answerIsCollect = RxString("collect");
+      answerIsCollect('collect');
+      problemTrue++;
     } else {
-      if (textEditController.text == answer) {
-        print("정답");
-        // answerIsCollect = RxString("collect");
-        answerIsCollect('collect');
-        problemTrue++;
-      } else {
-        print("오답");
-        // answerIsCollect = RxString("notCollect");
-        answerIsCollect('notCollect');
-      }
+      print("오답");
+      // answerIsCollect = RxString("notCollect");
+      answerIsCollect('notCollect');
     }
   }
 
@@ -87,19 +85,14 @@ class QuizGetx extends GetxController {
     required Function() changeBackgroundColor,
   }) {
     changeBackgroundColor();
-    if (progress == 4) {
-      Get.to(() => const Result());
-      progress = RxInt(0);
+    if (answer == selection) {
+      answerIsCollect("collect");
+      print("정답");
+      problemTrue++;
     } else {
-      if (answer == selection) {
-        answerIsCollect("collect");
-        print("정답");
-        problemTrue++;
-      } else {
-        answerIsCollect("notCollect");
-        print("오답");
-      }
-      // answerIsCollect = RxString("Normal");
+      answerIsCollect("notCollect");
+      print("오답");
     }
+    // answerIsCollect = RxString("Normal");
   }
 }

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
+import 'package:flutter_project/ui/screen/result/result.dart';
 import 'package:flutter_project/ui/widgets/pages/spelling-quiz/spelling-quiz.dart';
 import 'package:flutter_project/utilities/logger.dart';
 import 'package:get/get.dart';
@@ -58,8 +59,16 @@ class _SpellingState extends State<Spelling> {
                       ? null
                       : () => {
                             x.answerIsCollect("Normal"),
-                            x.progress(x.progress.value + 1),
-                            x.textEditController.text = "",
+                            if (x.progress.value == 4)
+                              {
+                                FocusManager.instance.primaryFocus?.unfocus(),
+                                Get.to(() => const Result()),
+                              }
+                            else
+                              {
+                                x.progress(x.progress.value + 1),
+                                x.textEditController.text = "",
+                              }
                           },
                   child: Scaffold(
                     resizeToAvoidBottomInset: false,
