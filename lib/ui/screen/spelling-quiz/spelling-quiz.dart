@@ -62,6 +62,8 @@ class _SpellingState extends State<Spelling> {
                             if (x.progress.value == 4)
                               {
                                 FocusManager.instance.primaryFocus?.unfocus(),
+                                x.correct(),
+                                x.wrong(),
                                 Get.to(() => const Result()),
                               }
                             else
@@ -110,9 +112,9 @@ class _SpellingState extends State<Spelling> {
                               editController: x.textEditController,
                               checkAnswer: () {
                                 x.checkAnswer(
-                                  answer: response.data[x.progress.value]
-                                      ['answer'],
-                                );
+                                    answer: response.data[x.progress.value]
+                                        ['answer'],
+                                    id: response.data[x.progress.value]['id']);
                               },
                               commentary: response.data[x.progress.value]
                                   ['commentary'],

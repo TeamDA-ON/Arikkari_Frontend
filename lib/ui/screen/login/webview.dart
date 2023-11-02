@@ -31,7 +31,7 @@ class _WebviewState extends State<Webview> {
   @override
   Widget build(BuildContext context) {
     const authUrl =
-        'https://accounts.google.com/o/oauth2/v2/auth?client_id=415045963497-6a4h12l94ovshlq70jmfjlh3susd8g91.apps.googleusercontent.com&redirect_uri=https://port-0-java-springboot-12fhqa2blnyp8mt7.sel5.cloudtype.app/login/oauth2/code/google&response_type=code&scope=email profile';
+        'https://accounts.google.com/o/oauth2/v2/auth?client_id=415045963497-6a4h12l94ovshlq70jmfjlh3susd8g91.apps.googleusercontent.com&redirect_uri=https://port-0-arikkari-backend-euegqv2blnrdvf3e.sel5.cloudtype.app/login/oauth2/code/google&response_type=code&scope=email profile';
     return MaterialApp(
       home: Scaffold(
         body: WebView(
@@ -44,7 +44,7 @@ class _WebviewState extends State<Webview> {
           },
           navigationDelegate: (NavigationRequest request) async {
             if (request.url.startsWith(
-                'https://port-0-java-springboot-12fhqa2blnyp8mt7.sel5.cloudtype.app/')) {
+                'https://port-0-arikkari-backend-euegqv2blnrdvf3e.sel5.cloudtype.app/')) {
               var urlParameters = Uri.parse(request.url).queryParameters;
               var code = urlParameters['code'];
               var scope = urlParameters['scope'];

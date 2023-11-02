@@ -84,6 +84,8 @@ class _VocaState extends State<Voca> {
                             x.answerIsCollect("Normal"),
                             if (x.progress.value == 4)
                               {
+                                x.correct(),
+                                x.wrong(),
                                 Get.to(() => const Result()),
                               }
                             else
@@ -138,6 +140,8 @@ class _VocaState extends State<Voca> {
                                                       .progress
                                                       .value]['answer'],
                                                   selection: 1,
+                                                  id: response.data[
+                                                      x.progress.value]['id'],
                                                   changeBackgroundColor: () =>
                                                       changeBackgroundColor),
                                               setState(
@@ -149,6 +153,8 @@ class _VocaState extends State<Voca> {
                                               x.answerIsCollect("Normal"),
                                               if (x.progress.value == 4)
                                                 {
+                                                  x.correct(),
+                                                  x.wrong(),
                                                   Get.to(() => const Result()),
                                                 }
                                               else
@@ -172,6 +178,9 @@ class _VocaState extends State<Voca> {
                                                         .data[x.progress.value]
                                                     ['answer'],
                                                 selection: 2,
+                                                id: response
+                                                        .data[x.progress.value]
+                                                    ['id'],
                                                 changeBackgroundColor: () =>
                                                     changeBackgroundColor,
                                               ),
@@ -184,6 +193,8 @@ class _VocaState extends State<Voca> {
                                               x.answerIsCollect("Normal"),
                                               if (x.progress.value == 4)
                                                 {
+                                                  x.correct(),
+                                                  x.wrong(),
                                                   Get.to(() => const Result()),
                                                 }
                                               else
@@ -207,6 +218,9 @@ class _VocaState extends State<Voca> {
                                                         .data[x.progress.value]
                                                     ['answer'],
                                                 selection: 3,
+                                                id: response
+                                                        .data[x.progress.value]
+                                                    ['id'],
                                                 changeBackgroundColor: () =>
                                                     changeBackgroundColor,
                                               ),
@@ -219,6 +233,8 @@ class _VocaState extends State<Voca> {
                                               x.answerIsCollect("Normal"),
                                               if (x.progress.value == 4)
                                                 {
+                                                  x.correct(),
+                                                  x.wrong(),
                                                   Get.to(() => const Result()),
                                                 }
                                               else

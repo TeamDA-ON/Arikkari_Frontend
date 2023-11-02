@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/bottomBar.dart';
+import 'package:flutter_project/repository/data/http_client.dart';
 import 'package:flutter_project/ui/screen/spelling-quiz/spelling-quiz.dart';
 import 'package:flutter_project/ui/screen/voca-quiz/vaca-quiz.dart';
+import 'package:flutter_project/utilities/logger.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class QuizGetx extends GetxController {
@@ -14,6 +17,8 @@ class QuizGetx extends GetxController {
   RxBool isLoading = false.obs;
   String? accessToken;
   String? refreshToken;
+  List<int> correctList = [];
+  List<int> wrongList = [];
 
   @override
   void onInit() async {
@@ -59,22 +64,63 @@ class QuizGetx extends GetxController {
     Get.to(() => const BottomBar());
   }
 
-  void checkAnswer({required String? answer}) {
+  void wrong() async {
+    Dio dio = Dio();
+    String token = accessToken ?? '';
+    logger.d(token);
+    dio.options.headers['Authorization'] = 'Bearer $token';
+
+    try {
+      Map<String, dynamic> requestData = {
+        'list': wrongList,
+        'questionType': quizType,
+      };
+
+      final response = await dio.post(
+        '${HttpClients.hostUrl}/api/wrong',
+        data: requestData,
+      );
+
+      logger.d(response.data);
+    } catch (error) {
+      // 에러 처리
+      logger.d('Error: $error');
+    }
+  }
+
+  void correct() async {
+    Dio dio = Dio();
+    String token = accessToken ?? '';
+    logger.d(token);
+    dio.options.headers['Authorization'] = 'Bearer $token';
+
+    try {
+      Map<String, dynamic> requestData = {
+        'list': correctList,
+        'questionType': quizType,
+      };
+
+      final response = await dio.post(
+        '${HttpClients.hostUrl}/api/correct',
+        data: requestData,
+      );
+
+      logger.d(response.data);
+    } catch (error) {
+      logger.d('Error: $error');
+    }
+  }
+
+  void checkAnswer({required String? answer, required int id}) {
     isLoading(false);
-    // textEditController의 값이랑 비교하면 됨
-    // 여기에 답을 확인하는 로직 작성
-    // 정답이면 answerIsCollect = "collect"
-    // 아니면 answerIsCollect = "notCollect"
-    print("컨트롤러 ${textEditController.text}");
-    print("답 $answer");
     if (textEditController.text == answer) {
       print("정답");
-      // answerIsCollect = RxString("collect");
+      correctList.add(id);
       answerIsCollect('collect');
       problemTrue++;
     } else {
       print("오답");
-      // answerIsCollect = RxString("notCollect");
+      wrongList.add(id);
       answerIsCollect('notCollect');
     }
   }
@@ -82,15 +128,18 @@ class QuizGetx extends GetxController {
   void vocaAnswer({
     required int? answer,
     required int? selection,
+    required int id,
     required Function() changeBackgroundColor,
   }) {
     changeBackgroundColor();
     if (answer == selection) {
       answerIsCollect("collect");
       print("정답");
+      correctList.add(id);
       problemTrue++;
     } else {
       answerIsCollect("notCollect");
+      wrongList.add(id);
       print("오답");
     }
     // answerIsCollect = RxString("Normal");

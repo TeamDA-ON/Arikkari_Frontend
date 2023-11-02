@@ -12,7 +12,7 @@ final prettyDioLogger = PrettyDioLogger(
 
 class HttpClients {
   static const String hostUrl =
-      "https://port-0-arikkari-backend-12fhqa2blnyp8mt7.sel5.cloudtype.app";
+      "https://port-0-arikkari-backend-euegqv2blnrdvf3e.sel5.cloudtype.app";
   // static BaseOptions options = BaseOptions(
   //   baseUrl:
   //       "https://port-0-arikkari-backend-mvp-2rrqq2blmy418s6.sel5.cloudtype.app";
