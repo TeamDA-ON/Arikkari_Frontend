@@ -1,12 +1,12 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/repository/data/http_client.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:flutter_project/ui/widgets/pages/voca-quiz/button.dart';
 import 'package:flutter_project/ui/widgets/pages/voca-quiz/voca_QuizContainer.dart';
 import 'package:flutter_project/utilities/logger.dart';
-import 'package:get/get.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
+import 'package:get/get.dart';
+import 'package:dio/dio.dart';
 
 int? id;
 RxInt answer = 0.obs;
@@ -16,7 +16,6 @@ RxString? selection1 = ''.obs;
 RxString? selection2 = ''.obs;
 RxString? selection3 = ''.obs;
 RxString? commentary = ''.obs;
-late final response;
 
 class Voca extends StatefulWidget {
   const Voca({super.key});
@@ -26,10 +25,12 @@ class Voca extends StatefulWidget {
 }
 
 class _VocaState extends State<Voca> {
+  late final dynamic response;
   Future<void> getData(QuizGetx x) async {
     var dio = Dio();
     try {
       response = await dio.get('${HttpClients.hostUrl}/api/mcq/get');
+
       // difficulty.value = response.data[x.progress.value]['difficulty'];
       // answer.value = response.data[x.progress.value]['answer'];
       // problem?.value = response.data[x.progress.value]['problem'];
@@ -50,7 +51,7 @@ class _VocaState extends State<Voca> {
       _backgroundColor = x.answerIsCollect == 'Normal'
           ? AppColors.lightGrayF1
           : x.answerIsCollect == 'collect'
-              ? AppColors.green
+              ? AppColors.light_green
               : AppColors.red1;
     });
   }
@@ -87,7 +88,7 @@ class _VocaState extends State<Voca> {
                     backgroundColor: x.answerIsCollect == "Normal"
                         ? AppColors.lightGrayF1
                         : x.answerIsCollect == "collect"
-                            ? AppColors.green
+                            ? AppColors.light_green
                             : AppColors.red1,
                     body: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -125,16 +126,25 @@ class _VocaState extends State<Voca> {
                                     children: [
                                       button(
                                         onTap: () => {
-                                          x.vocaAnswer(
-                                              answer: response
-                                                      .data[x.progress.value]
-                                                  ['answer'],
-                                              selection: 1,
-                                              changeBackgroundColor: () =>
-                                                  changeBackgroundColor),
-                                          setState(
-                                            () => x.answerIsCollect,
-                                          ),
+                                          if (x.answerIsCollect == "Normal")
+                                            {
+                                              x.vocaAnswer(
+                                                  answer: response.data[x
+                                                      .progress
+                                                      .value]['answer'],
+                                                  selection: 1,
+                                                  changeBackgroundColor: () =>
+                                                      changeBackgroundColor),
+                                              setState(
+                                                () => x.answerIsCollect,
+                                              ),
+                                            }
+                                          else
+                                            {
+                                              x.answerIsCollect("Normal"),
+                                              x.progress(x.progress.value + 1),
+                                              x.textEditController.text = "",
+                                            }
                                         },
                                         quizSelection:
                                             response.data[x.progress.value]
@@ -145,17 +155,26 @@ class _VocaState extends State<Voca> {
                                       ),
                                       button(
                                         onTap: () => {
-                                          x.vocaAnswer(
-                                            answer:
-                                                response.data[x.progress.value]
+                                          if (x.answerIsCollect == "Normal")
+                                            {
+                                              x.vocaAnswer(
+                                                answer: response
+                                                        .data[x.progress.value]
                                                     ['answer'],
-                                            selection: 2,
-                                            changeBackgroundColor: () =>
-                                                changeBackgroundColor,
-                                          ),
-                                          setState(
-                                            () => x.answerIsCollect,
-                                          ),
+                                                selection: 2,
+                                                changeBackgroundColor: () =>
+                                                    changeBackgroundColor,
+                                              ),
+                                              setState(
+                                                () => x.answerIsCollect,
+                                              ),
+                                            }
+                                          else
+                                            {
+                                              x.answerIsCollect("Normal"),
+                                              x.progress(x.progress.value + 1),
+                                              x.textEditController.text = "",
+                                            }
                                         },
                                         quizSelection:
                                             response.data[x.progress.value]
@@ -166,17 +185,26 @@ class _VocaState extends State<Voca> {
                                       ),
                                       button(
                                         onTap: () => {
-                                          x.vocaAnswer(
-                                            answer:
-                                                response.data[x.progress.value]
+                                          if (x.answerIsCollect == "Normal")
+                                            {
+                                              x.vocaAnswer(
+                                                answer: response
+                                                        .data[x.progress.value]
                                                     ['answer'],
-                                            selection: 3,
-                                            changeBackgroundColor: () =>
-                                                changeBackgroundColor,
-                                          ),
-                                          setState(
-                                            () => x.answerIsCollect,
-                                          ),
+                                                selection: 3,
+                                                changeBackgroundColor: () =>
+                                                    changeBackgroundColor,
+                                              ),
+                                              setState(
+                                                () => x.answerIsCollect,
+                                              ),
+                                            }
+                                          else
+                                            {
+                                              x.answerIsCollect("Normal"),
+                                              x.progress(x.progress.value + 1),
+                                              x.textEditController.text = "",
+                                            }
                                         },
                                         quizSelection:
                                             response.data[x.progress.value]

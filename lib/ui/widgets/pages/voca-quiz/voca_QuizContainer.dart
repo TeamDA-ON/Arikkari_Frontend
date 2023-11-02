@@ -86,7 +86,7 @@ Stack voca_QuizContainer({
                     child: LinearProgressIndicator(
                       value: (progressNumber * 0.2).toDouble(),
                       valueColor: const AlwaysStoppedAnimation<Color>(
-                          Color(0xff00ff00)),
+                          AppColors.light_green),
                       backgroundColor: const Color(0xffD6D6D6),
                     ),
                   ),
