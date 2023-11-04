@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/user/user_getx.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
-import 'package:flutter_project/ui/screen/spelling-quiz/spelling-quiz.dart';
 import 'package:flutter_project/ui/screen/userPage/userPage.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../repository/data/http_client.dart';
 import '../../../utilities/logger.dart';
@@ -17,15 +17,21 @@ class UserInfoChagePage extends StatefulWidget {
 }
 
 class _UserInfoChagePageState extends State<UserInfoChagePage> {
-  void putUserInfoChangeFunction() {
-    Future<void> getData(UserPageGetx x) async {
-      var dio = Dio();
-      try {
-        response = await dio.put("${HttpClients.hostUrl}/api/user/update");
-        logger.d(response.data);
-      } catch (error) {
-        print(error);
-      }
+  void putData(UserPageGetx x) async {
+    print(x.controllName.text);
+    var dio = Dio();
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs = await SharedPreferences.getInstance();
+      dio.options.headers["Authorization"] =
+          "Bearer ${prefs.getString("access_token")}";
+      dynamic response = await dio.put("${HttpClients.hostUrl}/api/user/update",
+          data: {"name": x.controllName.text, "belong": x.controllSchool.text});
+      logger.d(response.statusCode);
+      print("put함");
+      Get.to(const UserPage());
+    } catch (error) {
+      print(error);
     }
   }
 
@@ -69,12 +75,7 @@ class _UserInfoChagePageState extends State<UserInfoChagePage> {
                         //변경하기 버튼
                         GestureDetector(
                           onTap: () {
-                            print("이름 ${x.controllName.text}");
-                            print("소속 ${x.controllSchool.text}");
-                            () => {
-                                  putUserInfoChangeFunction(),
-                                };
-                            Get.to(() => const UserPage());
+                            putData(x);
                           },
                           child: Container(
                             width: 180,
