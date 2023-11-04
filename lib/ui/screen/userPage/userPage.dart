@@ -22,10 +22,10 @@ class _UserPageState extends State<UserPage> {
     Future<void> getData() async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs = await SharedPreferences.getInstance();
-      print("토큰: $prefs");
+      print("토큰: ${prefs.getString("access_token")}");
       var dio = Dio();
       dio.options.headers["Authorization"] =
-          prefs.getString("access_token") ?? "";
+          "Bearer ${prefs.getString("access_token")}" ?? "";
       try {
         print("유저 가져옴");
         response = await dio.get(
