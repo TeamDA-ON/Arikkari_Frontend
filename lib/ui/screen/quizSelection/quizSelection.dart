@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/state/quiz/quiz_select_getx.dart';
+import 'package:flutter_project/state/quiz/quiz_getx.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:flutter_project/ui/widgets/constants/appbar.dart';
 import 'package:flutter_project/ui/widgets/pages/quizSelection/selectBox.dart';
@@ -10,8 +10,8 @@ class quizSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(QuizSelectGetx());
-    return GetBuilder<QuizSelectGetx>(builder: (x) {
+    Get.put(QuizGetx());
+    return GetBuilder<QuizGetx>(builder: (x) {
       return Scaffold(
         appBar: appBar(),
         body: Padding(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/repository/data/http_client.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
+import 'package:flutter_project/ui/screen/result/result.dart';
 import 'package:flutter_project/ui/widgets/pages/voca-quiz/button.dart';
 import 'package:flutter_project/ui/widgets/pages/voca-quiz/voca_QuizContainer.dart';
 import 'package:flutter_project/utilities/logger.dart';
@@ -73,8 +74,14 @@ class _VocaState extends State<Voca> {
                       ? null
                       : () => {
                             x.answerIsCollect("Normal"),
-                            x.progress(x.progress.value + 1),
-                            x.textEditController.text = "",
+                            if (x.progress.value == 4)
+                              {
+                                x.correct(),
+                                x.wrong(),
+                                Get.to(() => const Result()),
+                              }
+                            else
+                              x.progress(x.progress.value + 1),
                           },
                   child: Scaffold(
                     backgroundColor: x.answerIsCollect == "Normal"
@@ -107,7 +114,7 @@ class _VocaState extends State<Voca> {
                                         ['commentary'],
                                     problem: response.data[x.progress.value]
                                         ['problem'],
-                                    progressNumber: x.progress,
+                                    progressNumber: 1 + x.progress.value,
                                   ),
                                 ),
                                 SizedBox(
@@ -125,6 +132,8 @@ class _VocaState extends State<Voca> {
                                                       .progress
                                                       .value]['answer'],
                                                   selection: 1,
+                                                  id: response.data[
+                                                      x.progress.value]['id'],
                                                   changeBackgroundColor: () =>
                                                       changeBackgroundColor),
                                               setState(
@@ -134,8 +143,15 @@ class _VocaState extends State<Voca> {
                                           else
                                             {
                                               x.answerIsCollect("Normal"),
-                                              x.progress(x.progress.value + 1),
-                                              x.textEditController.text = "",
+                                              if (x.progress.value == 4)
+                                                {
+                                                  x.correct(),
+                                                  x.wrong(),
+                                                  Get.to(() => const Result()),
+                                                }
+                                              else
+                                                x.progress(
+                                                    x.progress.value + 1),
                                             }
                                         },
                                         quizSelection:
@@ -154,6 +170,9 @@ class _VocaState extends State<Voca> {
                                                         .data[x.progress.value]
                                                     ['answer'],
                                                 selection: 2,
+                                                id: response
+                                                        .data[x.progress.value]
+                                                    ['id'],
                                                 changeBackgroundColor: () =>
                                                     changeBackgroundColor,
                                               ),
@@ -164,8 +183,15 @@ class _VocaState extends State<Voca> {
                                           else
                                             {
                                               x.answerIsCollect("Normal"),
-                                              x.progress(x.progress.value + 1),
-                                              x.textEditController.text = "",
+                                              if (x.progress.value == 4)
+                                                {
+                                                  x.correct(),
+                                                  x.wrong(),
+                                                  Get.to(() => const Result()),
+                                                }
+                                              else
+                                                x.progress(
+                                                    x.progress.value + 1),
                                             }
                                         },
                                         quizSelection:
@@ -184,6 +210,9 @@ class _VocaState extends State<Voca> {
                                                         .data[x.progress.value]
                                                     ['answer'],
                                                 selection: 3,
+                                                id: response
+                                                        .data[x.progress.value]
+                                                    ['id'],
                                                 changeBackgroundColor: () =>
                                                     changeBackgroundColor,
                                               ),
@@ -194,8 +223,15 @@ class _VocaState extends State<Voca> {
                                           else
                                             {
                                               x.answerIsCollect("Normal"),
-                                              x.progress(x.progress.value + 1),
-                                              x.textEditController.text = "",
+                                              if (x.progress.value == 4)
+                                                {
+                                                  x.correct(),
+                                                  x.wrong(),
+                                                  Get.to(() => const Result()),
+                                                }
+                                              else
+                                                x.progress(
+                                                    x.progress.value + 1),
                                             }
                                         },
                                         quizSelection:

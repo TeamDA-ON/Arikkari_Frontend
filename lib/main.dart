@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_project/ui/screen/login/login.dart';
+import 'package:flutter_project/ui/screen/quizSelection/quizSelection.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -14,8 +13,9 @@ void main() {
       theme: ThemeData(
         fontFamily: 'Pretendard',
       ),
-      home: const Login(),
-      // home: const UserPage(),
+      // home: const Quiz(),
+      // home: const Login(),
+      home: const quizSelection(),
     ),
   );
 }

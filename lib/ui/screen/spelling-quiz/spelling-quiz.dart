@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/quiz/quiz_getx.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
+import 'package:flutter_project/ui/screen/result/result.dart';
 import 'package:flutter_project/ui/widgets/pages/spelling-quiz/spelling-quiz.dart';
 import 'package:flutter_project/utilities/logger.dart';
 import 'package:get/get.dart';
@@ -15,14 +16,14 @@ String? problem2;
 String? commentary;
 late final response;
 
-class Quiz extends StatefulWidget {
-  const Quiz({super.key});
+class Spelling extends StatefulWidget {
+  const Spelling({super.key});
 
   @override
-  State<Quiz> createState() => _QuizState();
+  State<Spelling> createState() => _SpellingState();
 }
 
-class _QuizState extends State<Quiz> {
+class _SpellingState extends State<Spelling> {
   @override
   Widget build(BuildContext context) {
     Future<void> getData() async {
@@ -58,8 +59,18 @@ class _QuizState extends State<Quiz> {
                       ? null
                       : () => {
                             x.answerIsCollect("Normal"),
-                            x.progress(x.progress.value + 1),
-                            x.textEditController.text = "",
+                            if (x.progress.value == 4)
+                              {
+                                FocusManager.instance.primaryFocus?.unfocus(),
+                                x.correct(),
+                                x.wrong(),
+                                Get.to(() => const Result()),
+                              }
+                            else
+                              {
+                                x.progress(x.progress.value + 1),
+                                x.textEditController.text = "",
+                              }
                           },
                   child: Scaffold(
                     resizeToAvoidBottomInset: false,
@@ -79,7 +90,7 @@ class _QuizState extends State<Quiz> {
                             ),
                             spelling_QuizContainer(
                               isLoading: x.isLoading.value,
-                              quizCount: x.progress.value,
+                              quizCount: x.progress.value + 1,
                               answerIsCollect: x.answerIsCollect,
                               problem1: response.data[x.progress.value]
                                   ['problem1'],
@@ -101,9 +112,9 @@ class _QuizState extends State<Quiz> {
                               editController: x.textEditController,
                               checkAnswer: () {
                                 x.checkAnswer(
-                                  answer: response.data[x.progress.value]
-                                      ['answer'],
-                                );
+                                    answer: response.data[x.progress.value]
+                                        ['answer'],
+                                    id: response.data[x.progress.value]['id']);
                               },
                               commentary: response.data[x.progress.value]
                                   ['commentary'],
