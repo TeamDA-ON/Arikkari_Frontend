@@ -19,15 +19,13 @@ class _UserPageState extends State<UserPage> {
   late final response;
   @override
   Widget build(BuildContext context) {
-    Future<void> getData() async {
+    Future<void> getData(UserPageGetx x) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs = await SharedPreferences.getInstance();
-      print("토큰: ${prefs.getString("access_token")}");
       var dio = Dio();
       dio.options.headers["Authorization"] =
-          "Bearer ${prefs.getString("access_token")}" ?? "";
+          "Bearer ${prefs.getString("access_token")}";
       try {
-        print("유저 가져옴");
         response = await dio.get(
           "${HttpClients.hostUrl}/api/user/get",
         );
@@ -41,10 +39,9 @@ class _UserPageState extends State<UserPage> {
       init: UserPageGetx(),
       builder: (x) {
         return FutureBuilder(
-          future: getData(),
+          future: getData(x),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              print("1번오류");
               return const CircularProgressIndicator();
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
@@ -88,7 +85,7 @@ class _UserPageState extends State<UserPage> {
                           const SizedBox(
                             width: 40.0,
                           ),
-                          userValue("권강빈"),
+                          userValue(response.data['name']),
                         ],
                       ),
                       const SizedBox(
@@ -100,7 +97,7 @@ class _UserPageState extends State<UserPage> {
                           const SizedBox(
                             width: 40,
                           ),
-                          userValue("부산소마고"),
+                          userValue(response.data['belong']),
                         ],
                       ),
                       const SizedBox(
@@ -124,11 +121,11 @@ class _UserPageState extends State<UserPage> {
                       const SizedBox(
                         height: 20,
                       ),
-                      quizCountWidget("맞힌문제", 3),
+                      quizCountWidget("맞힌문제", response.data['correctCount']),
                       const SizedBox(
                         height: 30,
                       ),
-                      quizCountWidget("틀린문제", 2),
+                      quizCountWidget("틀린문제", response.data['wrongCount']),
                       SizedBox(
                         height: Get.height * 0.1,
                       ),
@@ -167,7 +164,8 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Row quizCountWidget(String quiztype, int count) {
+  Row quizCountWidget(String quiztype, int? count) {
+    count ??= 0;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
