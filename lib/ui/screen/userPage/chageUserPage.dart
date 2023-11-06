@@ -1,10 +1,39 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/user/user_getx.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
+import 'package:flutter_project/ui/screen/userPage/userPage.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class UserInfoChagePage extends StatelessWidget {
+import '../../../repository/data/http_client.dart';
+import '../../../utilities/logger.dart';
+
+class UserInfoChagePage extends StatefulWidget {
   const UserInfoChagePage({super.key});
+
+  @override
+  State<UserInfoChagePage> createState() => _UserInfoChagePageState();
+}
+
+class _UserInfoChagePageState extends State<UserInfoChagePage> {
+  void putData(UserPageGetx x) async {
+    print(x.controllName.text);
+    var dio = Dio();
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs = await SharedPreferences.getInstance();
+      dio.options.headers["Authorization"] =
+          "Bearer ${prefs.getString("access_token")}";
+      dynamic response = await dio.put("${HttpClients.hostUrl}/api/user/update",
+          data: {"name": x.controllName.text, "belong": x.controllSchool.text});
+      logger.d(response.statusCode);
+      print("put함");
+      Get.to(const UserPage());
+    } catch (error) {
+      print(error);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +72,10 @@ class UserInfoChagePage extends StatelessWidget {
                         SizedBox(
                           height: Get.height * 0.06,
                         ),
+                        //변경하기 버튼
                         GestureDetector(
                           onTap: () {
-                            print("이름 ${x.controllName.text}");
-                            print("소속 ${x.controllSchool.text}");
+                            putData(x);
                           },
                           child: Container(
                             width: 180,
