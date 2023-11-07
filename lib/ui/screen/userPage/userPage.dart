@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/state/user/user_getx.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
 import 'package:flutter_project/ui/screen/login/login.dart';
+import 'package:flutter_project/ui/screen/userPage/seeDetail/detail.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -122,11 +123,13 @@ class _UserPageState extends State<UserPage> {
                       const SizedBox(
                         height: 20,
                       ),
-                      quizCountWidget("맞힌문제", response.data['correctCount']),
+                      quizCountWidget(
+                          "맞힌문제", response.data['correctCount'], x, true),
                       const SizedBox(
                         height: 30,
                       ),
-                      quizCountWidget("틀린문제", response.data['wrongCount']),
+                      quizCountWidget(
+                          "틀린문제", response.data['wrongCount'], x, false),
                       SizedBox(
                         height: Get.height * 0.1,
                       ),
@@ -175,7 +178,7 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Row quizCountWidget(String quiztype, int? count) {
+  Row quizCountWidget(String quiztype, int? count, UserPageGetx x, bool? a) {
     count ??= 0;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -203,7 +206,14 @@ class _UserPageState extends State<UserPage> {
         ),
         const Opacity(opacity: 0.0),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            () => {
+                  x.detailIsTrue(a),
+                  Get.to(
+                    () => const Errata(),
+                  ),
+                };
+          },
           child: const Text(
             "자세히보기",
             style: TextStyle(

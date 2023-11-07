@@ -9,6 +9,7 @@ class UserPageGetx extends GetxController {
   RxString belong = "".obs;
   RxInt correctCount = 0.obs;
   RxInt wrongCount = 0.obs;
+  RxBool detailIsTrue = true.obs;
 
   void changeUserInfo() {
     Get.to(() => const UserInfoChagePage());
