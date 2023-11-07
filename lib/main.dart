@@ -9,7 +9,8 @@ void main() {
       theme: ThemeData(
         fontFamily: 'Pretendard',
       ),
-      // home: const Spelling(),
+      // home: const Quiz(),
+      // home: const Login(),
       home: const Login(),
     ),
   );
