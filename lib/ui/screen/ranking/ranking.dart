@@ -51,12 +51,6 @@ class _RankingState extends State<Ranking> {
                 ranking: '${rankingData.indexOf(data) + 1}',
                 score: '${data['point']}',
               ),
-            playerRanking(
-              belong: '무ㅣㅓㅗㅚㅚㅚ소속',
-              name: '권강빈박우',
-              ranking: '4',
-              score: '50',
-            ),
           ],
         ),
       ),
