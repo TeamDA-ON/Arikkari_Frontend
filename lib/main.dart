@@ -3,14 +3,15 @@ import 'package:flutter_project/ui/screen/login/login.dart';
 import 'package:get/get.dart';
 
 void main() {
-  runApp(GetMaterialApp(
-    debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      fontFamily: 'Pretendard',
+  runApp(
+    GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'Pretendard',
+      ),
+      home: const Login(),
     ),
-    // home: const Spelling(),
-    home: const Login(),
-  ));
+  );
 }
 
 // class Home extends StatelessWidget {

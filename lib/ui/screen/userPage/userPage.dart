@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/state/user/user_getx.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
+import 'package:flutter_project/ui/screen/login/login.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -130,7 +131,17 @@ class _UserPageState extends State<UserPage> {
                         height: Get.height * 0.1,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Future<void> logoutWithLoginPage() async {
+                            // Save the tokens to shared preferences or any other storage method
+                            final prefs = await SharedPreferences.getInstance();
+                            prefs.setString('access_token', '');
+                            prefs.setString("refresh_token", "");
+                            Get.offAll(() => const Login());
+                          }
+
+                          logoutWithLoginPage();
+                        },
                         child: Container(
                           width: 198,
                           height: 50,
