@@ -95,11 +95,15 @@ class Home extends StatelessWidget {
                                             ),
                                           ),
                                           actions: <Widget>[
-                                            GestureDetector(
-                                              child: const Text('확인'),
-                                              onTap: () {
-                                                Navigator.of(context).pop();
-                                              },
+                                            SizedBox(
+                                              width: 50,
+                                              height: 30,
+                                              child: GestureDetector(
+                                                child: const Text('확인'),
+                                                onTap: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
                                             ),
                                           ],
                                         );
