@@ -44,24 +44,30 @@ Padding playerRanking(
                 height: 0,
               ),
             ),
-            Text(
-              name,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-                fontFamily: 'Pretendard',
-                fontWeight: FontWeight.w700,
-                height: 0,
+            SizedBox(
+              width: 120,
+              child: Text(
+                name,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontFamily: 'Pretendard',
+                  fontWeight: FontWeight.w700,
+                  height: 0,
+                ),
               ),
             ),
-            Text(
-              belong,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 12,
-                fontFamily: 'Pretendard',
-                fontWeight: FontWeight.w700,
-                height: 0,
+            SizedBox(
+              width: 80,
+              child: Text(
+                belong,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontFamily: 'Pretendard',
+                  fontWeight: FontWeight.w700,
+                  height: 0,
+                ),
               ),
             ),
             Text(

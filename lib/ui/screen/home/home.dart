@@ -82,23 +82,28 @@ class Home extends StatelessWidget {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    AlertDialog(
-                                      title: const Text('팝업 메시지'),
-                                      content: SingleChildScrollView(
-                                        child: ListBody(
-                                          children: const <Widget>[
-                                            Text('옳거나 그르다고, 또는 좋거나 싫다고 함.'),
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text('팝업 메시지'),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              children: const <Widget>[
+                                                Text('옳거나 그르다고, 또는 좋거나 싫다고 함.'),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: <Widget>[
+                                            GestureDetector(
+                                              child: const Text('확인'),
+                                              onTap: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
                                           ],
-                                        ),
-                                      ),
-                                      actions: <Widget>[
-                                        GestureDetector(
-                                          child: const Text('확인'),
-                                          onTap: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
+                                        );
+                                      },
                                     );
                                   },
                                   child: Text(
