@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project/bottomBar.dart';
 import 'package:flutter_project/state/user/user_getx.dart';
 import 'package:flutter_project/ui/_constant/theme/app_colors.dart';
-import 'package:flutter_project/ui/screen/userPage/userPage.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,7 +29,7 @@ class _UserInfoChagePageState extends State<UserInfoChagePage> {
           data: {"name": x.controllName.text, "belong": x.controllSchool.text});
       logger.d(response.statusCode);
       print("put함");
-      Get.to(const UserPage());
+      Get.to(const BottomBar());
     } catch (error) {
       print(error);
     }

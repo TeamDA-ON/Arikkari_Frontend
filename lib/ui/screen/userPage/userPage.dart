@@ -98,7 +98,7 @@ class _UserPageState extends State<UserPage> {
                           const SizedBox(
                             width: 40,
                           ),
-                          userValue(response.data['belong']),
+                          userValue(response.data['belong'] ?? '무소속'),
                         ],
                       ),
                       const SizedBox(
