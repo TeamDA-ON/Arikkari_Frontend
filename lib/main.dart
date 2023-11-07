@@ -5,13 +5,15 @@ import 'package:get/get.dart';
 void main() {
   runApp(
     GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: 'Pretendard',
-        ),
-        // home: const Spelling(),
-        // home: const Login(),
-        home: const Home()),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'Pretendard',
+      ),
+      // home: const Quiz(),
+      // home: const Login(),
+      // home: const Login(),
+      home: const Home(),
+    ),
   );
 }
 
