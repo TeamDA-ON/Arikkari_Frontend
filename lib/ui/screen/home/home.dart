@@ -80,15 +80,37 @@ class Home extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  x.todayWord,
-                                  style: const TextStyle(
-                                      color: AppColors.blueF3,
-                                      fontSize: 38,
-                                      fontWeight: FontWeight.w600,
-                                      decoration: TextDecoration.underline,
-                                      decorationThickness: 1),
-                                  textAlign: TextAlign.center,
+                                GestureDetector(
+                                  onTap: () {
+                                    AlertDialog(
+                                      title: const Text('팝업 메시지'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: const <Widget>[
+                                            Text('옳거나 그르다고, 또는 좋거나 싫다고 함.'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        GestureDetector(
+                                          child: const Text('확인'),
+                                          onTap: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                  child: Text(
+                                    x.todayWord,
+                                    style: const TextStyle(
+                                        color: AppColors.blueF3,
+                                        fontSize: 38,
+                                        fontWeight: FontWeight.w600,
+                                        decoration: TextDecoration.underline,
+                                        decorationThickness: 1),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 )
                               ],
                             ),
