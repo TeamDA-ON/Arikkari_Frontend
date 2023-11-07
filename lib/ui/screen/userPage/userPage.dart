@@ -136,6 +136,7 @@ class _UserPageState extends State<UserPage> {
                             // Save the tokens to shared preferences or any other storage method
                             final prefs = await SharedPreferences.getInstance();
                             prefs.setString('access_token', '');
+                            prefs.setString("refresh_token", "");
                             Get.offAll(() => const Login());
                           }
 
