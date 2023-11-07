@@ -14,7 +14,6 @@ String? answer;
 String? problem1;
 String? problem2;
 String? commentary;
-late final response;
 
 class Spelling extends StatefulWidget {
   const Spelling({super.key});
@@ -26,6 +25,7 @@ class Spelling extends StatefulWidget {
 class _SpellingState extends State<Spelling> {
   @override
   Widget build(BuildContext context) {
+    late final dynamic response;
     Future<void> getData() async {
       var dio = Dio();
       try {
@@ -77,7 +77,7 @@ class _SpellingState extends State<Spelling> {
                     backgroundColor: x.answerIsCollect == "Normal"
                         ? AppColors.lightGrayF1
                         : x.answerIsCollect == "collect"
-                            ? AppColors.green // 정답일때
+                            ? AppColors.light_green // 정답일때
                             : AppColors.red1, // 오답일때
                     body: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
