@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/ui/screen/login/login.dart';
+import 'package:flutter_project/ui/screen/home/home.dart';
 import 'package:get/get.dart';
 
 void main() {
   runApp(
     GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Pretendard',
-      ),
-      // home: const Spelling(),
-      home: const Login(),
-    ),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'Pretendard',
+        ),
+        // home: const Spelling(),
+        // home: const Login(),
+        home: const Home()),
   );
 }
 
