@@ -63,7 +63,7 @@ class Home extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.08,
+                      height: MediaQuery.of(context).size.height * 0.06,
                     ),
                     Stack(
                         clipBehavior: Clip.none,
