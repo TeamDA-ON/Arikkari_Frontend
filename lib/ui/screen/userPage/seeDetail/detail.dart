@@ -28,9 +28,13 @@ class _Errata extends State<Errata> {
       var dio = Dio();
       dio.options.headers["Authorization"] =
           "Bearer ${prefs.getString("access_token")}";
-      response = await dio.get(
-        "${HttpClients.hostUrl}/api/wrong/list",
-      );
+      !x.detailIsTrue.value
+          ? response = await dio.get(
+              "${HttpClients.hostUrl}/api/wrong/list",
+            )
+          : response = await dio.get(
+              "${HttpClients.hostUrl}/api/correct/list",
+            );
       logger.d(response.data);
       quizColume = List<Map<String, dynamic>>.from(response.data);
     }
@@ -46,98 +50,118 @@ class _Errata extends State<Errata> {
           } else {
             return Scaffold(
               appBar: appBar(),
-              body: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        x.detailIsTrue.value
-                            ? Image.asset("assets/img/collect.png")
-                            : Image.asset("assets/img/wrong.png"),
-                        Text(
-                          x.detailIsTrue.value ? "맞은 문제" : "틀린문제",
-                          style: const TextStyle(
-                            fontFamily: "Pretendard",
-                            color: AppColors.darkGrayF3,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              x.detailIsTrue.value
+                                  ? Image.asset("assets/img/collect.png")
+                                  : Image.asset("assets/img/wrong.png"),
+                              const SizedBox(
+                                width: 2,
+                              ),
+                              Text(
+                                x.detailIsTrue.value ? "맞은 문제" : "틀린문제",
+                                style: const TextStyle(
+                                  fontFamily: "Pretendard",
+                                  color: AppColors.darkGrayF3,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.05,
-                    ),
-                    // for (var data in quizColume)
-                    Column(
-                      children: [
-                        Row(
+                        ],
+                      ),
+                      SizedBox(
+                        height: Get.height * 0.03,
+                      ),
+                      for (var data in quizColume)
+                        Column(
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text(
-                                  "이걸 틀리리네",
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.darkGrayF1,
-                                    fontFamily: "Pretendard",
-                                  ),
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      data["answer"],
+                                      style: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.darkGrayF1,
+                                        fontFamily: "Pretendard",
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: Get.width * 0.01,
+                                    ),
+                                    Text(
+                                      "∙ ${data["questionType"] == "MCQ" ? "어휘" : "맞춤법"}",
+                                      style: const TextStyle(
+                                        color: AppColors.blueF3,
+                                        fontSize: 12,
+                                        fontFamily: "Pretendard",
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  "∙ 맞춤법",
+                                const Text(
+                                  "더 알아보기",
                                   style: TextStyle(
-                                    color: AppColors.blueF3,
+                                    color: AppColors.basic_grayF2,
                                     fontSize: 12,
                                     fontFamily: "Pretendard",
                                   ),
                                 ),
                               ],
                             ),
-                            const Text(
-                              "더 알아보기",
-                              style: TextStyle(
-                                color: AppColors.basic_grayF2,
-                                fontSize: 12,
-                                fontFamily: "Pretendard",
-                              ),
+                            SizedBox(
+                              height: Get.height * 0.02,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: Get.width - 40,
+                                  height: 50,
+                                  margin: const EdgeInsets.only(bottom: 10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.yellow,
+                                    ),
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Text(
+                                      data["description"],
+                                      style: const TextStyle(
+                                        color: AppColors.darkGrayF2,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 12,
+                                        fontFamily: "Pretendard",
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                           ],
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: Get.width * 0.7,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.yellow,
-                                ),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              child: const Padding(
-                                padding: EdgeInsets.all(5),
-                                child: Text(
-                                  "해설같은거",
-                                  style: TextStyle(
-                                    color: AppColors.darkGrayF2,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 12,
-                                    fontFamily: "Pretendard",
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
+                        )
+                    ],
+                  ),
                 ),
               ),
             );
