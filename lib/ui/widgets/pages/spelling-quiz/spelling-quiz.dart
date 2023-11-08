@@ -29,7 +29,7 @@ Stack spelling_QuizContainer({
       answerIsCollect == "notCollect"
           ? Container(
               width: Get.width,
-              height: (Get.height * 0.4) + 90,
+              height: (Get.height * 0.45) + 90,
               decoration: const BoxDecoration(
                 color: Color(0xFFFEE500),
                 borderRadius: BorderRadius.only(
@@ -143,7 +143,7 @@ Stack spelling_QuizContainer({
                       // inputFormatters: [LengthLimitingTextInputFormatter(MAXLENGTH)], //입력길이 제한
                       autofocus: true,
                       style: const TextStyle(
-                        fontSize: 25,
+                        fontSize: 22,
                       ),
                       controller: editController,
                       decoration: const InputDecoration(
