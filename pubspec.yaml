@@ -84,6 +84,8 @@ flutter:
     - assets/img/logo.png
     - assets/img/xMark.png
     - assets/img/vMark.png
+    - assets/img/wrong.png
+    - assets/img/collect.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -204,7 +204,7 @@ Container problemTextMethod(String? problemText) {
     child: Text(
       problemText ?? '', // 가져온 데이터의 일부를 표시
       style: const TextStyle(
-        fontSize: 32,
+        fontSize: 26,
       ),
     ),
   );
