@@ -65,7 +65,7 @@ class _Errata extends State<Errata> {
                                   ? Image.asset("assets/img/collect.png")
                                   : Image.asset("assets/img/wrong.png"),
                               const SizedBox(
-                                width: 2,
+                                width: 5,
                               ),
                               Text(
                                 x.detailIsTrue.value ? "맞은 문제" : "틀린문제",
@@ -114,14 +114,6 @@ class _Errata extends State<Errata> {
                                       ),
                                     ),
                                   ],
-                                ),
-                                const Text(
-                                  "더 알아보기",
-                                  style: TextStyle(
-                                    color: AppColors.basic_grayF2,
-                                    fontSize: 12,
-                                    fontFamily: "Pretendard",
-                                  ),
                                 ),
                               ],
                             ),
