@@ -290,11 +290,11 @@ Stack spelling_QuizContainer({
 
 Container problemTextMethod(String problemText) {
   return Container(
-    margin: const EdgeInsets.only(top: 4),
+    margin: const EdgeInsets.only(top: 3),
     child: Text(
       problemText, // 가져온 데이터의 일부를 표시
       style: const TextStyle(
-        fontSize: 32,
+        fontSize: 28,
       ),
     ),
   );
