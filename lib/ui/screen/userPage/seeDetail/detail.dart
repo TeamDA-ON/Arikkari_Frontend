@@ -125,7 +125,6 @@ class _Errata extends State<Errata> {
                               children: [
                                 Container(
                                   width: Get.width - 40,
-                                  height: 50,
                                   margin: const EdgeInsets.only(bottom: 10),
                                   decoration: BoxDecoration(
                                     border: Border.all(
@@ -138,10 +137,11 @@ class _Errata extends State<Errata> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(5),
                                     child: Text(
-                                      data["description"],
+                                      data["define"],
                                       style: const TextStyle(
                                         color: AppColors.darkGrayF2,
                                         fontWeight: FontWeight.w700,
+                                        overflow: TextOverflow.clip,
                                         fontSize: 12,
                                         fontFamily: "Pretendard",
                                       ),
