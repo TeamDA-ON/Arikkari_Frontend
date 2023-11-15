@@ -137,7 +137,9 @@ class _Errata extends State<Errata> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(5),
                                     child: Text(
-                                      data["define"],
+                                      data["define"].contains("<error>")
+                                          ? data["description"]
+                                          : data["define"],
                                       style: const TextStyle(
                                         color: AppColors.darkGrayF2,
                                         fontWeight: FontWeight.w700,
